@@ -1,49 +1,38 @@
 <?PHP
-    use DynamicalWeb\DynamicalWeb;
     use DynamicalWeb\HTML;
-    use DynamicalWeb\Runtime;
-    use Example\ExampleLibrary;
-
-    Runtime::import('Example');
-
 ?>
-<!doctype html>
-<html lang="<?PHP HTML::print(APP_LANGUAGE_ISO_639); ?>">
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <?PHP HTML::importSection('header'); ?>
-        <title><?PHP HTML::print(TEXT_PAGE_TITLE); ?></title>
     </head>
-
-    <body>
-
-        <header>
+    <body class="dark-theme sidebar-dark">
+        <div class="container-scroller">
+        <!-- partial:../../partials/_navbar.html -->
             <?PHP HTML::importSection('navigation'); ?>
-        </header>
-
-        <main role="main" class="container">
-            <h1 class="mt-5"><?PHP HTML::print(TEXT_HEADER); ?></h1>
-            <p class="lead"><?PHP HTML::print(TEXT_CONTENT); ?></p>
-
-            <hr/>
-            <?PHP HTML::importMarkdown('example'); ?>
-            <?PHP
-                $ExampleLibrary = DynamicalWeb::setMemoryObject('example_library', new ExampleLibrary());
-                $ExampleLibrary->getPrintFunctions()->SayName('John Smith');
-                $ExampleLibrary->getPrintFunctions()->sayAge(12);
-            ?>
-            <?PHP HTML::print(CLIENT_REMOTE_HOST); ?><br/>
-            <?PHP HTML::print(CLIENT_PLATFORM); ?><br/>
-            <?PHP HTML::print(CLIENT_BROWSER); ?><br/>
-            <?PHP HTML::print(CLIENT_VERSION); ?><br/>
-            <br/>
-<pre>
-<?PHP HTML::print(json_encode(DynamicalWeb::getDefinedVariables(), JSON_PRETTY_PRINT)); ?>
-</pre><br/><br/>
-        </main>
-
-        <?PHP HTML::importSection('footer'); ?>
-
-        <?PHP HTML::importSection('js_scripts'); ?>
-
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <?PHP HTML::importSection('sidebar'); ?>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper"> </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../partials/_footer.html -->
+                    <footer class="footer">
+                        <div class="container-fluid clearfix">
+                          <span class="d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018
+                            <a href="http://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
+                                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with
+                            <i class="mdi mdi-heart text-danger"></i>
+                          </span>
+                        </div>
+                    </footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+        <?PHP HTML::importSection('header'); ?>
     </body>
 </html>
