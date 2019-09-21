@@ -33,6 +33,6 @@
             </div>
             <!-- page-body-wrapper ends -->
         </div>
-        <?PHP HTML::importSection('header'); ?>
+        <?PHP HTML::importSection('js_scripts'); ?>
     </body>
 </html>

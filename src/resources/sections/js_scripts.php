@@ -5,3 +5,4 @@
 <script src="/assets/js/shared/misc.js"></script>
 <script src="/assets/js/shared/settings.js"></script>
 <script src="/assets/js/shared/todolist.js"></script>
+<script src="/assets/js/sidebar.js"></script>
