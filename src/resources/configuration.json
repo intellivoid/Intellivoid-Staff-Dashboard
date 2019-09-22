@@ -4,8 +4,7 @@
     "router": [
         {"path": "/", "page": "index"},
         {"path": "/auth/login", "page": "login"},
-        {"path": "/error", "page": "error"},
-        {"path": "/sub/other", "page": "sub_other"}
+        {"path": "/auth/logout", "page": "logout"}
     ],
     "libraries": {
         "SecuredWebSessions": {
