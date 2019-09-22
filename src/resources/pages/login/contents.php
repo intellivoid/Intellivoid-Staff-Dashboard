@@ -3,6 +3,10 @@
     use DynamicalWeb\DynamicalWeb;
     use DynamicalWeb\HTML;
 
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+        HTML::importScript('authenticate');
+    }
 
 ?>
 <!doctype html>
@@ -29,7 +33,7 @@
 
                                 <div class="border-bottom pt-3"></div>
 
-                                <form class="pb-4" id="authentication_form" name="authentication_form">
+                                <form class="pb-4" id="authentication_form" action="<?PHP DynamicalWeb::getRoute('login', [], true); ?>" method="POST" name="authentication_form">
                                     <div class="form-group pt-4">
                                         <label for="authentication_code" class="label">Authentication Code</label>
                                         <div class="input-group">
