@@ -3,22 +3,29 @@
     "debugging_mode": true,
     "router": [
         {"path": "/", "page": "index"},
-        {"path": "/other", "page": "other"},
+        {"path": "/auth/login", "page": "login"},
         {"path": "/error", "page": "error"},
         {"path": "/sub/other", "page": "sub_other"}
     ],
     "libraries": {
-        "Example": {
-            "directory_name": "Example",
-            "autoloader": "ExampleLibrary.php",
+        "SecuredWebSessions": {
+            "directory_name": "sws",
+            "autoloader": "sws.php",
             "check_class_exists": true,
-            "namespace": "Example",
-            "main_class": "ExampleLibrary"
+            "namespace": "sws",
+            "main_class": "sws"
+        },
+        "IntellivoidAccounts": {
+            "directory_name": "IntellivoidAccounts",
+            "autoloader": "IntellivoidAccounts.php",
+            "check_class_exists": true,
+            "namespace": "IntellivoidAccounts",
+            "main_class": "IntellivoidAccounts"
         }
     },
     "runtime_scripts": {
         "initialize": [],
-        "on_page_load": [],
+        "on_page_load": ["auth.check.php"],
         "page_loaded": [],
         "after_request": [],
         "on_request": [],
