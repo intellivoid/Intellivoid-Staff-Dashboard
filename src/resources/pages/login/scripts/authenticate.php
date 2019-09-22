@@ -3,9 +3,9 @@
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
     use DynamicalWeb\HTML;
-use sws\sws;
+    use sws\sws;
 
-HTML::importScript('auth_api');
+    HTML::importScript('auth_api');
 
     if(isset($_POST['authentication_code']) == false)
     {
@@ -28,7 +28,7 @@ HTML::importScript('auth_api');
 
     try
     {
-        $Response = otl_VerifyCode($_POST['authentication_code'], $KnownHost);
+        $Response = otl_VerifyCode($_POST['authentication_code'], $KnownHost, CLIENT_USER_AGENT);
     }
     catch(Exception $exception)
     {

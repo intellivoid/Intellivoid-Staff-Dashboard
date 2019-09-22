@@ -46,6 +46,7 @@
                         RenderAlert('Internal Server Error', "danger", "mdi-alert-circle");
                         break;
 
+                    case 113:
                     case 100:
                     case 101:
                     case 102:
@@ -90,6 +91,10 @@
 
                     case 112:
                         RenderAlert('Invalid Host ID', "danger", "mdi-alert-circle");
+                        break;
+
+                    case 114:
+                        RenderAlert('Invalid User Agent', "danger", "mdi-alert-circle");
                         break;
                 }
             }

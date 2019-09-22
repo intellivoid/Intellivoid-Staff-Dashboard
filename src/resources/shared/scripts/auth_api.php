@@ -42,16 +42,18 @@
      *
      * @param string $code
      * @param string $host_id
+     * @param string $user_agent
      * @return array
      * @throws Exception
      */
-    function otl_VerifyCode(string $code, string $host_id): array
+    function otl_VerifyCode(string $code, string $host_id, string $user_agent): array
     {
         $vendor = urlencode("Intellivoid Staff Dashboard");
         $host_id = urlencode($host_id);
         $code = urlencode($code);
+        $user_agent = urlencode($user_agent);
 
-        $request_url = AUTH_ENDPOINT . "otl?auth_code=" . $code . "&host_id=" . $host_id . "&vendor=" . $vendor;
+        $request_url = AUTH_ENDPOINT . "otl?auth_code=" . $code . "&host_id=" . $host_id . "&user_agent=" . $user_agent . "&vendor=" . $vendor;
         $response = json_decode(file_get_contents($request_url), true);
 
         if($response['status'] == false)
