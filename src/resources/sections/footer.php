@@ -1,19 +1,10 @@
 <?PHP
-    use DynamicalWeb\DynamicalWeb;
-    use DynamicalWeb\HTML;
-    use Example\ExampleLibrary;
+use DynamicalWeb\HTML;
 ?>
 <footer class="footer">
-    <div class="container">
-        <span class="text-muted"><?PHP HTML::print(TEXT_FOOTER_TEXT); ?></span>
-        <span class="text-muted">
-            <?PHP
-                /** @var ExampleLibrary $ExampleLibrary */
-                $ExampleLibrary = DynamicalWeb::getMemoryObject('example_library');
-
-                $ExampleLibrary->getPrintFunctions()->SayName('Samantha Smith');
-                $ExampleLibrary->getPrintFunctions()->sayAge(24);
-            ?>
+    <div class="container-fluid clearfix">
+        <span class="d-block text-center text-sm-left d-sm-inline-block">Copyright © 2017-<?PHP HTML::print(date('Y')); ?>
+            <a href="https://www.intellivoid.info/" target="_blank">Intellivoid</a>. All rights reserved.
         </span>
     </div>
 </footer>
