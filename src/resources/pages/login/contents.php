@@ -19,8 +19,9 @@
     <body>
         <div class="container-scroller">
             <div class="container-fluid page-body-wrapper full-page-wrapper">
-                <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
+                <div class="content-wrapper d-flex align-items-center auth area theme-one">
                     <div class="row w-100 mx-auto">
+                        <?PHP HTML::importSection('background_animations'); ?>
                         <div class="col-lg-4 mx-auto">
                             <div class="auto-form-wrapper">
                                 <h1 class="text-center">
