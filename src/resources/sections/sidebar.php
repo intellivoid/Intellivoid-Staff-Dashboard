@@ -46,6 +46,9 @@ use DynamicalWeb\HTML;
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('accounts', [], true); ?>">Accounts</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Applications</a>
+                    </li>
                 </ul>
             </div>
         </li>

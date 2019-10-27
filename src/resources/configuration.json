@@ -6,7 +6,8 @@
         {"path": "/auth/login", "page": "login"},
         {"path": "/auth/logout", "page": "logout"},
 
-        {"path": "/cloud/accounts", "page": "accounts"}
+        {"path": "/cloud/accounts", "page": "accounts"},
+        {"path": "/cloud/applications", "page": "applications"}
     ],
     "libraries": {
         "SecuredWebSessions": {
