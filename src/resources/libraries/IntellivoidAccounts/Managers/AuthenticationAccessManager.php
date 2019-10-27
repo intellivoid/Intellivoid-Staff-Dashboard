@@ -1,12 +1,14 @@
 <?php /** @noinspection PhpUnused */
 
 
-namespace IntellivoidAccounts\Managers;
+    namespace IntellivoidAccounts\Managers;
 
     use IntellivoidAccounts\Abstracts\AuthenticationAccessStatus;
+    use IntellivoidAccounts\Abstracts\AuthenticationRequestStatus;
     use IntellivoidAccounts\Abstracts\SearchMethods\AuthenticationAccessSearchMethod;
     use IntellivoidAccounts\Exceptions\AuthenticationAccessNotFoundException;
     use IntellivoidAccounts\Exceptions\AuthenticationRequestAlreadyUsedException;
+    use IntellivoidAccounts\Exceptions\AuthenticationRequestNotFoundException;
     use IntellivoidAccounts\Exceptions\DatabaseException;
     use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
     use IntellivoidAccounts\IntellivoidAccounts;
@@ -14,6 +16,7 @@ namespace IntellivoidAccounts\Managers;
     use IntellivoidAccounts\Objects\COA\AuthenticationRequest;
     use IntellivoidAccounts\Utilities\Hashing;
     use msqg\QueryBuilder;
+    use ZiProto\ZiProto;
 
     /**
      * Class AuthenticationAccessManager
@@ -44,6 +47,7 @@ namespace IntellivoidAccounts\Managers;
          * @throws DatabaseException
          * @throws InvalidSearchMethodException
          * @throws AuthenticationRequestAlreadyUsedException
+         * @throws AuthenticationRequestNotFoundException
          */
         public function createAuthenticationAccess(AuthenticationRequest $authenticationRequest): AuthenticationAccess
         {
@@ -57,6 +61,9 @@ namespace IntellivoidAccounts\Managers;
                 unset($authenticationAccessNotFoundException);
             }
 
+            $originalAuthenticationRequest = $this->intellivoidAccounts->getCrossOverAuthenticationManager()->getAuthenticationRequestManager()->getAuthenticationRequest(AuthenticationAccessSearchMethod::byId, $authenticationRequest->Id);
+            $originalAuthenticationRequest->AccountId = $authenticationRequest->AccountId;
+
             $current_timestamp = (int)time();
             $access_token = Hashing::authenticationAccessToken(
                 $authenticationRequest->Id,
@@ -69,6 +76,8 @@ namespace IntellivoidAccounts\Managers;
             $application_id = (int)$authenticationRequest->ApplicationId;
             $account_id = (int)$authenticationRequest->AccountId;
             $request_id = (int)$authenticationRequest->Id;
+            $permissions = $authenticationRequest->RequestedPermissions;
+            $permissions = ZiProto::encode($permissions);
             $status = (int)AuthenticationAccessStatus::Active;
             $expires_timestamp = $current_timestamp + 43200;
             $last_used_timestamp = $current_timestamp;
@@ -76,9 +85,10 @@ namespace IntellivoidAccounts\Managers;
 
             $Query = QueryBuilder::insert_into('authentication_access', array(
                 'access_token' => $access_token,
-                'application' => $application_id,
+                'application_id' => $application_id,
                 'account_id' => $account_id,
                 'request_id' => $request_id,
+                'permissions' => $permissions,
                 'status' => $status,
                 'expires_timestamp' => $expires_timestamp,
                 'last_used_timestamp' => $last_used_timestamp,
@@ -92,6 +102,7 @@ namespace IntellivoidAccounts\Managers;
             }
             else
             {
+                $this->intellivoidAccounts->getCrossOverAuthenticationManager()->getAuthenticationRequestManager()->updateAuthenticationRequest($originalAuthenticationRequest);
                 return $this->getAuthenticationAccess(AuthenticationAccessSearchMethod::byAccessToken, $access_token);
             }
         }
@@ -128,8 +139,10 @@ namespace IntellivoidAccounts\Managers;
             $Query = QueryBuilder::select('authentication_access', [
                 'id',
                 'access_token',
+                'application_id',
                 'account_id',
                 'request_id',
+                'permissions',
                 'status',
                 'expires_timestamp',
                 'last_used_timestamp',
@@ -148,6 +161,7 @@ namespace IntellivoidAccounts\Managers;
                 }
 
                 $Row = $QueryResults->fetch_array(MYSQLI_ASSOC);
+                $Row['permissions'] = ZiProto::decode($Row['permissions']);
                 return AuthenticationAccess::fromArray($Row);
             }
         }

@@ -1,6 +1,7 @@
 <?PHP
 
-    use DynamicalWeb\HTML;
+use DynamicalWeb\DynamicalWeb;
+use DynamicalWeb\HTML;
 
     $UsernameSafe = ucfirst(WEB_ACCOUNT_USERNAME);
     if(strlen($UsernameSafe) > 16)
@@ -33,6 +34,20 @@
                 <span class="menu-title">Dashboard</span>
                 <i class="menu-arrow"></i>
             </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#cloud-dropdown" aria-expanded="false" aria-controls="cloud-dropdown">
+                <i class="menu-icon mdi mdi-cloud"></i>
+                <span class="menu-title">Cloud</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="cloud-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('accounts', [], true); ?>">Accounts</a>
+                    </li>
+                </ul>
+            </div>
         </li>
     </ul>
 </nav>

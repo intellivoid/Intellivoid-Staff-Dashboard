@@ -14,6 +14,7 @@
     use IntellivoidAccounts\Objects\COA\AuthenticationRequest;
     use IntellivoidAccounts\Utilities\Hashing;
     use msqg\QueryBuilder;
+    use ZiProto\ZiProto;
 
     /**
      * Class AuthenticationRequestManager
@@ -41,9 +42,11 @@
          * @param Application $application
          * @param int $host_id
          * @return AuthenticationRequest
+         * @throws AuthenticationRequestNotFoundException
          * @throws DatabaseException
+         * @throws InvalidSearchMethodException
          */
-        public function createAuthenticationAccess(Application $application, int $host_id): AuthenticationRequest
+        public function createAuthenticationRequest(Application $application, int $host_id): AuthenticationRequest
         {
             $current_timestamp = (int)time();
             $request_token = Hashing::authenticationRequestToken(
@@ -54,6 +57,8 @@
             $status = (int)AuthenticationRequestStatus::Active;
             $account_id = 0;
             $host_id = (int)$host_id;
+            $requested_permissions = ZiProto::encode($application->Permissions);
+            $requested_permissions = $this->intellivoidAccounts->database->real_escape_string($requested_permissions);
             $created_timestamp = $current_timestamp;
             $expires_timestamp = $current_timestamp + 600;
 
@@ -63,6 +68,7 @@
                 'status' => $status,
                 'account_id' => $account_id,
                 'host_id' => $host_id,
+                'requested_permissions' => $requested_permissions,
                 'created_timestamp' => $created_timestamp,
                 'expires_timestamp' => $expires_timestamp
             ));
@@ -74,7 +80,7 @@
             }
             else
             {
-                return $this->get_authentication_request(AuthenticationRequestSearchMethod::requestToken, $request_token);
+                return $this->getAuthenticationRequest(AuthenticationRequestSearchMethod::requestToken, $request_token);
             }
         }
 
@@ -113,6 +119,7 @@
                 'status',
                 'account_id',
                 'host_id',
+                'requested_permissions',
                 'created_timestamp',
                 'expires_timestamp'
             ], $search_method, $value);
@@ -130,6 +137,7 @@
                 }
 
                 $Row = $QueryResults->fetch_array(MYSQLI_ASSOC);
+                $Row['requested_permissions'] = ZiProto::decode($Row['requested_permissions']);
                 return AuthenticationRequest::fromArray($Row);
             }
         }
