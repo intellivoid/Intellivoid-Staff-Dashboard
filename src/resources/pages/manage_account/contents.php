@@ -9,8 +9,9 @@ use IntellivoidAccounts\Abstracts\SearchMethods\KnownHostsSearchMethod;
 use IntellivoidAccounts\Exceptions\AccountNotFoundException;
     use IntellivoidAccounts\Exceptions\DatabaseException;
     use IntellivoidAccounts\IntellivoidAccounts;
+use IntellivoidAccounts\Objects\UserAgentRecord;
 
-    Runtime::import('IntellivoidAccounts');
+Runtime::import('IntellivoidAccounts');
 
     if(isset($_GET['id']) == false)
     {
@@ -122,13 +123,13 @@ use IntellivoidAccounts\Exceptions\AccountNotFoundException;
                                         <div class="profile-body">
                                             <ul class="nav tab-switch" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" id="user-profile-info-tab" data-toggle="pill" href="#user-profile-info" role="tab" aria-controls="user-profile-info" aria-selected="true">Profile</a>
+                                                    <a class="nav-link active" id="user-profile-info-tab" data-toggle="pill" href="#user-profile-info" role="tab" aria-controls="user-profile-info" aria-selected="true" style="border-bottom-width: 0;">Profile</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" id="user-profile-kh-tab" data-toggle="pill" href="#user-profile-kh" role="tab" aria-controls="user-profile-kh" aria-selected="false">Known Hosts</a>
+                                                    <a class="nav-link" id="user-profile-kh-tab" data-toggle="pill" href="#user-profile-kh" role="tab" aria-controls="user-profile-kh" aria-selected="false" style="border-bottom-width: 0;">Known Hosts</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" id="user-profile-kd-tab" data-toggle="pill" href="#user-profile-kd" role="tab" aria-controls="user-profile-kd" aria-selected="false">Devices</a>
+                                                    <a class="nav-link" id="user-profile-kd-tab" data-toggle="pill" href="#user-profile-kd" role="tab" aria-controls="user-profile-kd" aria-selected="false" style="border-bottom-width: 0;">Devices</a>
                                                 </li>
                                             </ul>
                                             <div class="row">
@@ -259,7 +260,14 @@ use IntellivoidAccounts\Exceptions\AccountNotFoundException;
                                                                 <?PHP
                                                                     foreach($Account->Configuration->KnownHosts->KnownHosts as $host_id)
                                                                     {
-                                                                        $KnownHost = $IntellivoidAccounts->getKnownHostsManager()->getHost(KnownHostsSearchMethod::byId, (int)$host_id);
+                                                                        try
+                                                                        {
+                                                                            $KnownHost = $IntellivoidAccounts->getKnownHostsManager()->getHost(KnownHostsSearchMethod::byId, (int)$host_id);
+                                                                        }
+                                                                        catch(Exception $exception)
+                                                                        {
+                                                                            continue;
+                                                                        }
 
                                                                         $flag_icon = "";
                                                                         $country = "";
@@ -298,48 +306,128 @@ use IntellivoidAccounts\Exceptions\AccountNotFoundException;
                                                         <div class="tab-pane fade" id="user-profile-kd" role="tabpanel" aria-labelledby="user-profile-kd-tab">
                                                             <table class="table">
                                                                 <thead>
-                                                                <tr>
-                                                                    <th>ID</th>
-                                                                    <th>IP</th>
-                                                                    <th>Country</th>
-                                                                    <th>Last Used</th>
-                                                                    <th>Actions</th>
-                                                                </tr>
+                                                                    <tr>
+                                                                        <th>ID</th>
+                                                                        <th>Browser</th>
+                                                                        <th>Platform</th>
+                                                                        <th>Version</th>
+                                                                        <th>Last Seen</th>
+                                                                    </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                 <?PHP
 
-                                                                $IntellivoidAccounts->getTrackingUserAgentManager()->getRecord()
+                                                                $DeviceResults = array();
                                                                 foreach($Account->Configuration->KnownHosts->KnownHosts as $host_id)
                                                                 {
-                                                                    $KnownHost = $IntellivoidAccounts->getKnownHostsManager()->getHost(KnownHostsSearchMethod::byId, (int)$host_id);
+                                                                    $Results = $IntellivoidAccounts->getTrackingUserAgentManager()->getRecordsByHost($host_id);
+                                                                    foreach($Results as $device)
+                                                                    {
+                                                                        $device = UserAgentRecord::fromArray($device);
+                                                                        $DeviceResults[$device->ID] = $device;
+                                                                    }
+                                                                }
 
-                                                                    $flag_icon = "";
-                                                                    $country = "";
-                                                                    if($KnownHost->LocationData->CountryCode == null)
+                                                                /** @var UserAgentRecord $device */
+                                                                foreach($DeviceResults as $device)
+                                                                {
+                                                                    $platform_icon = "mdi mdi-desktop-mac";
+                                                                    switch(strtolower($device->Platform))
                                                                     {
-                                                                        $country = "Unknown";
-                                                                        $flag_icon = "mdi mdi-map-marker-off";
+                                                                        case 'xbox one':
+                                                                        case 'xbox':
+                                                                            $platform_icon = 'mdi mdi-xbox';
+                                                                            break;
+
+                                                                        case 'windows phone':
+                                                                            $platform_icon = 'mdi mdi-windows';
+                                                                            break;
+
+                                                                        case 'android':
+                                                                            $platform_icon = 'mdi mdi-android';
+                                                                            break;
+
+                                                                        case 'linux':
+                                                                        case 'linux-gnu':
+                                                                        case 'x11':
+                                                                            $platform_icon = 'mdi mdi-linux';
+                                                                            break;
+
+                                                                        case 'chrome os':
+                                                                        case 'cros':
+                                                                            $platform_icon = 'mdi mdi-laptop-chromebook';
+                                                                            break;
+
+                                                                        case 'blackBerry':
+                                                                            $platform_icon = 'mdi mdi-blackberry';
+                                                                            break;
+
+                                                                        case 'playStation vita':
+                                                                        case 'playStation':
+                                                                            $platform_icon = 'mdi mdi-playstation';
+                                                                            break;
+
+                                                                        case 'iphone':
+                                                                        case 'ipad':
+                                                                            $platform_icon = 'mdi mdi-apple';
+                                                                            break;
+
                                                                     }
-                                                                    else
+
+                                                                    $browser_icon = "mdi mdi-web";
+                                                                    switch(strtolower($device->Browser))
                                                                     {
-                                                                        $country = $KnownHost->LocationData->CountryName;
-                                                                        $flag_icon = "flag-icon pr-2 flag-icon-" . strtolower($KnownHost->LocationData->CountryCode);
+                                                                        case 'firefox':
+                                                                            $browser_icon = 'mdi mdi-firefox';
+                                                                            break;
+
+                                                                        case 'safari':
+                                                                        case 'applewebkit':
+                                                                            $browser_icon = 'mdi mdi-apple-safari';
+                                                                            break;
+
+                                                                        case 'edge':
+                                                                            $browser_icon = 'mdi mdi-edge';
+                                                                            break;
+
+                                                                        case 'msie':
+                                                                        case 'iemobile':
+                                                                            $browser_icon = 'mdi mdi-internet-explorer';
+                                                                            break;
+
+                                                                        case 'lynx':
+                                                                        case 'bingbot':
+                                                                        case 'baiduspider':
+                                                                        case 'googlebot':
+                                                                        case 'yandexbot':
+                                                                        case 'version':
+                                                                        case 'wget':
+                                                                        case 'curl':
+                                                                            $browser_icon = 'mdi mdi-settings';
+                                                                            break;
+
+                                                                        case 'steam':
+                                                                        case 'valve':
+                                                                            $browser_icon = 'mdi mdi-steam';
+
+                                                                        case 'chrome':
+                                                                            $browser_icon = 'mdi mdi-google-chrome';
+                                                                            break;
                                                                     }
+
                                                                     ?>
                                                                     <tr>
+                                                                        <td><?PHP HTML::print($device->ID); ?></td>
                                                                         <td>
-                                                                            <i class="<?PHP HTML::print($flag_icon); ?>" title="<?PHP HTML::print($flag_icon); ?>"></i>
-                                                                            <?PHP HTML::print($KnownHost->ID); ?>
+                                                                            <i class="<?PHP HTML::print($browser_icon); ?>"></i>
+                                                                            <?PHP HTML::print($device->Browser); ?>
                                                                         </td>
-                                                                        <td><?PHP HTML::print($KnownHost->IpAddress); ?></td>
-                                                                        <td><?PHP HTML::print($country); ?></td>
-                                                                        <td><?PHP HTML::print(date("F j, Y, g:i a", $KnownHost->LastUsed)); ?></td>
                                                                         <td>
-                                                                            <button class="btn btn-xs btn-outline-primary">
-                                                                                <i class="mdi mdi-database-search"></i>
-                                                                            </button>
+                                                                            <i class="<?PHP HTML::print($platform_icon); ?>"></i>
+                                                                            <?PHP HTML::print($device->Platform); ?>
                                                                         </td>
+                                                                        <td><?PHP HTML::print($device->Version); ?></td>
+                                                                        <td><?PHP HTML::print(date("F j, Y, g:i a", $device->LastSeen)); ?></td>
                                                                     </tr>
                                                                     <?PHP
                                                                 }

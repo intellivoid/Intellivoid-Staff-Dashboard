@@ -16915,7 +16915,7 @@ div.tagsinput {
   .profile-page .profile-body .tab-switch {
     border-bottom: 1px solid #f2f2f2; }
     .profile-page .profile-body .tab-switch .nav-item .nav-link {
-      color: #858585;
+      color: #ffffff;
       font-size: 1rem;
       padding-bottom: 1.2rem;
       font-weight: 600;
@@ -16927,7 +16927,7 @@ div.tagsinput {
       -webkit-transition-property: color, border-color;
       transition-property: color, border-color; }
       .profile-page .profile-body .tab-switch .nav-item .nav-link.active {
-        color: #000;
+        color: #2196f3;
         border-bottom: 3px solid #2196f3; }
   .profile-page .profile-body .tab-body {
     border: none;
