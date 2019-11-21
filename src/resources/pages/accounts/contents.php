@@ -1,8 +1,10 @@
 <?PHP
-    use DynamicalWeb\HTML;
+
+use DynamicalWeb\DynamicalWeb;
+use DynamicalWeb\HTML;
     use DynamicalWeb\Runtime;
-use IntellivoidAccounts\Abstracts\AccountStatus;
-use IntellivoidAccounts\IntellivoidAccounts;
+    use IntellivoidAccounts\Abstracts\AccountStatus;
+    use IntellivoidAccounts\IntellivoidAccounts;
     use msqg\QueryBuilder;
 
     Runtime::import('IntellivoidAccounts');
@@ -98,7 +100,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                                 <div class="dropdown">
                                                                     <button class="btn btn-xs btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
-                                                                        <a class="dropdown-item" href="#">Manage Account</a>
+                                                                        <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $account['id']), true); ?>">Manage Account</a>
                                                                     </div>
                                                                 </div>
                                                             </td>

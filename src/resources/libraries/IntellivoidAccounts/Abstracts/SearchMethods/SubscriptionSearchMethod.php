@@ -4,10 +4,10 @@
     namespace IntellivoidAccounts\Abstracts\SearchMethods;
 
     /**
-     * Class TransactionRecordSearchMethod
-     * @package IntellivoidAccounts\Abstracts
+     * Class SubscriptionSearchMethod
+     * @package IntellivoidAccounts\Abstracts\SearchMethods
      */
-    abstract class TransactionRecordSearchMethod
+    abstract class SubscriptionSearchMethod
     {
         const byId = 'id';
 

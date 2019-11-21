@@ -1,8 +1,7 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
     namespace IntellivoidAccounts\Utilities;
 
-    use IntellivoidAccounts\Objects\COA\AuthenticationRequest;
     use tsa\Classes\Crypto;
     use tsa\Exceptions\BadLengthException;
     use tsa\Exceptions\SecuredRandomProcessorNotFoundException;
@@ -104,28 +103,6 @@
             $builder .= hash('crc32', $unix_timestamp);
             $builder .= hash('crc32', $amount);
             $builder .= hash('crc32', $source);
-
-            return $builder;
-        }
-
-        /**
-         * Creates a transaction public record ID
-         *
-         * @param int $account_id
-         * @param int $unix_timestamp
-         * @param float $amount
-         * @param string $vendor
-         * @param int $operator_type
-         * @return string
-         */
-        public static function transactionRecordPublicID(int $account_id, int $unix_timestamp, float $amount, string $vendor, int $operator_type): string
-        {
-            $builder = self::pepper($vendor);
-
-            $builder .= hash('crc32', $account_id);
-            $builder .= hash('crc32', $unix_timestamp - 100);
-            $builder .= hash('crc32', $amount + 200);
-            $builder .= hash('crc32', $operator_type + 5);
 
             return $builder;
         }
@@ -244,15 +221,15 @@
          * Creates a unique public telegram client ID
          *
          * @param string $chat_id
-         * @param int $timestamp
+         * @param int $user_id
          * @return string
          */
-        public static function telegramClientPublicID(string $chat_id, int $timestamp): string
+        public static function telegramClientPublicID(string $chat_id, int $user_id): string
         {
             $builder = "TEL-";
 
             $builder .= hash('sha256', $chat_id);
-            $builder .= hash('crc32', $timestamp);
+            $builder .= '-' . hash('crc32', $user_id);
 
             return $builder;
         }
@@ -380,7 +357,6 @@
          *
          * @param int $account_id
          * @param int $application_id
-         * @param int $timestamp
          * @return string
          */
         public static function ApplicationAccess(int $account_id, int $application_id): string
@@ -390,5 +366,56 @@
 
             $core = hash('sha256', $account_id_c . $application_id_c . 'C');
             return $core . hash('crc32b', $account_id_c) . hash('crc32b', $application_id_c);
+        }
+
+        /**
+         * Calculates a unique public ID for the subscription plan's public ID
+         *
+         * @param int $application_id
+         * @param string $plan_name
+         * @return string
+         */
+        public static function SubscriptionPlanPublicID(int $application_id, string $plan_name): string
+        {
+            return hash('crc32b', $application_id) . hash('sha256', $plan_name);
+        }
+
+        /**
+         * Calculates a unique public ID for the subscription
+         *
+         * @param int $subscription_plan_id
+         * @param string $promotion_code
+         * @return string
+         */
+        public static function SubscriptionPromotionPublicID(int $subscription_plan_id, string $promotion_code): string
+        {
+            return hash('crc32b', $subscription_plan_id) . hash('sha256', $promotion_code);
+        }
+
+        /**
+         * Calculates a unique public ID for the transaction record
+         *
+         * @param int $account_id
+         * @param string $vendor
+         * @param int $timestamp
+         * @return string
+         */
+        public static function TransactionRecordPublicID(int $account_id, string $vendor, int $timestamp): string
+        {
+            $account_id = hash('crc32b', $account_id);
+            $vendor = hash('crc32b', $vendor);
+            return $account_id . $vendor . hash('sha256', $account_id . $vendor . $timestamp);
+        }
+
+        /**
+         * Calculates a unique Public ID for this subscription
+         *
+         * @param int $account_id
+         * @param int $subscription_plan_id
+         * @return bool
+         */
+        public static function SubscriptionPublicID(int $account_id, int $subscription_plan_id): bool
+        {
+            return hash('crc32b', $account_id) . hash('sha256', $account_id . $subscription_plan_id);
         }
     }

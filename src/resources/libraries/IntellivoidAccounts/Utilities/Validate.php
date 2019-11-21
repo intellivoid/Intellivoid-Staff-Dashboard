@@ -126,57 +126,6 @@
         }
 
         /**
-         * Determines if the message subject is valid or not
-         *
-         * @param string $input
-         * @return bool
-         */
-        public static function messageSubject(string $input): bool
-        {
-            if(strlen($input) < 5)
-            {
-                return false;
-            }
-
-            if(strlen($input) > 120)
-            {
-                return false;
-            }
-
-            $input = base64_encode($input);
-
-            if(strlen($input) > 255)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /**
-         * Determines if the message content is valid or not
-         *
-         * @param string $input
-         * @return bool
-         */
-        public static function messageContent(string $input): bool
-        {
-            $input = base64_encode($input);
-
-            if(strlen($input) < 1)
-            {
-                return false;
-            }
-
-            if(strlen($input) > 50000)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /**
          * Determines if the user agent is valid
          *
          * @param string $input
@@ -332,4 +281,71 @@
             return true;
         }
 
+        /**
+         * Validates if a URL is valid or not
+         *
+         * @param string $input
+         * @return bool
+         */
+        public static function url(string $input): bool
+        {
+            if(filter_var($input, FILTER_VALIDATE_URL) == false)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /**
+         * Validates if the subscription plan name is valid
+         *
+         * @param string $input
+         * @return bool
+         */
+        public static function subscriptionPlanName(string $input): bool
+        {
+            if(strlen($input) > 120)
+            {
+                return false;
+            }
+
+            if(strlen($input) < 3)
+            {
+                return false;
+            }
+
+            if(preg_match("/^[a-zA-Z0-9 ]*$/", $input))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /**
+         * Validates if the promotion code for the subscription is valid or not
+         *
+         * @param string $input
+         * @return bool
+         */
+        public static function subscriptionPromotionCode(string $input): bool
+        {
+            if(strlen($input) > 120)
+            {
+                return false;
+            }
+
+            if(strlen($input) < 3)
+            {
+                return false;
+            }
+
+            if(preg_match("/^[a-zA-Z0-9 ]*$/", $input))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }

@@ -7,6 +7,7 @@
         {"path": "/auth/logout", "page": "logout"},
 
         {"path": "/cloud/accounts", "page": "accounts"},
+        {"path": "/cloud/accounts/manage", "page": "manage_account"},
         {"path": "/cloud/applications", "page": "applications"}
     ],
     "libraries": {

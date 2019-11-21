@@ -248,4 +248,71 @@
             $this->updateRecord($user_agent_record);
             return $tracking_id;
         }
+
+        /**
+         * Returns the total amount of Tracking User Agent records by the Host ID
+         *
+         * @param int $host_id
+         * @return int
+         * @throws DatabaseException
+         */
+        public function getTotalRecordsByHost(int $host_id): int
+        {
+            $host_id = (int)$host_id;
+            $Query = "SELECT COUNT(id) AS total FROM `tracking_user_agents` WHERE host_id=$host_id";
+
+            $QueryResults = $this->intellivoidAccounts->database->query($Query);
+            if($QueryResults == false)
+            {
+                throw new DatabaseException($Query, $this->intellivoidAccounts->database->error);
+            }
+            else
+            {
+                return (int)$QueryResults->fetch_array()['total'];
+            }
+        }
+
+        /**
+         * Returns an array of Records by the Host ID
+         *
+         * @param int $host_id
+         * @param int $offset
+         * @param int $limit
+         * @return array
+         * @throws DatabaseException
+         */
+        public function getRecordsByHost(int $host_id, int $offset = 0, $limit = 50): array
+        {
+            $host_id = (int)$host_id;
+
+            $Query = QueryBuilder::select('tracking_user_agents', [
+                'id',
+                'tracking_id',
+                'user_agent_string',
+                'platform',
+                'browser',
+                'version',
+                'host_id',
+                'created',
+                'last_seen'
+            ], 'account_id', $host_id, null, null, $limit, $offset);
+
+            $QueryResults = $this->intellivoidAccounts->database->query($Query);
+            if ($QueryResults == false)
+            {
+                throw new DatabaseException($Query, $this->intellivoidAccounts->database->error);
+            }
+            else
+            {
+                $ResultsArray = [];
+
+                while ($Row = $QueryResults->fetch_assoc())
+                {
+                    $ResultsArray[] = $Row;
+                }
+
+                return $ResultsArray;
+            }
+
+        }
     }
