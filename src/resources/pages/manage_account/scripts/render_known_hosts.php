@@ -9,8 +9,9 @@
         if(count($known_hosts) > 0)
         {
             ?>
-            <table class="table">
-                <thead>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
                     <tr>
                         <th>ID</th>
                         <th>IP</th>
@@ -19,50 +20,51 @@
                         <th>Actions</th>
                     </tr>
                     </thead>
-                <tbody>
+                    <tbody>
                     <?PHP
-                        foreach($known_hosts as $host_id)
+                    foreach($known_hosts as $host_id)
+                    {
+                        try
                         {
-                            try
-                            {
-                                $KnownHost = $IntellivoidAccounts->getKnownHostsManager()->getHost(KnownHostsSearchMethod::byId, (int)$host_id);
-                            }
-                            catch(Exception $exception)
-                            {
-                                continue;
-                            }
-
-                            if($KnownHost->LocationData->CountryCode == null)
-                            {
-                                $country = "Unknown";
-                                $flag_icon = "mdi mdi-map-marker-off";
-                            }
-                            else
-                            {
-                                $country = $KnownHost->LocationData->CountryName;
-                                $flag_icon = "flag-icon pr-2 flag-icon-" . strtolower($KnownHost->LocationData->CountryCode);
-                            }
-
-                            ?>
-                            <tr>
-                                <td>
-                                    <i class="<?PHP HTML::print($flag_icon); ?>" title="<?PHP HTML::print($flag_icon); ?>"></i>
-                                    <?PHP HTML::print($KnownHost->ID); ?>
-                                </td>
-                                <td><?PHP HTML::print($KnownHost->IpAddress); ?></td>
-                                <td><?PHP HTML::print($country); ?></td>
-                                <td><?PHP HTML::print(date("F j, Y, g:i a", $KnownHost->LastUsed)); ?></td>
-                                <td>
-                                    <a class="text-primary" href="#">
-                                        <i class="pl-1 mdi mdi-database-search"></i> View details
-                                    </a>
-                                </td>
-                            </tr>
-                            <?PHP
+                            $KnownHost = $IntellivoidAccounts->getKnownHostsManager()->getHost(KnownHostsSearchMethod::byId, (int)$host_id);
                         }
+                        catch(Exception $exception)
+                        {
+                            continue;
+                        }
+
+                        if($KnownHost->LocationData->CountryCode == null)
+                        {
+                            $country = "Unknown";
+                            $flag_icon = "mdi mdi-map-marker-off";
+                        }
+                        else
+                        {
+                            $country = $KnownHost->LocationData->CountryName;
+                            $flag_icon = "flag-icon pr-2 flag-icon-" . strtolower($KnownHost->LocationData->CountryCode);
+                        }
+
+                        ?>
+                        <tr>
+                            <td>
+                                <i class="<?PHP HTML::print($flag_icon); ?>" title="<?PHP HTML::print($flag_icon); ?>"></i>
+                                <?PHP HTML::print($KnownHost->ID); ?>
+                            </td>
+                            <td><?PHP HTML::print($KnownHost->IpAddress); ?></td>
+                            <td><?PHP HTML::print($country); ?></td>
+                            <td><?PHP HTML::print(date("F j, Y, g:i a", $KnownHost->LastUsed)); ?></td>
+                            <td>
+                                <a class="text-primary" href="#">
+                                    <i class="pl-1 mdi mdi-database-search"></i> View details
+                                </a>
+                            </td>
+                        </tr>
+                        <?PHP
+                    }
                     ?>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
             <?PHP
         }
         else

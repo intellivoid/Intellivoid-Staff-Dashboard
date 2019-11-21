@@ -177,7 +177,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                             <p class="card-title ml-3 mb-0">Administrator</p>
                                                         </div>
                                                         <div class="wrapper ml-auto action-bar">
-                                                            <a class="text-white" href="#">
+                                                            <a class="text-white" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $_GET['id'], 'action' => 'set_permission', 'permission' => 'administrator'), true); ?>">
                                                                 <i class="mdi mdi-check mr-3"></i>
                                                             </a>
                                                         </div>
