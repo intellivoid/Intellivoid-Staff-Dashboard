@@ -88,6 +88,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
     HTML::importScript('update_account');
     HTML::importScript('render_known_hosts');
     HTML::importScript('render_known_devices');
+    HTML::importScript('render_details');
 
 ?>
 <!DOCTYPE html>
@@ -133,6 +134,9 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="user-profile-kd-tab" data-toggle="pill" href="#user-profile-kd" role="tab" aria-controls="user-profile-kd" aria-selected="false" style="border-bottom-width: 0;">Devices</a>
                                                 </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="user-profile-details-tab" data-toggle="pill" href="#user-profile-details" role="tab" aria-controls="user-profile-details" aria-selected="false" style="border-bottom-width: 0;">Details</a>
+                                                </li>
                                             </ul>
                                             <div class="row">
                                                 <div class="col-md-9">
@@ -160,6 +164,9 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                                 render_known_devices($IntellivoidAccounts, $DeviceResults);
                                                             ?>
                                                         </div>
+                                                        <div class="tab-pane fade" id="user-profile-details" role="tabpanel" aria-labelledby="user-profile-details-tab">
+                                                            <?PHP render_details($IntellivoidAccounts, $Account);  ?>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
@@ -168,8 +175,9 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                         <ul class="chats">
                                                             <li class="chat-persons">
                                                                 <a href="#">
-                                                              <span class="pro-pic">
-                                                                <img src="../../../assets/images/faces/face2.jpg" alt="profile image"> </span>
+                                                                    <span class="pro-pic">
+                                                                        <img src="../../../assets/images/faces/face2.jpg" alt="profile image">
+                                                                    </span>
                                                                     <div class="user">
                                                                         <p class="u-name">Marina Michel</p>
                                                                         <p class="u-designation">Business Development</p>

@@ -53,9 +53,9 @@
                                 <td><?PHP HTML::print($country); ?></td>
                                 <td><?PHP HTML::print(date("F j, Y, g:i a", $KnownHost->LastUsed)); ?></td>
                                 <td>
-                                    <button class="btn btn-xs btn-outline-primary">
-                                        <i class="mdi mdi-database-search"></i>
-                                    </button>
+                                    <a class="text-primary" href="#">
+                                        <i class="pl-1 mdi mdi-database-search"></i> View details
+                                    </a>
                                 </td>
                             </tr>
                             <?PHP
