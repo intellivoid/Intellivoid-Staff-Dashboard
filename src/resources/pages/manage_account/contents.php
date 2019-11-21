@@ -139,7 +139,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                 </li>
                                             </ul>
                                             <div class="row">
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 border-right">
                                                     <div class="tab-content tab-body" id="profile-log-switch">
                                                         <div class="tab-pane fade show active pr-3" id="user-profile-info" role="tabpanel" aria-labelledby="user-profile-info-tab">
                                                             <p class="card-description"> Personal info </p>
@@ -170,88 +170,40 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <h5 class="my-4">Who to follow</h5>
-                                                    <div class="new-accounts">
-                                                        <ul class="chats">
-                                                            <li class="chat-persons">
-                                                                <a href="#">
-                                                                    <span class="pro-pic">
-                                                                        <img src="../../../assets/images/faces/face2.jpg" alt="profile image">
-                                                                    </span>
-                                                                    <div class="user">
-                                                                        <p class="u-name">Marina Michel</p>
-                                                                        <p class="u-designation">Business Development</p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li class="chat-persons">
-                                                                <a href="#">
-                                  <span class="pro-pic">
-                                    <img src="../../../assets/images/faces/face3.jpg" alt="profile image"> </span>
-                                                                    <div class="user">
-                                                                        <p class="u-name">Stella Johnson</p>
-                                                                        <p class="u-designation">SEO Expert</p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li class="chat-persons">
-                                                                <a href="#">
-                                  <span class="pro-pic">
-                                    <img src="../../../assets/images/faces/face4.jpg" alt="profile image"> </span>
-                                                                    <div class="user">
-                                                                        <p class="u-name">Peter Joo</p>
-                                                                        <p class="u-designation">UI/UX designer</p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+                                                    <h5 class="my-4">Roles</h5>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="wrapper d-flex align-items-center media-info">
+                                                            <i class="mdi mdi-shield icon-md"></i>
+                                                            <p class="card-title ml-3 mb-0">Administrator</p>
+                                                        </div>
+                                                        <div class="wrapper ml-auto action-bar">
+                                                            <a class="text-white" href="#">
+                                                                <i class="mdi mdi-check mr-3"></i>
+                                                            </a>
+                                                        </div>
                                                     </div>
-                                                    <h5 class="my-4">Pending</h5>
-                                                    <div class="new-accounts">
-                                                        <ul class="chats">
-                                                            <li class="chat-persons">
-                                                                <a href="#">
-                                  <span class="pro-pic">
-                                    <img src="../../../assets/images/faces/face5.jpg" alt="profile image"> </span>
-                                                                    <div class="user">
-                                                                        <p class="u-name">Marina Michel</p>
-                                                                        <p class="u-designation">Business Development</p>
-                                                                        <span class="d-flex align-items-center mt-2">
-                                      <span class="btn btn-xs btn-rounded btn-outline-light mr-2">Buyer</span>
-                                      <span class="btn btn-xs btn-rounded btn-outline-primary">Lead</span>
-                                    </span>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li class="chat-persons">
-                                                                <a href="#">
-                                  <span class="pro-pic">
-                                    <img src="../../../assets/images/faces/face6.jpg" alt="profile image"> </span>
-                                                                    <div class="user">
-                                                                        <p class="u-name">Stella Johnson</p>
-                                                                        <p class="u-designation">SEO Expert</p>
-                                                                        <span class="d-flex align-items-center mt-2">
-                                      <span class="btn btn-xs btn-rounded btn-outline-light mr-2">Buyer</span>
-                                      <span class="btn btn-xs btn-rounded btn-outline-primary">Lead</span>
-                                    </span>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li class="chat-persons">
-                                                                <a href="#">
-                                  <span class="pro-pic">
-                                    <img src="../../../assets/images/faces/face7.jpg" alt="profile image"> </span>
-                                                                    <div class="user">
-                                                                        <p class="u-name">Peter Joo</p>
-                                                                        <p class="u-designation">UI/UX designer</p>
-                                                                        <span class="d-flex align-items-center mt-2">
-                                      <span class="btn btn-xs btn-rounded btn-outline-light mr-2">Buyer</span>
-                                      <span class="btn btn-xs btn-rounded btn-outline-primary">Lead</span>
-                                    </span>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+                                                    <div class="d-flex align-items-center border-top mt-3">
+                                                        <div class="wrapper d-flex align-items-center media-info pt-3">
+                                                            <i class="mdi mdi-security icon-md"></i>
+                                                            <p class="card-title ml-3 mb-0">Moderator</p>
+                                                        </div>
+                                                        <div class="wrapper ml-auto action-bar">
+                                                            <a class="text-white" href="#">
+                                                                <i class="mdi mdi-check mr-3"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center border-top mt-3">
+                                                        <div class="wrapper d-flex align-items-center media-info pt-3">
+                                                            <i class="mdi mdi-lifebuoy icon-md"></i>
+                                                            <p class="card-title ml-3 mb-0">Support</p>
+                                                        </div>
+                                                        <div class="wrapper ml-auto action-bar">
+                                                            <a class="text-white" href="#">
+                                                                <i class="mdi mdi-check mr-3"></i>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

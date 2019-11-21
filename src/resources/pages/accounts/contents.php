@@ -41,77 +41,80 @@ use DynamicalWeb\HTML;
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">Accounts</h4>
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Username</th>
-                                                    <th>ID</th>
-                                                    <th>Public ID</th>
-                                                    <th>Email</th>
-                                                    <th>Status</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?PHP
-                                                    foreach($Results['results'] as $account)
-                                                    {
-                                                        $public_id = $account['public_id'];
-                                                        $account['public_id'] = (strlen($account['public_id']) > 15) ? substr($account['public_id'], 0, 15) . '...' : $account['public_id'];
-                                                        $account['username'] = (strlen($account['username']) > 15) ? substr($account['username'], 0, 15) . '...' : $account['username'];
-                                                        ?>
-                                                        <tr>
-                                                            <td>
-                                                                <img src="<?PHP HTML::print(getAvatarUrl($public_id, 'tiny')); ?>" class="img-fluid" style="border-radius: 0;" alt="Profile Image">
-                                                                <span class="pl-2"><?PHP HTML::print($account['username']); ?></span>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Username</th>
+                                                        <th>ID</th>
+                                                        <th>Public ID</th>
+                                                        <th>Email</th>
+                                                        <th>Status</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?PHP
+                                                        foreach($Results['results'] as $account)
+                                                        {
+                                                            $public_id = $account['public_id'];
+                                                            $account['public_id'] = (strlen($account['public_id']) > 15) ? substr($account['public_id'], 0, 15) . '...' : $account['public_id'];
+                                                            $account['username'] = (strlen($account['username']) > 15) ? substr($account['username'], 0, 15) . '...' : $account['username'];
+                                                            ?>
+                                                                <tr>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                                        <img src="<?PHP HTML::print(getAvatarUrl($public_id, 'tiny')); ?>" class="img-fluid" style="border-radius: 0;" alt="Profile Image">
+                                                                        <span class="pl-2"><?PHP HTML::print($account['username']); ?></span>
 
-                                                            </td>
-                                                            <td><?PHP HTML::print($account['id']); ?></td>
-                                                            <td><?PHP HTML::print($account['public_id']); ?></td>
-                                                            <td><?PHP HTML::print($account['email']); ?></td>
-                                                            <td>
-                                                                <?PHP
-                                                                    switch((int)$account['status'])
-                                                                    {
-                                                                        case AccountStatus::Active:
-                                                                            HTML::print("<label class=\"badge badge-success\">Active</label>", false);
-                                                                            break;
+                                                                    </td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($account['id']); ?></td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($account['public_id']); ?></td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($account['email']); ?></td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                                        <?PHP
+                                                                        switch((int)$account['status'])
+                                                                        {
+                                                                            case AccountStatus::Active:
+                                                                                HTML::print("<label class=\"badge badge-success\">Active</label>", false);
+                                                                                break;
 
-                                                                        case AccountStatus::Suspended:
-                                                                            HTML::print("<label class=\"badge badge-danger\">Suspended</label>", false);
-                                                                            break;
+                                                                            case AccountStatus::Suspended:
+                                                                                HTML::print("<label class=\"badge badge-danger\">Suspended</label>", false);
+                                                                                break;
 
-                                                                        case AccountStatus::Limited:
-                                                                            HTML::print("<label class=\"badge badge-warning\">Limited</label>", false);
-                                                                            break;
+                                                                            case AccountStatus::Limited:
+                                                                                HTML::print("<label class=\"badge badge-warning\">Limited</label>", false);
+                                                                                break;
 
-                                                                        case AccountStatus::VerificationRequired:
-                                                                            HTML::print("<label class=\"badge badge-primary\">Verification Required</label>", false);
-                                                                            break;
+                                                                            case AccountStatus::VerificationRequired:
+                                                                                HTML::print("<label class=\"badge badge-primary\">Verification Required</label>", false);
+                                                                                break;
 
-                                                                        default:
-                                                                            HTML::print("<label class=\"badge badge-\">Limited</label>", false);
-                                                                            break;
-                                                                    }
-                                                                ?>
+                                                                            default:
+                                                                                HTML::print("<label class=\"badge badge-\">Limited</label>", false);
+                                                                                break;
+                                                                        }
+                                                                        ?>
 
-                                                            </td>
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <button class="btn btn-xs btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
-                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
-                                                                        <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $account['id']), true); ?>">Manage Account</a>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
+                                                                    </td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                                        <div class="dropdown">
+                                                                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Actions</a>
+                                                                            <div class="dropdown-menu" >
+                                                                                <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $account['id']), true); ?>">Manage Account</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
 
-                                                        </tr>
-                                                        <?PHP
-                                                    }
-                                                ?>
+                                                                </tr>
+                                                            <?PHP
+                                                        }
+                                                    ?>
 
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
