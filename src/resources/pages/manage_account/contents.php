@@ -11,7 +11,7 @@ use IntellivoidAccounts\Exceptions\AccountNotFoundException;
     use IntellivoidAccounts\IntellivoidAccounts;
 use IntellivoidAccounts\Objects\UserAgentRecord;
 
-Runtime::import('IntellivoidAccounts');
+    Runtime::import('IntellivoidAccounts');
 
     if(isset($_GET['id']) == false)
     {
@@ -86,6 +86,7 @@ Runtime::import('IntellivoidAccounts');
     }
 
     HTML::importScript('update_account');
+    HTML::importScript('render_known_hosts');
 
 ?>
 <!DOCTYPE html>
@@ -246,61 +247,7 @@ Runtime::import('IntellivoidAccounts');
 
                                                         </div>
                                                         <div class="tab-pane fade" id="user-profile-kh" role="tabpanel" aria-labelledby="user-profile-kh-tab">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th>ID</th>
-                                                                    <th>IP</th>
-                                                                    <th>Country</th>
-                                                                    <th>Last Used</th>
-                                                                    <th>Actions</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <?PHP
-                                                                    foreach($Account->Configuration->KnownHosts->KnownHosts as $host_id)
-                                                                    {
-                                                                        try
-                                                                        {
-                                                                            $KnownHost = $IntellivoidAccounts->getKnownHostsManager()->getHost(KnownHostsSearchMethod::byId, (int)$host_id);
-                                                                        }
-                                                                        catch(Exception $exception)
-                                                                        {
-                                                                            continue;
-                                                                        }
-
-                                                                        $flag_icon = "";
-                                                                        $country = "";
-                                                                        if($KnownHost->LocationData->CountryCode == null)
-                                                                        {
-                                                                            $country = "Unknown";
-                                                                            $flag_icon = "mdi mdi-map-marker-off";
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            $country = $KnownHost->LocationData->CountryName;
-                                                                            $flag_icon = "flag-icon pr-2 flag-icon-" . strtolower($KnownHost->LocationData->CountryCode);
-                                                                        }
-                                                                        ?>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <i class="<?PHP HTML::print($flag_icon); ?>" title="<?PHP HTML::print($flag_icon); ?>"></i>
-                                                                                    <?PHP HTML::print($KnownHost->ID); ?>
-                                                                                </td>
-                                                                                <td><?PHP HTML::print($KnownHost->IpAddress); ?></td>
-                                                                                <td><?PHP HTML::print($country); ?></td>
-                                                                                <td><?PHP HTML::print(date("F j, Y, g:i a", $KnownHost->LastUsed)); ?></td>
-                                                                                <td>
-                                                                                    <button class="btn btn-xs btn-outline-primary">
-                                                                                        <i class="mdi mdi-database-search"></i>
-                                                                                    </button>
-                                                                                </td>
-                                                                            </tr>
-                                                                        <?PHP
-                                                                    }
-                                                                ?>
-                                                                </tbody>
-                                                            </table>
+                                                            <?PHP render_known_hosts($IntellivoidAccounts, $Account->Configuration->KnownHosts->KnownHosts); ?>
                                                         </div>
 
                                                         <div class="tab-pane fade" id="user-profile-kd" role="tabpanel" aria-labelledby="user-profile-kd-tab">
