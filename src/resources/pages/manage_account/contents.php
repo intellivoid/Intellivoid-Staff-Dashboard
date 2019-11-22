@@ -86,9 +86,12 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
     }
 
     HTML::importScript('update_account');
+    HTML::importScript('apply_permission');
+    HTML::importScript('revoke_permission');
     HTML::importScript('render_known_hosts');
     HTML::importScript('render_known_devices');
     HTML::importScript('render_details');
+    HTML::importScript('render_roles');
 
 ?>
 <!DOCTYPE html>
@@ -171,40 +174,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                 </div>
                                                 <div class="col-md-3">
                                                     <h5 class="my-4">Roles</h5>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="wrapper d-flex align-items-center media-info">
-                                                            <i class="mdi mdi-shield icon-md"></i>
-                                                            <p class="card-title ml-3 mb-0">Administrator</p>
-                                                        </div>
-                                                        <div class="wrapper ml-auto action-bar">
-                                                            <a class="text-white" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $_GET['id'], 'action' => 'set_permission', 'permission' => 'administrator'), true); ?>">
-                                                                <i class="mdi mdi-check mr-3"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex align-items-center border-top mt-3">
-                                                        <div class="wrapper d-flex align-items-center media-info pt-3">
-                                                            <i class="mdi mdi-security icon-md"></i>
-                                                            <p class="card-title ml-3 mb-0">Moderator</p>
-                                                        </div>
-                                                        <div class="wrapper ml-auto action-bar">
-                                                            <a class="text-white" href="#">
-                                                                <i class="mdi mdi-check mr-3"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex align-items-center border-top mt-3">
-                                                        <div class="wrapper d-flex align-items-center media-info pt-3">
-                                                            <i class="mdi mdi-lifebuoy icon-md"></i>
-                                                            <p class="card-title ml-3 mb-0">Support</p>
-                                                        </div>
-                                                        <div class="wrapper ml-auto action-bar">
-                                                            <a class="text-white" href="#">
-                                                                <i class="mdi mdi-check mr-3"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                                    <?PHP render_roles($Account); ?>
                                                 </div>
                                             </div>
                                         </div>

@@ -39,5 +39,17 @@
             case 107:
                 RenderAlert('The information was cleared', "success", "mdi-checkbox-marked-circle-outline");
                 break;
+
+            case 108:
+                RenderAlert('The given permission is not valid', "warning", "mdi-alert-circle");
+                break;
+
+            case 109:
+                RenderAlert('Permission has been applied', "success", "mdi-checkbox-marked-circle-outline");
+                break;
+
+            case 110:
+                RenderAlert('Permission has been revoked', "success", "mdi-checkbox-marked-circle-outline");
+                break;
         }
     }
