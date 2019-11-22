@@ -119,7 +119,23 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                 <div class="profile-info d-flex align-items-center">
                                                     <img class="rounded-circle img-lg" src="<?PHP HTML::print(getAvatarUrl($Account->PublicID, 'normal')); ?>" alt="profile image">
                                                     <div class="wrapper pl-4">
-                                                        <p class="profile-user-name"><?PHP HTML::print($Account->Username); ?></p>
+                                                        <p class="profile-user-name">
+                                                            <?PHP HTML::print($Account->Username); ?>
+                                                            <?PHP
+                                                                if($Account->Configuration->Roles->has_role("ADMINISTRATOR"))
+                                                                {
+                                                                    HTML::print("<i class=\"mdi mdi-shield\"></i>", false);
+                                                                }
+                                                                if($Account->Configuration->Roles->has_role("MODERATOR"))
+                                                                {
+                                                                    HTML::print("<i class=\"mdi mdi-security\"></i>", false);
+                                                                }
+                                                                if($Account->Configuration->Roles->has_role("SUPPORT"))
+                                                                {
+                                                                    HTML::print("<i class=\"mdi mdi-lifebuoy\"></i>", false);
+                                                                }
+                                                            ?>
+                                                        </p>
                                                         <div class="wrapper d-flex align-items-center">
                                                             <p class="profile-user-designation"><?PHP HTML::print(date("F j, Y, g:i a", $Account->CreationDate)); ?></p>
                                                         </div>
