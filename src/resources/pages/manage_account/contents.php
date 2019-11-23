@@ -95,6 +95,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
     HTML::importScript('render_details');
     HTML::importScript('render_login_history');
     HTML::importScript('render_roles');
+    HTML::importScript('telegram_details');
     HTML::importScript('render_status');
 
 ?>
@@ -172,7 +173,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                             <?PHP
                                                                 if($Account->Configuration->VerificationMethods->TelegramClientLinked)
                                                                 {
-                                                                    HTML::importScript('telegram_details');
+                                                                    render_telegram_details($IntellivoidAccounts, $Account);
                                                                 }
                                                             ?>
                                                         </div>
