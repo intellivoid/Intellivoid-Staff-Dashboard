@@ -82,7 +82,7 @@
                                             <p><?PHP HTML::print(str_ireplace("%s", $Application->Name, "%s has access to")); ?></p>
                                             <div class="d-flex ml-2 align-items-center py-1 pb-2">
                                                 <i class="mdi mdi-account-card-details mdi-18px"></i>
-                                                <p class="mb-0 ml-3">Your username and avatar</p>
+                                                <p class="mb-0 ml-3">Username and avatar</p>
                                             </div>
                                             <?PHP
                                             if(in_array(AccountRequestPermissions::ViewEmailAddress, $ApplicationAccess->Permissions))
@@ -90,7 +90,7 @@
                                                 ?>
                                                 <div class="d-flex ml-2 align-items-center py-1 pb-2">
                                                     <i class="mdi mdi-email mdi-18px"></i>
-                                                    <p class="mb-0 ml-3">View your Email Address</p>
+                                                    <p class="mb-0 ml-3">View Email Address</p>
                                                 </div>
                                                 <?PHP
                                             }
@@ -99,7 +99,7 @@
                                                 ?>
                                                 <div class="d-flex ml-2 align-items-center py-1 pb-2">
                                                     <i class="mdi mdi-account mdi-18px"></i>
-                                                    <p class="mb-0 ml-3">View your personal information</p>
+                                                    <p class="mb-0 ml-3">View personal information</p>
                                                 </div>
                                                 <?PHP
                                             }
@@ -108,7 +108,7 @@
                                                 ?>
                                                 <div class="d-flex ml-2 align-items-center py-1 pb-2">
                                                     <i class="mdi mdi-account-edit mdi-18px"></i>
-                                                    <p class="mb-0 ml-3">Edit your personal information</p>
+                                                    <p class="mb-0 ml-3">Edit personal information</p>
                                                 </div>
                                                 <?PHP
                                             }
@@ -117,7 +117,7 @@
                                                 ?>
                                                 <div class="d-flex ml-2 align-items-center py-1 pb-2">
                                                     <i class="mdi mdi-shopping mdi-18px"></i>
-                                                    <p class="mb-0 ml-3">Make purchases on your behalf</p>
+                                                    <p class="mb-0 ml-3">Make purchases on users behalf</p>
                                                 </div>
                                                 <?PHP
                                             }
@@ -126,7 +126,7 @@
                                                 ?>
                                                 <div class="d-flex ml-2 align-items-center py-1 pb-2">
                                                     <i class="mdi mdi-telegram mdi-18px"></i>
-                                                    <p class="mb-0 ml-3">Send notifications to you on Telegram</p>
+                                                    <p class="mb-0 ml-3">Send notifications to user on Telegram</p>
                                                 </div>
                                                 <?PHP
                                             }
@@ -134,7 +134,7 @@
 
                                         </div>
                                         <div class="col-lg-3 mt-auto mb-2">
-                                            <button class="btn btn-sm btn-outline-danger" onclick="location.href='<?PHP //DynamicalWeb::getRoute('services', array('action' => 'revoke_access', 'access_id' => $ApplicationAccess->PublicID), true); ?>';">Revoke Access</button>
+                                            <button class="btn btn-sm btn-outline-danger" onclick="location.href='<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $account->ID, 'action' => 'revoke_access', 'access_id' => $ApplicationAccess->PublicID), true); ?>';">Revoke Access</button>
                                         </div>
                                     </div>
                                 </div>

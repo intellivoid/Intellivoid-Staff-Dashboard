@@ -79,5 +79,22 @@
             case 117:
                 RenderAlert('The notification has been successfully sent to Telegram', "success", "mdi-checkbox-marked-circle-outline");
                 break;
+
+            case 118:
+                RenderAlert('The COA Access record was not found', "danger", "mdi-alert-circle");
+                break;
+
+            case 119:
+                RenderAlert('There was an error while trying to process this operation', "danger", "mdi-alert-circle");
+                break;
+
+            case 120:
+                RenderAlert('Access to this Service/Application has been revoked successfully', "success", "mdi-checkbox-marked-circle-outline");
+                break;
+
+            case 121:
+                RenderAlert('Access to this Service/Application cannot be revoked because it has already been revoked', "warning", "mdi-alert-circle");
+                break;
+
         }
     }

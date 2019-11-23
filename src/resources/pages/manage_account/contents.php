@@ -90,6 +90,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
     HTML::importScript('send_notification');
     HTML::importScript('set_status');
     HTML::importScript('revoke_permission');
+    HTML::importScript('revoke_access');
     HTML::importScript('render_known_hosts');
     HTML::importScript('render_known_devices');
     HTML::importScript('render_details');
