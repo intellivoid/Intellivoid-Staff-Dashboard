@@ -93,6 +93,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
     HTML::importScript('render_known_hosts');
     HTML::importScript('render_known_devices');
     HTML::importScript('render_details');
+    HTML::importScript('render_coa_access');
     HTML::importScript('render_login_history');
     HTML::importScript('render_roles');
     HTML::importScript('telegram_details');
@@ -162,6 +163,9 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                     <a class="nav-link" id="user-login-history-tab" data-toggle="pill" href="#user-login-history" role="tab" aria-controls="user-login-history" aria-selected="false" style="border-bottom-width: 0;">Login History</a>
                                                 </li>
                                                 <li class="nav-item">
+                                                    <a class="nav-link" id="user-profile-coa-tab" data-toggle="pill" href="#user-coa-details" role="tab" aria-controls="user-coa-details" aria-selected="false" style="border-bottom-width: 0;">COA Access</a>
+                                                </li>
+                                                <li class="nav-item">
                                                     <a class="nav-link" id="user-profile-details-tab" data-toggle="pill" href="#user-profile-details" role="tab" aria-controls="user-profile-details" aria-selected="false" style="border-bottom-width: 0;">Details</a>
                                                 </li>
                                             </ul>
@@ -197,6 +201,9 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                                 }
                                                                 render_known_devices($IntellivoidAccounts, $DeviceResults);
                                                             ?>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="user-coa-details" role="tabpanel" aria-labelledby="user-coa-details-tab">
+                                                            <?PHP render_coa_access($IntellivoidAccounts, $Account);  ?>
                                                         </div>
                                                         <div class="tab-pane fade" id="user-profile-details" role="tabpanel" aria-labelledby="user-profile-details-tab">
                                                             <?PHP render_details($IntellivoidAccounts, $Account);  ?>

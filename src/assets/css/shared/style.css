@@ -4575,7 +4575,6 @@ input[type="button"].btn-block {
   border-radius: 0; }
 
 .accordion .card:first-of-type {
-  border-bottom: 0;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0; }
 
