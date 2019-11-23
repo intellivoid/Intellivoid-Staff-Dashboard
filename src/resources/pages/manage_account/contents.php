@@ -87,6 +87,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
 
     HTML::importScript('update_account');
     HTML::importScript('apply_permission');
+    HTML::importScript('send_notification');
     HTML::importScript('set_status');
     HTML::importScript('revoke_permission');
     HTML::importScript('render_known_hosts');
@@ -167,8 +168,13 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                 <div class="col-md-9 border-right">
                                                     <div class="tab-content tab-body" id="profile-log-switch">
                                                         <div class="tab-pane fade show active pr-3" id="user-profile-info" role="tabpanel" aria-labelledby="user-profile-info-tab">
-                                                            <p class="card-description"> Personal info </p>
                                                             <?PHP HTML::importScript('edit_personal_information'); ?>
+                                                            <?PHP
+                                                                if($Account->Configuration->VerificationMethods->TelegramClientLinked)
+                                                                {
+                                                                    HTML::importScript('telegram_details');
+                                                                }
+                                                            ?>
                                                         </div>
                                                         <div class="tab-pane fade" id="user-profile-kh" role="tabpanel" aria-labelledby="user-profile-kh-tab">
                                                             <?PHP render_known_hosts($IntellivoidAccounts, $Account->Configuration->KnownHosts->KnownHosts); ?>

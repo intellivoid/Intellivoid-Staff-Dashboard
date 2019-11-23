@@ -67,5 +67,17 @@
             case 114:
                 RenderAlert('The status is invalid or unsupported', "danger", "mdi-alert-circle");
                 break;
+
+            case 115:
+                RenderAlert('There was an issue while trying send a notification to this Telegram client', "danger", "mdi-alert-circle");
+                break;
+
+            case 116:
+                RenderAlert('This account has no Telegram client linked', "warning", "mdi-alert-circle");
+                break;
+
+            case 117:
+                RenderAlert('The notification has been successfully sent to Telegram', "success", "mdi-checkbox-marked-circle-outline");
+                break;
         }
     }

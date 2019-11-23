@@ -3,7 +3,7 @@
     use DynamicalWeb\HTML;
 
 ?>
-
+<h4 class="mt-2 pt-4 mb-4">Personal Details</h4>
 <form method="POST" action="<?PHP DynamicalWeb::getRoute('manage_account', array('action'=>'update_information', 'id'=>$_GET['id']), true); ?>">
     <div class="row">
         <div class="col-md-6">
@@ -107,7 +107,7 @@
         <div class="col-md-12">
             <div class="form-group row">
                 <div class="col-sm-3">
-                    <input type="submit" class="btn btn-outline-primary" value="Save Changes">
+                    <input type="submit" class="btn btn-sm btn-outline-primary" value="Save Changes">
                 </div>
             </div>
         </div>
