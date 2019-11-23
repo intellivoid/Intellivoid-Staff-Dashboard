@@ -51,5 +51,21 @@
             case 110:
                 RenderAlert('Permission has been revoked', "success", "mdi-checkbox-marked-circle-outline");
                 break;
+
+            case 111:
+                RenderAlert('There has been an issue while trying to update the permissions of this account', "danger", "mdi-alert-circle");
+                break;
+
+            case 112:
+                RenderAlert('There was an issue while trying to update the status of the account', "danger", "mdi-alert-circle");
+                break;
+
+            case 113:
+                RenderAlert('The account status has been updated', "success", "mdi-checkbox-marked-circle-outline");
+                break;
+
+            case 114:
+                RenderAlert('The status is invalid or unsupported', "danger", "mdi-alert-circle");
+                break;
         }
     }

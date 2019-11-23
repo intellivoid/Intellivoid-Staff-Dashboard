@@ -3,49 +3,60 @@
 
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
-    use IntellivoidAccounts\Abstracts\AuditEventType;
+use IntellivoidAccounts\Abstracts\AccountStatus;
+use IntellivoidAccounts\Abstracts\AuditEventType;
     use IntellivoidAccounts\Abstracts\SearchMethods\AccountSearchMethod;
     use IntellivoidAccounts\IntellivoidAccounts;
 
     if(isset($_GET['action']))
     {
-        if($_GET['action'] == 'set_permission')
+        if($_GET['action'] == 'set_status')
         {
             try
             {
-                apply_permission();
+                set_status();
             }
             catch(Exception $exception)
             {
                 Actions::redirect(DynamicalWeb::getRoute('manage_account', array(
-                    'callback' => '111', 'id' => $_GET['id']
+                    'callback' => '112', 'id' => $_GET['id']
                 )));
             }
         }
     }
 
-    function apply_permission()
+    function set_status()
     {
-        if(isset($_GET['permission']) == false)
+        if(isset($_GET['status']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute('manage_account', array(
                 'callback' => '100', 'id' => $_GET['id']
             )));
         }
 
-        $Role = "None";
+        $Status = 0;
 
-        switch(strtoupper($_GET['permission']))
+        switch(strtoupper($_GET['status']))
         {
-            case "ADMINISTRATOR":
-            case "MODERATOR":
-            case "SUPPORT":
-                $Role = strtoupper($_GET['permission']);
+            case "ACTIVE":
+                $Status = AccountStatus::Active;
+                break;
+
+            case "SUSPENDED";
+                $Status = AccountStatus::Suspended;
+                break;
+
+            case "LIMITED":
+                $Status = AccountStatus::Limited;
+                break;
+
+            case "VERIFICATION_REQUIRED":
+                $Status = AccountStatus::VerificationRequired;
                 break;
 
             default:
                 Actions::redirect(DynamicalWeb::getRoute('manage_account', array(
-                    'callback' => '108', 'id' => $_GET['id']
+                    'callback' => '114', 'id' => $_GET['id']
                 )));
         }
 
@@ -63,10 +74,10 @@
         }
 
         $Account = $IntellivoidAccounts->getAccountManager()->getAccount(AccountSearchMethod::byId, (int)$_GET['id']);
-        $Account->Configuration->Roles->apply_role($Role);
+        $Account->Status = (int)$Status;
         $IntellivoidAccounts->getAccountManager()->updateAccount($Account);
 
         Actions::redirect(DynamicalWeb::getRoute('manage_account', array(
-            'callback' => '109', 'id' => $_GET['id']
+            'callback' => '113', 'id' => $_GET['id']
         )));
     }

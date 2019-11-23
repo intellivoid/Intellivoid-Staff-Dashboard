@@ -87,12 +87,14 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
 
     HTML::importScript('update_account');
     HTML::importScript('apply_permission');
+    HTML::importScript('set_status');
     HTML::importScript('revoke_permission');
     HTML::importScript('render_known_hosts');
     HTML::importScript('render_known_devices');
     HTML::importScript('render_details');
     HTML::importScript('render_login_history');
     HTML::importScript('render_roles');
+    HTML::importScript('render_status');
 
 ?>
 <!DOCTYPE html>
@@ -195,9 +197,13 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
+                                                    <h5 class="my-4">Status</h5>
+                                                    <?PHP render_status($Account); ?>
+                                                    <div class="mt-4 border-top"></div>
                                                     <h5 class="my-4">Roles</h5>
                                                     <?PHP render_roles($Account); ?>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
