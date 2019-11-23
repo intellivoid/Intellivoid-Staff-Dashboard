@@ -24,13 +24,13 @@ use IntellivoidAccounts\Objects\Account;
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label mt-1" for="configuration_details">Configuration Details</label>
                 <div class="col-sm-9">
-                    <textarea class="form-control" id="configuration_details" rows="15"><?PHP HTML::print(json_encode($account->Configuration->toArray(), JSON_PRETTY_PRINT)); ?></textarea>
+                    <textarea class="form-control" id="configuration_details" rows="15" readonly><?PHP HTML::print(json_encode($account->Configuration->toArray(), JSON_PRETTY_PRINT)); ?></textarea>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label mt-1" for="personal_information_details">Personal Information Details</label>
                 <div class="col-sm-9">
-                    <textarea class="form-control" id="personal_information_details" rows="15"><?PHP HTML::print(json_encode($account->PersonalInformation->toArray(), JSON_PRETTY_PRINT)); ?></textarea>
+                    <textarea class="form-control" id="personal_information_details" rows="15" readonly><?PHP HTML::print(json_encode($account->PersonalInformation->toArray(), JSON_PRETTY_PRINT)); ?></textarea>
                 </div>
             </div>
         </div>
