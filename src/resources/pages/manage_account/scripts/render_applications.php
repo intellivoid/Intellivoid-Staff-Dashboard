@@ -18,7 +18,6 @@ use IntellivoidAccounts\Abstracts\SearchMethods\ApplicationSearchMethod;
         {
             ?>
             <div class="wrapper mt-4">
-
                 <div class="d-flex flex-column justify-content-center align-items-center" style="height:50vh;">
                     <div class="p-2 my-flex-item">
                         <h4>No Items</h4>

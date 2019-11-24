@@ -105,6 +105,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
     HTML::importScript('render_roles');
     HTML::importScript('telegram_details');
     HTML::importScript('render_status');
+    HTML::importScript('render_audit_logs');
 
 ?>
 <!DOCTYPE html>
@@ -176,6 +177,9 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                     <a class="nav-link" id="user-applications-tab" data-toggle="pill" href="#user-applications" role="tab" aria-controls="user-applications" aria-selected="false" style="border-bottom-width: 0;">Applications</a>
                                                 </li>
                                                 <li class="nav-item">
+                                                    <a class="nav-link" id="user-audit-tab" data-toggle="pill" href="#user-audit" role="tab" aria-controls="user-audit" aria-selected="false" style="border-bottom-width: 0;">Audit</a>
+                                                </li>
+                                                <li class="nav-item">
                                                     <a class="nav-link" id="user-profile-details-tab" data-toggle="pill" href="#user-profile-details" role="tab" aria-controls="user-profile-details" aria-selected="false" style="border-bottom-width: 0;">Details</a>
                                                 </li>
                                             </ul>
@@ -217,6 +221,9 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                         </div>
                                                         <div class="tab-pane fade" id="user-applications" role="tabpanel" aria-labelledby="user-applications-tab">
                                                             <?PHP render_applications($IntellivoidAccounts, $Account);  ?>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="user-audit" role="tabpanel" aria-labelledby="user-audit-tab">
+                                                            <?PHP render_audit_logs($IntellivoidAccounts, $Account);  ?>
                                                         </div>
                                                         <div class="tab-pane fade" id="user-profile-details" role="tabpanel" aria-labelledby="user-profile-details-tab">
                                                             <?PHP render_details($IntellivoidAccounts, $Account);  ?>
