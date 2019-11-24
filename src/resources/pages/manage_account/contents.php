@@ -87,6 +87,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
 
     // Actions
     HTML::importScript('update_account');
+    HTML::importScript('export_data');
     HTML::importScript('apply_permission');
     HTML::importScript('send_notification');
     HTML::importScript('set_status');

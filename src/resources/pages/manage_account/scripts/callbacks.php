@@ -112,5 +112,9 @@
                 RenderAlert('The Application has been enabled', "success", "mdi-checkbox-marked-circle-outline");
                 break;
 
+            case 126:
+                RenderAlert('There was an error while trying to export account data', "danger", "mdi-alert-circle");
+                break;
+
         }
     }

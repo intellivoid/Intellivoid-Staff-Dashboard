@@ -1,6 +1,7 @@
 <?PHP
 
-    use DynamicalWeb\HTML;
+use DynamicalWeb\DynamicalWeb;
+use DynamicalWeb\HTML;
     use IntellivoidAccounts\Abstracts\SearchMethods\KnownHostsSearchMethod;
     use IntellivoidAccounts\IntellivoidAccounts;
 use IntellivoidAccounts\Objects\Account;
@@ -32,6 +33,9 @@ use IntellivoidAccounts\Objects\Account;
                 <div class="col-sm-9">
                     <textarea class="form-control" id="personal_information_details" rows="15" readonly><?PHP HTML::print(json_encode($account->PersonalInformation->toArray(), JSON_PRETTY_PRINT)); ?></textarea>
                 </div>
+            </div>
+            <div class="form-group row">
+                <button type="button" class="btn btn-outline-primary" onclick="location.href='<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $_GET['id'], 'action' => 'export_data'), true); ?>';">Export Data</button>
             </div>
         </div>
         <?PHP

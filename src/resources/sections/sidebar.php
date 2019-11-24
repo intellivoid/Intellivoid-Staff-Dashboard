@@ -1,7 +1,7 @@
 <?PHP
 
-use DynamicalWeb\DynamicalWeb;
-use DynamicalWeb\HTML;
+    use DynamicalWeb\DynamicalWeb;
+    use DynamicalWeb\HTML;
 
     $UsernameSafe = ucfirst(WEB_ACCOUNT_USERNAME);
     if(strlen($UsernameSafe) > 16)
