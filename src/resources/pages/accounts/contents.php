@@ -115,93 +115,97 @@ use DynamicalWeb\HTML;
                                             </table>
 
                                         </div>
-                                        <div class="wrapper mt-4">
-                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                <div class="p-2 my-flex-item">
-                                                    <nav>
-                                                        <ul class="pagination flat pagination-success flex-wrap">
+                                        <?PHP
+                                        if($Results['total_pages'] > 1)
+                                        {
+                                            ?>
+                                            <div class="wrapper mt-4">
+                                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                                    <div class="p-2 my-flex-item">
+                                                        <nav>
+                                                            <ul class="pagination flat pagination-success flex-wrap">
                                                             <?PHP
-                                                                if($Results['total_pages'] > 1)
+                                                            if($Results['current_page'] == 1)
+                                                            {
+                                                                ?>
+                                                                <li class="page-item">
+                                                                    <a class="page-link disabled" disabled>
+                                                                        <i class="mdi mdi-chevron-left"></i>
+                                                                    </a>
+                                                                </li>
+
+                                                                <?PHP
+                                                            }
+                                                            else
+                                                            {
+                                                                ?>
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('accounts', array('page' => $Results['current_page'] -1), true); ?>">
+                                                                        <i class="mdi mdi-chevron-left"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <?PHP
+                                                            }
+
+                                                            $current_count = 1;
+                                                            while(True)
+                                                            {
+                                                                if($Results['current_page'] == $current_count)
                                                                 {
-                                                                    if($Results['current_page'] == 1)
-                                                                    {
-                                                                        ?>
-                                                                        <li class="page-item">
-                                                                            <a class="page-link disabled" disabled>
-                                                                                <i class="mdi mdi-chevron-left"></i>
-                                                                            </a>
-                                                                        </li>
-
-                                                                        <?PHP
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        ?>
-                                                                        <li class="page-item">
-                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('accounts', array('page' => $Results['current_page'] -1), true); ?>">
-                                                                                <i class="mdi mdi-chevron-left"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <?PHP
-                                                                    }
-
-                                                                    $current_count = 1;
-                                                                    while(True)
-                                                                    {
-                                                                        if($Results['current_page'] == $current_count)
-                                                                        {
-                                                                            ?>
-                                                                            <li class="page-item active">
-                                                                                <a class="page-link disabled" disabled><?PHP HTML::print($current_count); ?></a>
-                                                                            </li>
-                                                                            <?PHP
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            ?>
-                                                                            <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('accounts', array('page' => $current_count), true); ?>"><?PHP HTML::print($current_count); ?></a>
-                                                                            </li>
-                                                                            <?PHP
-                                                                        }
-
-                                                                        if($Results['total_pages'] == $current_count)
-                                                                        {
-                                                                            break;
-                                                                        }
-
-                                                                        $current_count += 1;
-                                                                    }
-
-                                                                    if($Results['current_page'] == $Results['total_pages'])
-                                                                    {
-                                                                        ?>
-                                                                        <li class="page-item">
-                                                                            <a class="page-link disabled" disabled>
-                                                                                <i class="mdi mdi-chevron-right"></i>
-                                                                            </a>
-                                                                        </li>
-
-                                                                        <?PHP
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        ?>
-                                                                        <li class="page-item">
-                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('accounts', array('page' => $Results['current_page'] +1), true); ?>">
-                                                                                <i class="mdi mdi-chevron-right"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <?PHP
-                                                                    }
+                                                                    ?>
+                                                                    <li class="page-item active">
+                                                                        <a class="page-link disabled" disabled><?PHP HTML::print($current_count); ?></a>
+                                                                    </li>
+                                                                    <?PHP
                                                                 }
-                                                            ?>
+                                                                else
+                                                                {
+                                                                    ?>
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('accounts', array('page' => $current_count), true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                    </li>
+                                                                    <?PHP
+                                                                }
 
-                                                        </ul>
-                                                    </nav>
+                                                                if($Results['total_pages'] == $current_count)
+                                                                {
+                                                                    break;
+                                                                }
+
+                                                                $current_count += 1;
+                                                            }
+
+                                                            if($Results['current_page'] == $Results['total_pages'])
+                                                            {
+                                                                ?>
+                                                                <li class="page-item">
+                                                                    <a class="page-link disabled" disabled>
+                                                                        <i class="mdi mdi-chevron-right"></i>
+                                                                    </a>
+                                                                </li>
+
+                                                                <?PHP
+                                                            }
+                                                            else
+                                                            {
+                                                                ?>
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('accounts', array('page' => $Results['current_page'] +1), true); ?>">
+                                                                        <i class="mdi mdi-chevron-right"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <?PHP
+                                                            }
+                                                            ?>
+                                                            </ul>
+                                                        </nav>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <?PHP
+                                        }
+                                        ?>
+
                                     </div>
                                 </div>
                             </div>
