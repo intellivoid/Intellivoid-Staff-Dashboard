@@ -97,7 +97,7 @@
                                             case 'Tizen':
                                             case 'iPhone':
                                             case 'Android':
-                                                HTML::print("<i class=\"mdi mdi-phone pr-1\"></i>", false);
+                                                HTML::print("<i class=\"mdi mdi-cellphone-iphone pr-1\"></i>", false);
                                                 break;
 
                                             default:

@@ -96,5 +96,21 @@
                 RenderAlert('Access to this Service/Application cannot be revoked because it has already been revoked', "warning", "mdi-alert-circle");
                 break;
 
+            case 122:
+                RenderAlert('There was an issue while trying to update the application', "danger", "mdi-alert-circle");
+                break;
+
+            case 123:
+                RenderAlert('The Application was not found', "warning", "mdi-alert-circle");
+                break;
+
+            case 124:
+                RenderAlert('The Application has been disabled', "success", "mdi-checkbox-marked-circle-outline");
+                break;
+
+            case 125:
+                RenderAlert('The Application has been enabled', "success", "mdi-checkbox-marked-circle-outline");
+                break;
+
         }
     }

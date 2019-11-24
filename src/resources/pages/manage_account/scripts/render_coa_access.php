@@ -48,6 +48,7 @@
                                         <small class="text-muted"><?PHP HTML::print(str_ireplace('%s', gmdate("j/m/y g:i a", $ApplicationAccess->LastAuthenticatedTimestamp), 'Last Authenticated: %s')); ?></small>
                                     </div>
                                     <div class="ml-auto mr-3 mt-auto mb-auto">
+
                                         <i class="mdi mdi-account-card-details"></i>
                                         <?PHP
                                         if(in_array(AccountRequestPermissions::ViewEmailAddress ,$ApplicationAccess->Permissions))
@@ -77,7 +78,7 @@
                             </div>
                             <div id="collapse-<?PHP HTML::print($Application->PublicAppId); ?>" class="collapse" role="tabpanel" aria-labelledby="heading-<?PHP HTML::print($Application->PublicAppId); ?>" data-parent="#apps-accordion">
                                 <div class="card-body">
-                                    <div class="ml-2 mr-2 row grid-margin d-flex mb-0">
+                                    <div class="ml-2 mr-2 row grid-margin d-flex mb-3">
                                         <div class="col-lg-9 mb-2">
                                             <p><?PHP HTML::print(str_ireplace("%s", $Application->Name, "%s has access to")); ?></p>
                                             <div class="d-flex ml-2 align-items-center py-1 pb-2">
@@ -136,6 +137,11 @@
                                         <div class="col-lg-3 mt-auto mb-2">
                                             <button class="btn btn-sm btn-outline-danger" onclick="location.href='<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $account->ID, 'action' => 'revoke_access', 'access_id' => $ApplicationAccess->PublicID), true); ?>';">Revoke Access</button>
                                         </div>
+                                    </div>
+                                    <div class="border-top"></div>
+                                    <div class="ml-2 mr-2 mt-4">
+                                        <a class="btn btn-xs btn-primary mr-2" href="#">View Application</a>
+                                        <a class="btn btn-xs btn-primary mr-2" href="#">View Application Access</a>
                                     </div>
                                 </div>
                             </div>
