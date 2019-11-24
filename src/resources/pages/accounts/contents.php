@@ -5,15 +5,17 @@ use DynamicalWeb\HTML;
     use DynamicalWeb\Runtime;
     use IntellivoidAccounts\Abstracts\AccountStatus;
     use IntellivoidAccounts\IntellivoidAccounts;
-    use msqg\QueryBuilder;
+use IntellivoidAccounts\Objects\Account\Configuration;
+use msqg\QueryBuilder;
+use ZiProto\ZiProto;
 
-    Runtime::import('IntellivoidAccounts');
+Runtime::import('IntellivoidAccounts');
     HTML::importScript('db_render_helper');
 
     $IntellivoidAccounts = new IntellivoidAccounts();
 
     $Results = get_results($IntellivoidAccounts->database, 500, 'users', 'id',
-        QueryBuilder::select('users', ['id', 'public_id', 'username', 'email', 'status', 'creation_date'])
+        QueryBuilder::select('users', ['id', 'public_id', 'username', 'email', 'status', 'creation_date', 'configuration'])
     );
 ?>
 <!DOCTYPE html>
@@ -57,6 +59,7 @@ use DynamicalWeb\HTML;
                                                     <?PHP
                                                         foreach($Results['results'] as $account)
                                                         {
+                                                            $configuration = Configuration::fromArray(ZiProto::decode($account['configuration']));
                                                             $public_id = $account['public_id'];
                                                             $account['public_id'] = (strlen($account['public_id']) > 15) ? substr($account['public_id'], 0, 15) . '...' : $account['public_id'];
                                                             $account['username'] = (strlen($account['username']) > 15) ? substr($account['username'], 0, 15) . '...' : $account['username'];
@@ -64,8 +67,23 @@ use DynamicalWeb\HTML;
                                                                 <tr>
                                                                     <td style="padding-top: 10px; padding-bottom: 10px;">
                                                                         <img src="<?PHP HTML::print(getAvatarUrl($public_id, 'tiny')); ?>" class="img-fluid" style="border-radius: 0;" alt="Profile Image">
-                                                                        <span class="pl-2"><?PHP HTML::print($account['username']); ?></span>
-
+                                                                        <span class="pl-2">
+                                                                            <?PHP
+                                                                                HTML::print($account['username']);
+                                                                                if($configuration->Roles->has_role("ADMINISTRATOR"))
+                                                                                {
+                                                                                    HTML::print("<i class=\"mdi mdi-shield pl-1\"></i>", false);
+                                                                                }
+                                                                                if($configuration->Roles->has_role("MODERATOR"))
+                                                                                {
+                                                                                    HTML::print("<i class=\"mdi mdi-security pl-1\"></i>", false);
+                                                                                }
+                                                                                if($configuration->Roles->has_role("SUPPORT"))
+                                                                                {
+                                                                                    HTML::print("<i class=\"mdi mdi-lifebuoy pl-1\"></i>", false);
+                                                                                }
+                                                                            ?>
+                                                                        </span>
                                                                     </td>
                                                                     <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($account['id']); ?></td>
                                                                     <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($account['public_id']); ?></td>
@@ -102,6 +120,7 @@ use DynamicalWeb\HTML;
                                                                             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Actions</a>
                                                                             <div class="dropdown-menu" >
                                                                                 <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $account['id']), true); ?>">Manage Account</a>
+                                                                                <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $account['id'], 'action' => 'export_data'), true); ?>">Export Data</a>
                                                                             </div>
                                                                         </div>
                                                                     </td>
