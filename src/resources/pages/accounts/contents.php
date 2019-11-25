@@ -15,7 +15,7 @@
 
     $IntellivoidAccounts = new IntellivoidAccounts();
 
-    $Results = get_results($IntellivoidAccounts->database, 500, 'users', 'id',
+    $Results = get_results($IntellivoidAccounts->database, 100, 'users', 'id',
         QueryBuilder::select('users', ['id', 'public_id', 'username', 'email', 'status', 'creation_date', 'configuration'])
     );
 ?>
@@ -68,7 +68,7 @@
                                                             ?>
                                                                 <tr>
                                                                     <td style="padding-top: 10px; padding-bottom: 10px;">
-                                                                        <img src="<?PHP HTML::print(getAvatarUrl($public_id, 'tiny')); ?>" class="img-fluid" style="border-radius: 0;" alt="Profile Image">
+                                                                        <img src="<?PHP HTML::print(getAvatarUrl($public_id, 'tiny')); ?>" class="img-fluid rounded-circle" style="border-radius: 0;" alt="Profile Image">
                                                                         <span class="pl-2">
                                                                             <?PHP
                                                                                 HTML::print($account['username']);

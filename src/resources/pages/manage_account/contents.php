@@ -26,18 +26,11 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
     }
     catch (AccountNotFoundException $e)
     {
-        print("Account Not Found");
-        exit();
-    }
-    catch (DatabaseException $e)
-    {
-        print("Database Exception");
-        exit();
+        Actions::redirect(DynamicalWeb::getRoute('accounts', array('callback' => '104')));
     }
     catch (Exception $e)
     {
-        print($e->getMessage());
-        exit();
+        Actions::redirect(DynamicalWeb::getRoute('accounts', array('callback' => '105')));
     }
 
     if($Account->PersonalInformation->FirstName == null)

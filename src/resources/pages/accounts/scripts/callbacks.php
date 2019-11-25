@@ -23,5 +23,14 @@
             case 103:
                 RenderAlert('The given search method is not valid', "danger", "mdi-alert-circle");
                 break;
+
+            case 104:
+                RenderAlert('The account was not found', "danger", "mdi-alert-circle");
+                break;
+
+            case 105:
+                RenderAlert('Internal Server Error', "danger", "mdi-alert-circle");
+                break;
+
         }
     }
