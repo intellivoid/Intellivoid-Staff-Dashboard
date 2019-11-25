@@ -15,7 +15,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
 
     if(isset($_GET['id']) == false)
     {
-        Actions::redirect(DynamicalWeb::getRoute('applications'));
+        Actions::redirect(DynamicalWeb::getRoute('accounts'));
     }
 
     $IntellivoidAccounts = new IntellivoidAccounts();

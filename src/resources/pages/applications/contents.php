@@ -1,5 +1,7 @@
 <?PHP
-    use DynamicalWeb\HTML;
+
+use DynamicalWeb\DynamicalWeb;
+use DynamicalWeb\HTML;
     use DynamicalWeb\Runtime;
 use IntellivoidAccounts\Abstracts\AccountRequestPermissions;
 use IntellivoidAccounts\Abstracts\AccountStatus;
@@ -13,7 +15,7 @@ Runtime::import('IntellivoidAccounts');
 
     $IntellivoidAccounts = new IntellivoidAccounts();
 
-    $Results = get_results($IntellivoidAccounts->database, 500, 'applications', 'id',
+    $Results = get_results($IntellivoidAccounts->database, 100, 'applications', 'id',
         QueryBuilder::select('applications', ['id', 'public_app_id', 'name', 'status', 'flags', 'permissions'])
     );
 ?>
@@ -30,111 +32,207 @@ Runtime::import('IntellivoidAccounts');
                 <?PHP HTML::importSection('sidebar'); ?>
                 <div class="main-panel">
                     <div class="content-wrapper">
+                        <?PHP HTML::importScript('callbacks'); ?>
                         <div class="row">
-                            <div class="col-lg-12 grid-margin">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Actions</h4>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
-                                    <div class="card-body">
+                                    <div class="card-header header-sm d-flex justify-content-between align-items-center">
                                         <h4 class="card-title">Applications</h4>
-                                        <table class="table table-hover">
-                                            <thead>
+                                        <div class="wrapper d-flex align-items-center">
+                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#searchDialog" type="button">
+                                                <i class="mdi mdi-magnify"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
                                                 <tr>
-                                                    <th>Application</th>
+                                                    <th>Name</th>
                                                     <th>ID</th>
                                                     <th>Public ID</th>
                                                     <th>Permissions</th>
                                                     <th>Status</th>
                                                     <th>Actions</th>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
+                                                </thead>
+                                                <tbody>
                                                 <?PHP
-                                                    foreach($Results['results'] as $application)
-                                                    {
-                                                        $public_id = $application['public_app_id'];
-                                                        $application['public_app_id'] = (strlen($application['public_app_id']) > 15) ? substr($application['public_app_id'], 0, 15) . '...' : $application['public_app_id'];
-                                                        ?>
-                                                        <tr>
-                                                            <td>
-                                                                <img src="<?PHP HTML::print(getApplicationUrl($public_id, 'tiny')); ?>" class="img-fluid" style="border-radius: 0;" alt="Profile Image">
-                                                                <span class="pl-2"><?PHP HTML::print($application['name']); ?></span>
+                                                foreach($Results['results'] as $application)
+                                                {
+                                                    $public_id = $application['public_app_id'];
+                                                    $application['public_app_id'] = (strlen($application['public_app_id']) > 15) ? substr($application['public_app_id'], 0, 15) . '...' : $application['public_app_id'];
+                                                    ?>
+                                                    <tr>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                            <img src="<?PHP HTML::print(getApplicationUrl($public_id, 'tiny')); ?>" class="img-fluid" style="border-radius: 0;" alt="Profile Image">
+                                                            <span class="pl-2"><?PHP HTML::print($application['name']); ?></span>
 
-                                                            </td>
-                                                            <td><?PHP HTML::print($application['id']); ?></td>
-                                                            <td><?PHP HTML::print($application['public_app_id']); ?></td>
-                                                            <td>
-                                                                <?PHP
-                                                                    $application['permissions'] = ZiProto::decode($application['permissions']);
-                                                                    HTML::print("<i class=\"mdi mdi-account-card-details\"></i>", false);
-                                                                    if(in_array(AccountRequestPermissions::ViewEmailAddress, $application['permissions']))
-                                                                    {
-                                                                        HTML::print("<i class=\"mdi mdi-email pl-1\"></i>", false);
-                                                                    }
-                                                                    if(in_array(AccountRequestPermissions::ReadPersonalInformation, $application['permissions']))
-                                                                    {
-                                                                        HTML::print("<i class=\"mdi mdi-account pl-1\"></i>", false);
-                                                                    }
-                                                                    if(in_array(AccountRequestPermissions::EditPersonalInformation, $application['permissions']))
-                                                                    {
-                                                                        HTML::print("<i class=\"mdi mdi-account-edit pl-1\"></i>", false);
-                                                                    }
-                                                                    if(in_array(AccountRequestPermissions::MakePurchases, $application['permissions']))
-                                                                    {
-                                                                        HTML::print("<i class=\"mdi mdi-shopping pl-1\"></i>", false);
-                                                                    }
-                                                                ?>
+                                                        </td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($application['id']); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($application['public_app_id']); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                            <?PHP
+                                                            $application['permissions'] = ZiProto::decode($application['permissions']);
+                                                            HTML::print("<i class=\"mdi mdi-account-card-details\"></i>", false);
+                                                            if(in_array(AccountRequestPermissions::ViewEmailAddress, $application['permissions']))
+                                                            {
+                                                                HTML::print("<i class=\"mdi mdi-email pl-1\"></i>", false);
+                                                            }
+                                                            if(in_array(AccountRequestPermissions::ReadPersonalInformation, $application['permissions']))
+                                                            {
+                                                                HTML::print("<i class=\"mdi mdi-account pl-1\"></i>", false);
+                                                            }
+                                                            if(in_array(AccountRequestPermissions::EditPersonalInformation, $application['permissions']))
+                                                            {
+                                                                HTML::print("<i class=\"mdi mdi-account-edit pl-1\"></i>", false);
+                                                            }
+                                                            if(in_array(AccountRequestPermissions::MakePurchases, $application['permissions']))
+                                                            {
+                                                                HTML::print("<i class=\"mdi mdi-shopping pl-1\"></i>", false);
+                                                            }
+                                                            ?>
 
-                                                            </td>
-                                                            <td>
-                                                                <?PHP
-                                                                    switch((int)$application['status'])
-                                                                    {
-                                                                        case ApplicationStatus::Active:
-                                                                            HTML::print("<label class=\"badge badge-success\">Active</label>", false);
-                                                                            break;
+                                                        </td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                            <?PHP
+                                                            switch((int)$application['status'])
+                                                            {
+                                                                case ApplicationStatus::Active:
+                                                                    HTML::print("<label class=\"badge badge-success\">Active</label>", false);
+                                                                    break;
 
-                                                                        case ApplicationStatus::Disabled:
-                                                                            HTML::print("<label class=\"badge badge-warning\">Disabled</label>", false);
-                                                                            break;
+                                                                case ApplicationStatus::Disabled:
+                                                                    HTML::print("<label class=\"badge badge-warning\">Disabled</label>", false);
+                                                                    break;
 
-                                                                        case ApplicationStatus::Suspended:
-                                                                            HTML::print("<label class=\"badge badge-danger\">Suspended</label>", false);
-                                                                            break;
+                                                                case ApplicationStatus::Suspended:
+                                                                    HTML::print("<label class=\"badge badge-danger\">Suspended</label>", false);
+                                                                    break;
 
-                                                                        default:
-                                                                            HTML::print("<label class=\"badge badge-primary\">Unknown</label>", false);
-                                                                            break;
-                                                                    }
-                                                                ?>
+                                                                default:
+                                                                    HTML::print("<label class=\"badge badge-primary\">Unknown</label>", false);
+                                                                    break;
+                                                            }
+                                                            ?>
 
-                                                            </td>
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <button class="btn btn-xs btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
-                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
-                                                                        <a class="dropdown-item" href="#">Manage Account</a>
-                                                                    </div>
+                                                        </td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                            <div class="dropdown">
+                                                                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Actions</a>
+                                                                <div class="dropdown-menu" >
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $application['id']), true); ?>">Manage Application</a>
                                                                 </div>
-                                                            </td>
+                                                            </div>
+                                                        </td>
 
-                                                        </tr>
-                                                        <?PHP
-                                                    }
+                                                    </tr>
+                                                    <?PHP
+                                                }
                                                 ?>
 
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <?PHP
+                                        if($Results['total_pages'] > 1)
+                                        {
+                                            ?>
+                                            <div class="wrapper mt-4">
+                                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                                    <div class="p-2 my-flex-item">
+                                                        <nav>
+                                                            <ul class="pagination flat pagination-success flex-wrap">
+                                                                <?PHP
+                                                                if($Results['current_page'] == 1)
+                                                                {
+                                                                    ?>
+                                                                    <li class="page-item">
+                                                                        <a class="page-link disabled" disabled>
+                                                                            <i class="mdi mdi-chevron-left"></i>
+                                                                        </a>
+                                                                    </li>
+
+                                                                    <?PHP
+                                                                }
+                                                                else
+                                                                {
+                                                                    ?>
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('applications', array('page' => $Results['current_page'] -1), true); ?>">
+                                                                            <i class="mdi mdi-chevron-left"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                    <?PHP
+                                                                }
+
+                                                                $current_count = 1;
+                                                                while(True)
+                                                                {
+                                                                    if($Results['current_page'] == $current_count)
+                                                                    {
+                                                                        ?>
+                                                                        <li class="page-item active">
+                                                                            <a class="page-link disabled" disabled><?PHP HTML::print($current_count); ?></a>
+                                                                        </li>
+                                                                        <?PHP
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        ?>
+                                                                        <li class="page-item">
+                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('applications', array('page' => $current_count), true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                        </li>
+                                                                        <?PHP
+                                                                    }
+
+                                                                    if($Results['total_pages'] == $current_count)
+                                                                    {
+                                                                        break;
+                                                                    }
+
+                                                                    $current_count += 1;
+                                                                }
+
+                                                                if($Results['current_page'] == $Results['total_pages'])
+                                                                {
+                                                                    ?>
+                                                                    <li class="page-item">
+                                                                        <a class="page-link disabled" disabled>
+                                                                            <i class="mdi mdi-chevron-right"></i>
+                                                                        </a>
+                                                                    </li>
+
+                                                                    <?PHP
+                                                                }
+                                                                else
+                                                                {
+                                                                    ?>
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('applications', array('page' => $Results['current_page'] +1), true); ?>">
+                                                                            <i class="mdi mdi-chevron-right"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                    <?PHP
+                                                                }
+                                                                ?>
+                                                            </ul>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?PHP
+                                        }
+                                        ?>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?PHP HTML::importScript('search_dialog'); ?>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
             </div>
