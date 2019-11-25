@@ -1,15 +1,16 @@
 <?PHP
 
-use DynamicalWeb\DynamicalWeb;
-use DynamicalWeb\HTML;
+    use DynamicalWeb\DynamicalWeb;
+    use DynamicalWeb\HTML;
     use DynamicalWeb\Runtime;
     use IntellivoidAccounts\Abstracts\AccountStatus;
     use IntellivoidAccounts\IntellivoidAccounts;
-use IntellivoidAccounts\Objects\Account\Configuration;
-use msqg\QueryBuilder;
-use ZiProto\ZiProto;
+    use IntellivoidAccounts\Objects\Account\Configuration;
+    use msqg\QueryBuilder;
+    use ZiProto\ZiProto;
 
-Runtime::import('IntellivoidAccounts');
+    Runtime::import('IntellivoidAccounts');
+    HTML::importScript('process_search');
     HTML::importScript('db_render_helper');
 
     $IntellivoidAccounts = new IntellivoidAccounts();
@@ -22,7 +23,7 @@ Runtime::import('IntellivoidAccounts');
 <html lang="en">
     <head>
         <?PHP HTML::importSection('header'); ?>
-        <title>Intellivoid Staff</title>
+        <title>Intellivoid Staff - Manage Accounts</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">
@@ -31,18 +32,19 @@ Runtime::import('IntellivoidAccounts');
                 <?PHP HTML::importSection('sidebar'); ?>
                 <div class="main-panel">
                     <div class="content-wrapper">
+                        <?PHP HTML::importScript('callbacks'); ?>
                         <div class="row">
-                            <div class="col-lg-12 grid-margin">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Actions</h4>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
-                                    <div class="card-body">
+                                    <div class="card-header header-sm d-flex justify-content-between align-items-center">
                                         <h4 class="card-title">Accounts</h4>
+                                        <div class="wrapper d-flex align-items-center">
+                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#searchDialog" type="button">
+                                                <i class="mdi mdi-magnify"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-hover">
                                                 <thead>
@@ -230,6 +232,7 @@ Runtime::import('IntellivoidAccounts');
                             </div>
                         </div>
                     </div>
+                    <?PHP HTML::importScript('search_dialog'); ?>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
             </div>

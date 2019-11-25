@@ -29,10 +29,9 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#dashboard-dropdown" aria-expanded="false" aria-controls="dashboard-dropdown">
+            <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('index', [], true); ?>">
                 <i class="menu-icon mdi mdi-view-dashboard"></i>
                 <span class="menu-title">Dashboard</span>
-                <i class="menu-arrow"></i>
             </a>
         </li>
         <li class="nav-item">
