@@ -32,5 +32,9 @@
                 RenderAlert('Internal Server Error', "danger", "mdi-alert-circle");
                 break;
 
+            case 106:
+                RenderAlert('The application has been deleted', "success", "mdi-checkbox-marked-circle-outline");
+                break;
+
         }
     }

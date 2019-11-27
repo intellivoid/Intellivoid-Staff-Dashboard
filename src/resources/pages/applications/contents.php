@@ -1,16 +1,15 @@
 <?PHP
 
-use DynamicalWeb\DynamicalWeb;
-use DynamicalWeb\HTML;
+    use DynamicalWeb\DynamicalWeb;
+    use DynamicalWeb\HTML;
     use DynamicalWeb\Runtime;
-use IntellivoidAccounts\Abstracts\AccountRequestPermissions;
-use IntellivoidAccounts\Abstracts\AccountStatus;
-use IntellivoidAccounts\Abstracts\ApplicationStatus;
-use IntellivoidAccounts\IntellivoidAccounts;
+    use IntellivoidAccounts\Abstracts\AccountRequestPermissions;
+    use IntellivoidAccounts\Abstracts\ApplicationStatus;
+    use IntellivoidAccounts\IntellivoidAccounts;
     use msqg\QueryBuilder;
-use ZiProto\ZiProto;
+    use ZiProto\ZiProto;
 
-Runtime::import('IntellivoidAccounts');
+    Runtime::import('IntellivoidAccounts');
     HTML::importScript('db_render_helper');
 
     $IntellivoidAccounts = new IntellivoidAccounts();
@@ -66,7 +65,7 @@ Runtime::import('IntellivoidAccounts');
                                                     ?>
                                                     <tr>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
-                                                            <img src="<?PHP HTML::print(getApplicationUrl($public_id, 'tiny')); ?>" class="img-fluid" style="border-radius: 0;" alt="Profile Image">
+                                                            <img src="<?PHP HTML::print(getApplicationUrl($public_id, 'tiny')); ?>" class="img-fluid rounded-circle" style="border-radius: 0;" alt="Profile Image">
                                                             <span class="pl-2"><?PHP HTML::print($application['name']); ?></span>
 
                                                         </td>

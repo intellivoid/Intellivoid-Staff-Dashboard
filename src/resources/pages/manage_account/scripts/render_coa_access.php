@@ -5,7 +5,8 @@
     use IntellivoidAccounts\Abstracts\AccountRequestPermissions;
     use IntellivoidAccounts\Abstracts\ApplicationAccessStatus;
     use IntellivoidAccounts\Abstracts\SearchMethods\ApplicationSearchMethod;
-    use IntellivoidAccounts\IntellivoidAccounts;
+use IntellivoidAccounts\Exceptions\ApplicationNotFoundException;
+use IntellivoidAccounts\IntellivoidAccounts;
     use IntellivoidAccounts\Objects\Account;
     use IntellivoidAccounts\Objects\ApplicationAccess;
 
@@ -35,7 +36,15 @@
                     $ApplicationAccess = ApplicationAccess::fromArray($access_record);
                     if($ApplicationAccess->Status == ApplicationAccessStatus::Authorized)
                     {
-                        $Application = $IntellivoidAccounts->getApplicationManager()->getApplication(ApplicationSearchMethod::byId, $ApplicationAccess->ApplicationID);
+                        try
+                        {
+                            $Application = $IntellivoidAccounts->getApplicationManager()->getApplication(ApplicationSearchMethod::byId, $ApplicationAccess->ApplicationID);
+                        }
+                        catch (ApplicationNotFoundException $e)
+                        {
+                            unset($e);
+                            continue;
+                        }
                         ?>
                         <div class="card accordion-minimal" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-top-right-radius: 0; border-top-left-radius: 0; border-bottom 0;">
                             <div class="card-header" role="tab" id="heading-<?PHP HTML::print($Application->PublicAppId); ?>">
