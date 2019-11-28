@@ -149,7 +149,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                     </div>
                                     <div class="border-top"></div>
                                     <div class="ml-2 mr-2 mt-4">
-                                        <a class="btn btn-xs btn-primary mr-2" href="#">View Application</a>
+                                        <a class="btn btn-xs btn-primary mr-2" href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $Application->ID), true); ?>">View Application</a>
                                         <a class="btn btn-xs btn-primary mr-2" href="#">View Application Access</a>
                                     </div>
                                 </div>

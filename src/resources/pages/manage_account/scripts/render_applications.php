@@ -52,7 +52,7 @@ use IntellivoidAccounts\Abstracts\SearchMethods\ApplicationSearchMethod;
                                         <i class="mdi mdi-dots-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdown-<?PHP HTML::print($application['last_updated_timestamp']); ?>">
-                                        <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('pub_id' => $application['public_app_id'], 'id' => $_GET['id']), true); ?>">Manage Application</a>
+                                        <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $application['id']), true); ?>">Manage Application</a>
                                         <?PHP
                                         if($application['status'] == ApplicationStatus::Active)
                                         {
