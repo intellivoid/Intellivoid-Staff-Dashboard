@@ -12,7 +12,8 @@
         {"path": "/cloud/applications/manage", "page": "manage_application"},
         {"path": "/cloud/applications", "page": "applications"},
 
-        {"path": "/coa/authentication_requests", "page": "authentication_requests"}
+        {"path": "/coa/authentication_requests", "page": "authentication_requests"},
+        {"path": "/coa/authentication_requests/view", "page": "view_authentication_request"}
     ],
     "libraries": {
         "SecuredWebSessions": {

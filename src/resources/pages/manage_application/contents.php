@@ -54,7 +54,7 @@
 <html lang="en">
     <head>
         <?PHP HTML::importSection('header'); ?>
-        <title>Intellivoid Staff</title>
+        <title>Intellivoid Staff - Manage <?PHP HTML::print($Application->Name); ?></title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">

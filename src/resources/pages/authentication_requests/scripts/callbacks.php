@@ -25,15 +25,11 @@
                 break;
 
             case 104:
-                RenderAlert('The application was not found', "danger", "mdi-alert-circle");
+                RenderAlert('The Authentication Request was not found', "danger", "mdi-alert-circle");
                 break;
 
             case 105:
                 RenderAlert('Internal Server Error', "danger", "mdi-alert-circle");
-                break;
-
-            case 106:
-                RenderAlert('The application has been deleted', "success", "mdi-checkbox-marked-circle-outline");
                 break;
 
         }

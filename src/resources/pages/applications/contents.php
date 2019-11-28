@@ -24,7 +24,7 @@ use IntellivoidAccounts\Abstracts\ApplicationStatus;
 <html lang="en">
     <head>
         <?PHP HTML::importSection('header'); ?>
-        <title>Intellivoid Staff</title>
+        <title>Intellivoid Staff - Manage Applications</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">

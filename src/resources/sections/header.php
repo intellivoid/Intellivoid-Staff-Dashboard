@@ -2,10 +2,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="apple-mobile-web-app-title" content="Intellivoid Staff">
 <meta name="application-name" content="Intellivoid Staff">
-<meta name="msapplication-TileColor" content="#0030eb">
+<meta name="msapplication-TileColor" content="#252C46">
 <meta name="msapplication-TileImage" content="/assets/favicon/mstile-144x144.png?v=xQOrL7ldK2">
 <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml?v=xQOrL7ldK2">
-<meta name="theme-color" content="#0030eb">
+<meta name="theme-color" content="#252C46">
 <link rel="stylesheet" href="/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
 <link rel="stylesheet" href="/assets/vendors/iconfonts/puse-icons-feather/feather.css">
 <link rel="stylesheet" href="/assets/vendors/css/vendor.bundle.base.css">

@@ -107,7 +107,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
     <head>
         <?PHP HTML::importSection('header'); ?>
         <link rel="stylesheet" href="/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css" />
-        <title>Intellivoid Staff</title>
+        <title>Intellivoid Staff - Manage @<?PHP HTML::print($Account->Username); ?></title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">

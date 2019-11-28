@@ -120,7 +120,7 @@ use msqg\QueryBuilder;
 <html lang="en">
     <head>
         <?PHP HTML::importSection('header'); ?>
-        <title>Intellivoid Staff</title>
+        <title>Intellivoid Staff - COA Authentication Requests</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">
@@ -267,7 +267,19 @@ use msqg\QueryBuilder;
                                                             <div class="dropdown">
                                                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $authentication_request['id']), true); ?>">Manage Application</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_authentication_request', array('id' => $authentication_request['id']), true); ?>">View Details</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $authentication_request['application_id']), true); ?>">Manage Application</a>
+                                                                    <?PHP
+                                                                        if($authentication_request['account_id'] > 0)
+                                                                        {
+                                                                            ?>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $authentication_request['account_id']), true); ?>">Manage Account</a>
+                                                                            <?PHP
+                                                                        }
+                                                                    ?>
+                                                                    <div class="dropdown-divider"></div>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('authentication_requests', array('filter' => 'application_id', 'value' => $authentication_request['application_id']), true) ?>">Filter by Application</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('authentication_requests', array('filter' => 'host_id', 'value' => $authentication_request['host_id']), true) ?>">Filter by Host</a>
                                                                 </div>
                                                             </div>
                                                         </td>
