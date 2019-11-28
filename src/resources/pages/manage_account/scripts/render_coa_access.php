@@ -4,7 +4,8 @@
     use DynamicalWeb\HTML;
     use IntellivoidAccounts\Abstracts\AccountRequestPermissions;
     use IntellivoidAccounts\Abstracts\ApplicationAccessStatus;
-    use IntellivoidAccounts\Abstracts\SearchMethods\ApplicationSearchMethod;
+use IntellivoidAccounts\Abstracts\ApplicationFlags;
+use IntellivoidAccounts\Abstracts\SearchMethods\ApplicationSearchMethod;
 use IntellivoidAccounts\Exceptions\ApplicationNotFoundException;
 use IntellivoidAccounts\IntellivoidAccounts;
     use IntellivoidAccounts\Objects\Account;
@@ -53,6 +54,21 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                     <div class="ml-3">
                                         <h6 class="mb-0">
                                             <?PHP HTML::print($Application->Name); ?>
+                                            <?PHP
+                                            if(in_array(ApplicationFlags::Official, $Application->Flags))
+                                            {
+                                                HTML::print("<i class=\"mdi mdi-verified text-primary pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is an official Intellivoid Application/Service\"></i>", false);
+
+                                            }
+                                            elseif(in_array(ApplicationFlags::Verified, $Application->Flags))
+                                            {
+                                                HTML::print("<i class=\"mdi mdi-verified text-success pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is verified & trusted\"></i>", false);
+                                            }
+                                            elseif(in_array(ApplicationFlags::Untrusted, $Application->Flags))
+                                            {
+                                                HTML::print("<i class=\"mdi mdi-alert text-danger pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is untrusted and unsafe\"></i>", false);
+                                            }
+                                            ?>
                                         </h6>
                                         <small class="text-muted"><?PHP HTML::print(str_ireplace('%s', gmdate("j/m/y g:i a", $ApplicationAccess->LastAuthenticatedTimestamp), 'Last Authenticated: %s')); ?></small>
                                     </div>

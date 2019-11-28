@@ -4,6 +4,7 @@
     use DynamicalWeb\HTML;
     use IntellivoidAccounts\Abstracts\AccountRequestPermissions;
     use IntellivoidAccounts\Abstracts\ApplicationAccessStatus;
+use IntellivoidAccounts\Abstracts\ApplicationFlags;
 use IntellivoidAccounts\Abstracts\ApplicationStatus;
 use IntellivoidAccounts\Abstracts\SearchMethods\ApplicationSearchMethod;
     use IntellivoidAccounts\IntellivoidAccounts;
@@ -38,7 +39,24 @@ use IntellivoidAccounts\Abstracts\SearchMethods\ApplicationSearchMethod;
                     </div>
                     <div class="content">
                         <div class="d-flex align-items-center">
-                            <h6 class="product-name"><?PHP HTML::print($application['name']); ?></h6>
+                            <h6 class="product-name">
+                                <?PHP HTML::print($application['name']); ?>
+                                <?PHP
+                                    if(in_array(ApplicationFlags::Official, $application['flags']))
+                                    {
+                                        HTML::print("<i class=\"mdi mdi-verified text-primary pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is an official Intellivoid Application/Service\"></i>", false);
+
+                                    }
+                                    elseif(in_array(ApplicationFlags::Verified, $application['flags']))
+                                    {
+                                        HTML::print("<i class=\"mdi mdi-verified text-success pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is verified & trusted\"></i>", false);
+                                    }
+                                    elseif(in_array(ApplicationFlags::Untrusted, $application['flags']))
+                                    {
+                                        HTML::print("<i class=\"mdi mdi-alert text-danger pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is untrusted and unsafe\"></i>", false);
+                                    }
+                                ?>
+                            </h6>
                             <small class="time ml-3 d-none d-sm-block">
                                 <?PHP HTML::print(str_ireplace("%s", gmdate("F j, Y, g:i a", $application['creation_timestamp']), "Created at %s")); ?>
                             </small>

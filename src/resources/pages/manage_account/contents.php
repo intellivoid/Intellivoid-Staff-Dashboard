@@ -244,5 +244,6 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
             </div>
         </div>
         <?PHP HTML::importSection('js_scripts'); ?>
+        <script src="/assets/js/shared/tooltips.js"></script>
     </body>
 </html>

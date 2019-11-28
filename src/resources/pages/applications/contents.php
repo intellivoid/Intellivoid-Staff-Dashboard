@@ -4,7 +4,8 @@
     use DynamicalWeb\HTML;
     use DynamicalWeb\Runtime;
     use IntellivoidAccounts\Abstracts\AccountRequestPermissions;
-    use IntellivoidAccounts\Abstracts\ApplicationStatus;
+use IntellivoidAccounts\Abstracts\ApplicationFlags;
+use IntellivoidAccounts\Abstracts\ApplicationStatus;
     use IntellivoidAccounts\IntellivoidAccounts;
     use msqg\QueryBuilder;
     use ZiProto\ZiProto;
@@ -61,13 +62,30 @@
                                                 foreach($Results['results'] as $application)
                                                 {
                                                     $public_id = $application['public_app_id'];
+                                                    $flags = ZiProto::decode($application['flags']);
                                                     $application['public_app_id'] = (strlen($application['public_app_id']) > 15) ? substr($application['public_app_id'], 0, 15) . '...' : $application['public_app_id'];
                                                     ?>
                                                     <tr>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <img src="<?PHP HTML::print(getApplicationUrl($public_id, 'tiny')); ?>" class="img-fluid rounded-circle" style="border-radius: 0;" alt="Profile Image">
-                                                            <span class="pl-2"><?PHP HTML::print($application['name']); ?></span>
+                                                            <span class="pl-2">
+                                                                <?PHP HTML::print($application['name']); ?>
+                                                                <?PHP
+                                                                if(in_array(ApplicationFlags::Official, $flags))
+                                                                {
+                                                                    HTML::print("<i class=\"mdi mdi-verified text-primary pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is an official Intellivoid Application/Service\"></i>", false);
 
+                                                                }
+                                                                elseif(in_array(ApplicationFlags::Verified, $flags))
+                                                                {
+                                                                    HTML::print("<i class=\"mdi mdi-verified text-success pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is verified & trusted\"></i>", false);
+                                                                }
+                                                                elseif(in_array(ApplicationFlags::Untrusted, $flags))
+                                                                {
+                                                                    HTML::print("<i class=\"mdi mdi-alert text-danger pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is untrusted and unsafe\"></i>", false);
+                                                                }
+                                                                ?>
+                                                            </span>
                                                         </td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($application['id']); ?></td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($application['public_app_id']); ?></td>
@@ -237,5 +255,6 @@
             </div>
         </div>
         <?PHP HTML::importSection('js_scripts'); ?>
+        <script src="/assets/js/shared/tooltips.js"></script>
     </body>
 </html>
