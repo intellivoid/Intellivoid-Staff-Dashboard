@@ -16,7 +16,17 @@
         {
             if($_SERVER['REQUEST_METHOD'] == 'POST')
             {
-                update_logo();
+                try
+                {
+                    update_logo();
+
+                }
+                catch(Exception $e)
+                {
+                    Actions::redirect(DynamicalWeb::getRoute('manage_application',
+                        array('id' => $_GET['id'], 'callback' => '113')
+                    ));
+                }
             }
         }
     }

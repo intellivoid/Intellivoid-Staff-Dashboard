@@ -13,7 +13,16 @@
         {
             if($_SERVER['REQUEST_METHOD'] == 'POST')
             {
-                update_permissions();
+                try
+                {
+                    update_permissions();
+                }
+                catch(Exception $e)
+                {
+                    Actions::redirect(DynamicalWeb::getRoute('manage_application',
+                        array('id' => $_GET['id'], 'callback' => '113')
+                    ));
+                }
             }
         }
     }

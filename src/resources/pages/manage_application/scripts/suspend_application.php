@@ -11,7 +11,16 @@ use IntellivoidAccounts\IntellivoidAccounts;
     {
         if($_GET['action'] == 'suspend_application')
         {
-            suspend_application();
+            try
+            {
+                suspend_application();
+            }
+            catch(Exception $e)
+            {
+                Actions::redirect(DynamicalWeb::getRoute('manage_application',
+                    array('id' => $_GET['id'], 'callback' => '113')
+                ));
+            }
         }
     }
 

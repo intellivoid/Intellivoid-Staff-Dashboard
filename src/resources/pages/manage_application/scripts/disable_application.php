@@ -11,7 +11,16 @@
     {
         if($_GET['action'] == 'disable_application')
         {
-            disable_application();
+            try
+            {
+                disable_application();
+            }
+            catch(Exception $e)
+            {
+                Actions::redirect(DynamicalWeb::getRoute('manage_application',
+                    array('id' => $_GET['id'], 'callback' => '113')
+                ));
+            }
         }
     }
 
@@ -38,7 +47,7 @@
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute('manage_application',
-                array('pub_id' => $_GET['pub_id'], 'callback' => '113')
+                array('id' => $_GET['id'], 'callback' => '113')
             ));
         }
     }

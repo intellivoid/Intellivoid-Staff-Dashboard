@@ -11,7 +11,16 @@
     {
         if($_GET['action'] == 'enable_application')
         {
-            enable_application();
+            try
+            {
+                enable_application();
+            }
+            catch(Exception $e)
+            {
+                Actions::redirect(DynamicalWeb::getRoute('manage_application',
+                    array('id' => $_GET['id'], 'callback' => '113')
+                ));
+            }
         }
     }
 

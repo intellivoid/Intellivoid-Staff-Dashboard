@@ -13,7 +13,16 @@
         {
             if($_SERVER['REQUEST_METHOD'] == 'POST')
             {
-                update_secret_key();
+                try
+                {
+                    update_secret_key();
+                }
+                catch(Exception $e)
+                {
+                    Actions::redirect(DynamicalWeb::getRoute('manage_application',
+                        array('id' => $_GET['id'], 'callback' => '113')
+                    ));
+                }
             }
         }
     }

@@ -12,7 +12,16 @@
         {
             if($_SERVER['REQUEST_METHOD'] == 'POST')
             {
-                update_verification_status();
+                try
+                {
+                    update_verification_status();
+                }
+                catch(Exception $e)
+                {
+                    Actions::redirect(DynamicalWeb::getRoute('manage_application',
+                        array('id' => $_GET['id'], 'callback' => '113')
+                    ));
+                }
             }
         }
     }
