@@ -15,7 +15,7 @@
      * @return int
      * @throws Exception
      */
-    function get_total_items(mysqli $mysqli, string $table, string $by='id', string $where=null, string $where_value=null): int
+    function get_total_items(mysqli $mysqli, string $table, string $by='id', $where=null, $where_value=null): int
     {
         $by = $mysqli->real_escape_string($by);
         $table = $mysqli->real_escape_string($table);
@@ -35,7 +35,6 @@
             $where_value = $mysqli->real_escape_string($where_value);
             $Query .= " WHERE $where='$where_value'";
         }
-
         $QueryResults = $mysqli->query($Query);
 
         if($QueryResults == false)
@@ -70,14 +69,14 @@
         return 1;
     }
 
-/**
- * Gets the current offset depending on the current page
- *
- * @param int $max_items_per_page
- * @param int $current_page
- * @param int $total_pages
- * @return int
- */
+    /**
+     * Gets the current offset depending on the current page
+     *
+     * @param int $max_items_per_page
+     * @param int $current_page
+     * @param int $total_pages
+     * @return int
+     */
     function get_offset(int $max_items_per_page, int $current_page, int $total_pages): int
     {
         if($current_page > $total_pages)
@@ -100,10 +99,12 @@
      * @param $table
      * @param $by
      * @param $query
+     * @param null $where
+     * @param string|null $where_value
      * @return array
      * @throws Exception
      */
-    function get_results(mysqli $mysqli, $max_items_page, $table, $by, $query): array
+    function get_results(mysqli $mysqli, $max_items_page, $table, $by, $query, $where=null, $where_value=null): array
     {
         $CurrentPage = 1;
         if(isset($_GET['page']))
@@ -114,7 +115,7 @@
             }
         }
 
-        $TotalItems = get_total_items($mysqli, $table, $by, null, null);
+        $TotalItems = get_total_items($mysqli, $table, $by, $where, $where_value);
         $TotalPages = total_pages($TotalItems, $max_items_page);
         $Offset = get_offset($max_items_page, $CurrentPage, $TotalPages);
 

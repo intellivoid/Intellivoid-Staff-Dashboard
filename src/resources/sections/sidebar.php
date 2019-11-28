@@ -51,5 +51,22 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#coa-dropdown" aria-expanded="false" aria-controls="coa-dropdown">
+                <i class="menu-icon mdi mdi-lock"></i>
+                <span class="menu-title">COA</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="coa-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('authentication_requests', [], true); ?>">Authentication Requests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Access Tokens</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
     </ul>
 </nav>

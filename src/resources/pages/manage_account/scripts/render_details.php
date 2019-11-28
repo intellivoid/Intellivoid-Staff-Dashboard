@@ -1,10 +1,9 @@
 <?PHP
 
-use DynamicalWeb\DynamicalWeb;
-use DynamicalWeb\HTML;
-    use IntellivoidAccounts\Abstracts\SearchMethods\KnownHostsSearchMethod;
+    use DynamicalWeb\DynamicalWeb;
+    use DynamicalWeb\HTML;
     use IntellivoidAccounts\IntellivoidAccounts;
-use IntellivoidAccounts\Objects\Account;
+    use IntellivoidAccounts\Objects\Account;
 
     function render_details(IntellivoidAccounts $IntellivoidAccounts, Account $account)
     {

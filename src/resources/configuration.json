@@ -10,7 +10,9 @@
         {"path": "/cloud/accounts/manage", "page": "manage_account"},
 
         {"path": "/cloud/applications/manage", "page": "manage_application"},
-        {"path": "/cloud/applications", "page": "applications"}
+        {"path": "/cloud/applications", "page": "applications"},
+
+        {"path": "/coa/authentication_requests", "page": "authentication_requests"}
     ],
     "libraries": {
         "SecuredWebSessions": {
