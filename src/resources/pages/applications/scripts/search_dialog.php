@@ -18,9 +18,10 @@
                         <label for="by">By</label>
                         <select name="by" id="by" class="form-control">
                             <option value="id">ID</option>
-                            <option value="public_id">Public ID</option>
-                            <option value="username">Username</option>
-                            <option value="email">Email</option>
+                            <option value="public_app_id">Public Application ID</option>
+                            <option value="secret_key">Secret Key</option>
+                            <option value="name">Name</option>
+                            <option value="name_safe">Name Safe</option>
                         </select>
                     </div>
                     <div class="from-group">

@@ -11,6 +11,7 @@ use IntellivoidAccounts\Abstracts\ApplicationStatus;
     use ZiProto\ZiProto;
 
     Runtime::import('IntellivoidAccounts');
+    HTML::importScript('process_search');
     HTML::importScript('db_render_helper');
 
     $IntellivoidAccounts = new IntellivoidAccounts();
