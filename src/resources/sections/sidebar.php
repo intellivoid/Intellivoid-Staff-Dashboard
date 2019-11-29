@@ -63,7 +63,7 @@
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('authentication_requests', [], true); ?>">Authentication Requests</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Access Tokens</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('authentication_access', [], true); ?>">Authentication Access</a>
                     </li>
                 </ul>
             </div>
