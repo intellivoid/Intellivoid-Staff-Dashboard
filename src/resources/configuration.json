@@ -15,7 +15,8 @@
         {"path": "/coa/authentication_requests", "page": "authentication_requests"},
         {"path": "/coa/authentication_requests/view", "page": "view_authentication_request"},
         {"path": "/coa/authentication_access", "page": "authentication_access"},
-        {"path": "/coa/authentication_access/view", "page": "view_authentication_access"}
+        {"path": "/coa/authentication_access/view", "page": "view_authentication_access"},
+        {"path": "/coa/application_access", "page": "application_access"}
     ],
     "libraries": {
         "SecuredWebSessions": {

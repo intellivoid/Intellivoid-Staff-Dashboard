@@ -4,8 +4,10 @@
     use DynamicalWeb\HTML;
     use DynamicalWeb\Runtime;
     use IntellivoidAccounts\Abstracts\AccountRequestPermissions;
+use IntellivoidAccounts\Abstracts\ApplicationAccessStatus;
 use IntellivoidAccounts\Abstracts\ApplicationFlags;
 use IntellivoidAccounts\Abstracts\ApplicationStatus;
+use IntellivoidAccounts\Abstracts\AuthenticationAccessStatus;
 use IntellivoidAccounts\Abstracts\AuthenticationRequestStatus;
 use IntellivoidAccounts\Abstracts\SearchMethods\ApplicationSearchMethod;
 use IntellivoidAccounts\IntellivoidAccounts;
@@ -34,19 +36,20 @@ use msqg\QueryBuilder;
             }
         }
 
-        if($_GET['filter'] == 'host_id')
+        if($_GET['filter'] == 'account_id')
         {
             if(isset($_GET['value']))
             {
-                $where = 'host_id';
+                $where = 'account_id';
                 $where_value = (int)$_GET['value'];
             }
         }
     }
 
-    $Results = get_results($IntellivoidAccounts->database, 5000, 'authentication_requests', 'id',
-        QueryBuilder::select('authentication_requests', ['id', 'request_token', 'application_id', 'account_id', 'host_id', 'requested_permissions', 'status', 'created_timestamp', 'expires_timestamp'],
-            $where, $where_value, 'created_timestamp', SortBy::descending
+    $Results = get_results($IntellivoidAccounts->database, 5000, 'application_access', 'id',
+        QueryBuilder::select(
+                'application_access', ['id', 'public_id', 'application_id', 'account_id', 'permissions', 'status', 'creation_timestamp', 'last_authenticated_timestamp'],
+                $where, $where_value, 'last_authenticated_timestamp', SortBy::descending
         ),
     $where, $where_value);
 
@@ -93,7 +96,7 @@ use msqg\QueryBuilder;
                 <a href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $id), true) ?>" class="text-white">
                     <i class="mdi mdi-pencil"></i>
                 </a>
-                <a href="<?PHP DynamicalWeb::getRoute('authentication_requests', array('filter' => 'application_id', 'value' => $id), true) ?>" class="text-white pl-2">
+                <a href="<?PHP DynamicalWeb::getRoute('application_access', array('filter' => 'application_id', 'value' => $id), true) ?>" class="text-white pl-2">
                     <i class="mdi mdi-filter"></i>
                 </a>
             </div>
@@ -110,7 +113,7 @@ use msqg\QueryBuilder;
             </div>
             <div class="border-top mt-3 mb-3"></div>
             <div class="row ml-auto">
-                <a href="<?PHP DynamicalWeb::getRoute('authentication_requests', array('filter' => 'application_id', 'value' => $id), true) ?>" class="text-white">
+                <a href="<?PHP DynamicalWeb::getRoute('application_access', array('filter' => 'application_id', 'value' => $id), true) ?>" class="text-white">
                     <i class="mdi mdi-filter"></i>
                 </a>
             </div>
@@ -123,7 +126,7 @@ use msqg\QueryBuilder;
 <html lang="en">
     <head>
         <?PHP HTML::importSection('header'); ?>
-        <title>Intellivoid Staff - COA Authentication Requests</title>
+        <title>Intellivoid Staff - COA Authentication Access</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">
@@ -137,7 +140,7 @@ use msqg\QueryBuilder;
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
-                                        <h4 class="card-title">COA Authentication Requests</h4>
+                                        <h4 class="card-title">COA Application Access</h4>
                                         <div class="wrapper d-flex align-items-center">
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
                                                 <i class="mdi mdi-filter"></i>
@@ -153,9 +156,9 @@ use msqg\QueryBuilder;
                                                 <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Request Token</th>
+                                                    <th>Public ID</th>
                                                     <th>Application</th>
-                                                    <th>Host</th>
+                                                    <th>Account</th>
                                                     <th>Permissions</th>
                                                     <th>Status</th>
                                                     <th>Created</th>
@@ -164,38 +167,38 @@ use msqg\QueryBuilder;
                                                 </thead>
                                                 <tbody>
                                                 <?PHP
-                                                foreach($Results['results'] as $authentication_request)
+                                                foreach($Results['results'] as $application_access)
                                                 {
-                                                    $request_token = $authentication_request['request_token'];
-                                                    $authentication_request['request_token'] = (strlen($authentication_request['request_token']) > 15) ? substr($authentication_request['request_token'], 0, 15) . '...' : $authentication_request['request_token'];
+                                                    $public_id = $application_access['public_id'];
+                                                    $application_access['public_id'] = (strlen($application_access['public_id']) > 15) ? substr($application_access['public_id'], 0, 15) . '...' : $application_access['public_id'];
                                                     ?>
                                                     <tr>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($authentication_request['id']); ?></td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($request_token); ?>"><?PHP HTML::print($authentication_request['request_token']); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($application_access['id']); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($public_id); ?>"><?PHP HTML::print($application_access['public_id']); ?></td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <div class="dropdown">
-                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" > <?PHP HTML::print($authentication_request['application_id']); ?></span>
+                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" > <?PHP HTML::print($application_access['application_id']); ?></span>
                                                                 <div class="dropdown-menu p-3">
-                                                                    <?PHP render_app_dropdown($IntellivoidAccounts, $authentication_request['application_id']); ?>
+                                                                    <?PHP render_app_dropdown($IntellivoidAccounts, $application_access['application_id']); ?>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <div class="dropdown">
-                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($authentication_request['host_id']); ?></span>
+                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($application_access['account_id']); ?></span>
                                                                 <div class="dropdown-menu p-3">
                                                                     <div class="d-flex text-white">
-                                                                        <i class="mdi mdi-account-network text-white icon-md"></i>
+                                                                        <i class="mdi mdi-account text-white icon-md"></i>
                                                                         <div class="d-flex flex-column ml-2 mr-5">
-                                                                            <h6 class="mb-0">Host ID <?PHP HTML::print($authentication_request['host_id']); ?></h6>
+                                                                            <h6 class="mb-0">Account ID <?PHP HTML::print($application_access['account_id']); ?></h6>
                                                                         </div>
                                                                     </div>
                                                                     <div class="border-top mt-3 mb-3"></div>
                                                                     <div class="row ml-auto">
-                                                                        <a href="#" class="text-white">
+                                                                        <a href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $application_access['account_id']), true) ?>" class="text-white pl-2">
                                                                             <i class="mdi mdi-pencil"></i>
                                                                         </a>
-                                                                        <a href="<?PHP DynamicalWeb::getRoute('authentication_requests', array('filter' => 'host_id', 'value' => $authentication_request['host_id']), true) ?>" class="text-white pl-2">
+                                                                        <a href="<?PHP DynamicalWeb::getRoute('application_access', array('filter' => 'account_id', 'value' => $application_access['account_id']), true) ?>" class="text-white pl-2">
                                                                             <i class="mdi mdi-filter"></i>
                                                                         </a>
                                                                     </div>
@@ -204,7 +207,7 @@ use msqg\QueryBuilder;
                                                         </td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <?PHP
-                                                                $requested_permissions = ZiProto::decode($authentication_request['requested_permissions']);
+                                                                $requested_permissions = ZiProto::decode($application_access['permissions']);
 
                                                                 HTML::print("<i class=\"mdi mdi-account-card-details\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Access to Username and Avatar\"></i>", false);
 
@@ -236,53 +239,32 @@ use msqg\QueryBuilder;
                                                         </td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <?PHP
-                                                                if($authentication_request['account_id'] > 0)
-                                                                {
-                                                                    HTML::print("<label class=\"badge badge-inverse-success\">Authenticated</label>", false);
-                                                                }
-                                                                else
-                                                                {
-                                                                    switch($authentication_request['status'])
-                                                                    {
-                                                                        case AuthenticationRequestStatus::Active:
-                                                                            if((int)time() > (int)$authentication_request['expires_timestamp'])
-                                                                            {
-                                                                                HTML::print("<label class=\"badge badge-warning\">Expired</label>", false);
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                HTML::print("<label class=\"badge badge-success\">Active</label>", false);
-                                                                            }
-                                                                            break;
+                                                            switch($application_access['status'])
+                                                            {
+                                                                case ApplicationAccessStatus::Authorized:
+                                                                    HTML::print("<label class=\"badge badge-success\">Authorized</label>", false);
+                                                                    break;
 
-                                                                        case AuthenticationRequestStatus::Blocked:
-                                                                            HTML::print("<label class=\"badge badge-danger\">Blocked</label>", false);
-                                                                            break;
+                                                                case ApplicationAccessStatus::Unauthorized:
+                                                                    HTML::print("<label class=\"badge badge-danger\">Unauthorized</label>", false);
+                                                                    break;
 
-                                                                        default:
-                                                                            HTML::print("<label class=\"badge badge-outline-primary\">Unknown</label>", false);
-                                                                    }
-                                                                }
+                                                                default:
+                                                                    HTML::print("<label class=\"badge badge-outline-primary\">Unknown</label>", false);
+                                                            }
                                                             ?>
                                                         </td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print(date("F j, Y, g:i a", $authentication_request['created_timestamp'])); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print(date("F j, Y, g:i a", $application_access['creation_timestamp'])); ?></td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <div class="dropdown">
                                                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_authentication_request', array('id' => $authentication_request['id']), true); ?>">View Details</a>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $authentication_request['application_id']), true); ?>">Manage Application</a>
-                                                                    <?PHP
-                                                                        if($authentication_request['account_id'] > 0)
-                                                                        {
-                                                                            ?>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $authentication_request['account_id']), true); ?>">Manage Account</a>
-                                                                            <?PHP
-                                                                        }
-                                                                    ?>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_authentication_access', array('id' => $application_access['id']), true); ?>">View Details</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $application_access['application_id']), true); ?>">Manage Application</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $application_access['application_id']), true); ?>">Manage Account</a>
                                                                     <div class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('authentication_requests', array('filter' => 'application_id', 'value' => $authentication_request['application_id']), true) ?>">Filter by Application</a>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('authentication_requests', array('filter' => 'host_id', 'value' => $authentication_request['host_id']), true) ?>">Filter by Host</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('application_access', array('filter' => 'application_id', 'value' => $application_access['application_id']), true) ?>">Filter by Application</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('application_access', array('filter' => 'account_id', 'value' => $application_access['account_id']), true) ?>">Filter by Account</a>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -319,7 +301,7 @@ use msqg\QueryBuilder;
                                                                 {
                                                                     ?>
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('authentication_requests', array('page' => $Results['current_page'] -1), true); ?>">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('application_access', array('page' => $Results['current_page'] -1), true); ?>">
                                                                             <i class="mdi mdi-chevron-left"></i>
                                                                         </a>
                                                                     </li>
@@ -341,7 +323,7 @@ use msqg\QueryBuilder;
                                                                     {
                                                                         ?>
                                                                         <li class="page-item">
-                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('authentication_requests', array('page' => $current_count), true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('application_access', array('page' => $current_count), true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                         </li>
                                                                         <?PHP
                                                                     }
@@ -369,7 +351,7 @@ use msqg\QueryBuilder;
                                                                 {
                                                                     ?>
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('authentication_requests', array('page' => $Results['current_page'] +1), true); ?>">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('application_access', array('page' => $Results['current_page'] +1), true); ?>">
                                                                             <i class="mdi mdi-chevron-right"></i>
                                                                         </a>
                                                                     </li>

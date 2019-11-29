@@ -65,6 +65,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('authentication_access', [], true); ?>">Authentication Access</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('application_access', [], true); ?>">Application Access</a>
+                    </li>
                 </ul>
             </div>
         </li>
