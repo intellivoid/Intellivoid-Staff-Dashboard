@@ -37,7 +37,7 @@ use IntellivoidAccounts\Abstracts\SearchMethods\AuthenticationRequestSearchMetho
 <html lang="en">
     <head>
         <?PHP HTML::importSection('header'); ?>
-        <title>Intellivoid Staff - Manage Authentication Request (<?PHP HTML::print($AuthenticationRequest->Id); ?>)</title>
+        <title>Intellivoid Staff - View Authentication Request (<?PHP HTML::print($AuthenticationRequest->Id); ?>)</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">

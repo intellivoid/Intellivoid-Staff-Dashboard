@@ -279,6 +279,7 @@ use msqg\QueryBuilder;
                                         <?PHP
                                         if($Results['total_pages'] > 1)
                                         {
+                                            $RedirectHref = $_GET;
                                             ?>
                                             <div class="wrapper mt-4">
                                                 <div class="d-flex flex-column justify-content-center align-items-center">
@@ -299,9 +300,10 @@ use msqg\QueryBuilder;
                                                                 }
                                                                 else
                                                                 {
+                                                                    $RedirectHref['page'] = $Results['current_page'] - 1;
                                                                     ?>
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('application_access', array('page' => $Results['current_page'] -1), true); ?>">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('application_access', $RedirectHref, true); ?>">
                                                                             <i class="mdi mdi-chevron-left"></i>
                                                                         </a>
                                                                     </li>
@@ -321,9 +323,10 @@ use msqg\QueryBuilder;
                                                                     }
                                                                     else
                                                                     {
+                                                                        $RedirectHref['page'] = $current_count;
                                                                         ?>
                                                                         <li class="page-item">
-                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('application_access', array('page' => $current_count), true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('application_access', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                         </li>
                                                                         <?PHP
                                                                     }
@@ -349,9 +352,10 @@ use msqg\QueryBuilder;
                                                                 }
                                                                 else
                                                                 {
+                                                                    $RedirectHref['page'] = $Results['current_page'] + 1;
                                                                     ?>
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('application_access', array('page' => $Results['current_page'] +1), true); ?>">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('application_access', $RedirectHref, true); ?>">
                                                                             <i class="mdi mdi-chevron-right"></i>
                                                                         </a>
                                                                     </li>

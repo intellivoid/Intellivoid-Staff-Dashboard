@@ -40,7 +40,7 @@ use IntellivoidAccounts\Exceptions\AuthenticationRequestNotFoundException;
 <html lang="en">
     <head>
         <?PHP HTML::importSection('header'); ?>
-        <title>Intellivoid Staff - Manage Application Access (<?PHP HTML::print($ApplicationAccess->ID); ?>)</title>
+        <title>Intellivoid Staff - View Application Access (<?PHP HTML::print($ApplicationAccess->ID); ?>)</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">
