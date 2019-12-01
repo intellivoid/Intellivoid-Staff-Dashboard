@@ -285,7 +285,7 @@ use msqg\QueryBuilder;
                                         <?PHP
                                         if($Results['total_pages'] > 1)
                                         {
-                                            $Redirect = $_GET;
+                                            $RedirectHref = $_GET;
                                             ?>
                                             <div class="wrapper mt-4">
                                                 <div class="d-flex flex-column justify-content-center align-items-center">
