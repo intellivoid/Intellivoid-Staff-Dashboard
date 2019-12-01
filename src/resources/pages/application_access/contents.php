@@ -259,7 +259,7 @@ use msqg\QueryBuilder;
                                                             <div class="dropdown">
                                                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_authentication_access', array('id' => $application_access['id']), true); ?>">View Details</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_application_access', array('id' => $application_access['id']), true); ?>">View Details</a>
                                                                     <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $application_access['application_id']), true); ?>">Manage Application</a>
                                                                     <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $application_access['application_id']), true); ?>">Manage Account</a>
                                                                     <div class="dropdown-divider"></div>
