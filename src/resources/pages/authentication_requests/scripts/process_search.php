@@ -4,7 +4,8 @@
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
     use IntellivoidAccounts\Exceptions\AccountNotFoundException;
-    use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
+use IntellivoidAccounts\Exceptions\AuthenticationRequestNotFoundException;
+use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
     use IntellivoidAccounts\IntellivoidAccounts;
 
     if(isset($_GET['action']))
@@ -23,14 +24,14 @@
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'applications', array('callback' => '100')
+                'authentication_requests', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'applications', array('callback' => '100')
+                'authentication_requests', array('callback' => '100')
             ));
         }
 
@@ -49,27 +50,29 @@
 
         try
         {
-            $Application = $IntellivoidAccounts->getApplicationManager()->getApplication($_POST['by'], $_POST['value']);
+            $AuthenticationRequest = $IntellivoidAccounts->getCrossOverAuthenticationManager()->getAuthenticationRequestManager()->getAuthenticationRequest(
+                $_POST['by'], $_POST['value']
+            );
             Actions::redirect(DynamicalWeb::getRoute(
-                'manage_application', array('id' => $Application->ID)
+                'view_authentication_request', array('id' => $AuthenticationRequest->Id)
             ));
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'applications', array('callback' => '103')
+                'authentication_requests', array('callback' => '103')
             ));
         }
-        catch(AccountNotFoundException $accountNotFoundException)
+        catch(AuthenticationRequestNotFoundException $authenticationRequestNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'applications', array('callback' => '101')
+                'authentication_requests', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'applications', array('callback' => '102')
+                'authentication_requests', array('callback' => '102')
             ));
         }
     }
