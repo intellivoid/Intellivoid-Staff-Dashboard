@@ -35,6 +35,67 @@
             $where_value = $mysqli->real_escape_string($where_value);
             $Query .= " WHERE $where='$where_value'";
         }
+
+        $QueryResults = $mysqli->query($Query);
+
+        if($QueryResults == false)
+        {
+            throw new Exception($mysqli->error);
+        }
+        else
+        {
+            return (int)$QueryResults->fetch_array()['total'];
+        }
+    }
+
+    /**
+     * Returns total items by operator
+     *
+     * @param mysqli $mysqli
+     * @param string $table
+     * @param string $by
+     * @param null $where
+     * @param null $operator
+     * @param null $value
+     * @return int
+     * @throws Exception
+     */
+    function get_total_items_by_operator(mysqli $mysqli, string $table, string $by='id', $where=null, $operator=null, $value=null): int
+    {
+        $by = $mysqli->real_escape_string($by);
+        $table = $mysqli->real_escape_string($table);
+
+        /** @noinspection SqlNoDataSourceInspection */
+        /** @noinspection SqlResolve */
+        $Query = "SELECT COUNT($by) AS total FROM `$table`";
+
+        if($where !== null)
+        {
+            if($operator == null)
+            {
+                throw new Exception("'operator' cannot be null");
+            }
+
+            if($value == null)
+            {
+                throw new Exception("'value' cannot be null");
+            }
+
+            switch($operator)
+            {
+                case '>':
+                case '<':
+                    break;
+
+                default:
+                    throw new Exception("Invalid value for 'operator'");
+            }
+
+            $where = $mysqli->real_escape_string($where);
+            $value = (int)$value;
+            $Query .= " WHERE $where $operator $value";
+        }
+
         $QueryResults = $mysqli->query($Query);
 
         if($QueryResults == false)

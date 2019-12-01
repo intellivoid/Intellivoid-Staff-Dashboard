@@ -14,7 +14,9 @@
                 <?PHP HTML::importSection('sidebar'); ?>
                 <div class="main-panel">
                     <div class="content-wrapper">
-
+                        <div class="row">
+                            <?PHP HTML::importScript('render_stats'); ?>
+                        </div>
                     </div>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
