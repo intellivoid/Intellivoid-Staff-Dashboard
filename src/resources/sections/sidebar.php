@@ -71,5 +71,19 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#tpa-dropdown" aria-expanded="false" aria-controls="tpa-dropdown">
+                <i class="menu-icon mdi mdi-network"></i>
+                <span class="menu-title">Third-Party Access</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tpa-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Telegram Clients</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
     </ul>
 </nav>
