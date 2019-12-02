@@ -55,7 +55,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Client Details</h4>
+                                        <h4 class="card-title">Telegram Client Details</h4>
                                         <ul class="nav nav-tabs tab-solid tab-solid-primary" role="tablist">
                                             <li class="nav-item">
                                                 <a class="nav-link active show" id="client_details_tab" data-toggle="tab" href="#client_details" role="tab" aria-controls="client_details" aria-selected="true">Client Details</a>

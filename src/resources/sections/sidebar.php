@@ -48,6 +48,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Applications</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Devices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Known Hosts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Login Records</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Audit Logs</a>
+                    </li>
                 </ul>
             </div>
         </li>
