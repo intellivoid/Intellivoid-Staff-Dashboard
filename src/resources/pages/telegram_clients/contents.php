@@ -37,11 +37,20 @@ use msqg\QueryBuilder;
             }
         }
 
-        if($_GET['filter'] == 'application_id')
+        if($_GET['filter'] == 'chat_id')
         {
             if(isset($_GET['value']))
             {
-                $where = 'application_id';
+                $where = 'chat_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
+
+        if($_GET['filter'] == 'user_id')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'user_id';
                 $where_value = (int)$_GET['value'];
             }
         }

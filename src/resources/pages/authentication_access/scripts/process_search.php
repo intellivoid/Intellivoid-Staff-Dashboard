@@ -3,7 +3,7 @@
 
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
-    use IntellivoidAccounts\Exceptions\AccountNotFoundException;
+    use IntellivoidAccounts\Exceptions\AuthenticationAccessNotFoundException;
     use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
     use IntellivoidAccounts\IntellivoidAccounts;
 
@@ -62,7 +62,7 @@
                 'authentication_access', array('callback' => '103')
             ));
         }
-        catch(AccountNotFoundException $accountNotFoundException)
+        catch(AuthenticationAccessNotFoundException $accountNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
                 'authentication_access', array('callback' => '101')

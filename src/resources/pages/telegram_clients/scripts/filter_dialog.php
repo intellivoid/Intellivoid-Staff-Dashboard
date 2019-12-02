@@ -4,9 +4,9 @@
 <div class="modal fade" id="filterDialog" tabindex="-1" role="dialog" aria-labelledby="filterDialogLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="GET" action="<?PHP DynamicalWeb::getRoute('authentication_access', array(), true); ?>">
+            <form method="GET" action="<?PHP DynamicalWeb::getRoute('telegram_clients', array(), true); ?>">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="filterDialog">Filter Authentication Requests</h5>
+                    <h5 class="modal-title" id="filterDialog">Filter Telegram Clients</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             <i class="mdi mdi-close"></i>
@@ -18,7 +18,8 @@
                         <label for="filter">By</label>
                         <select name="filter" id="filter" class="form-control">
                             <option value="account_id">Account ID</option>
-                            <option value="application_id">Application ID</option>
+                            <option value="user_id">User ID</option>
+                            <option value="chat_id">Chat ID</option>
                         </select>
                     </div>
                     <div class="from-group">

@@ -3,9 +3,8 @@
 
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
-    use IntellivoidAccounts\Exceptions\AccountNotFoundException;
-use IntellivoidAccounts\Exceptions\AuthenticationRequestNotFoundException;
-use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
+    use IntellivoidAccounts\Exceptions\AuthenticationRequestNotFoundException;
+    use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
     use IntellivoidAccounts\IntellivoidAccounts;
 
     if(isset($_GET['action']))

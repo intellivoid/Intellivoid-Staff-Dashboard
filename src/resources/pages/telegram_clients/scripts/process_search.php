@@ -3,8 +3,8 @@
 
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
-    use IntellivoidAccounts\Exceptions\AccountNotFoundException;
     use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
+    use IntellivoidAccounts\Exceptions\TelegramClientNotFoundException;
     use IntellivoidAccounts\IntellivoidAccounts;
 
     if(isset($_GET['action']))
@@ -23,14 +23,14 @@
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_access', array('callback' => '100')
+                'telegram_clients', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_access', array('callback' => '100')
+                'telegram_clients', array('callback' => '100')
             ));
         }
 
@@ -49,29 +49,30 @@
 
         try
         {
-            $AuthenticationAccess = $IntellivoidAccounts->getCrossOverAuthenticationManager()->getAuthenticationRequestManager()->getAuthenticationRequest(
+            $TelegramClient = $IntellivoidAccounts->getTelegramClientManager()->getClient(
                 $_POST['by'], $_POST['value']
             );
+
             Actions::redirect(DynamicalWeb::getRoute(
-                'view_authentication_access', array('id' => $AuthenticationAccess->Id)
+                'view_telegram_client', array('id' => $TelegramClient->ID)
             ));
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_access', array('callback' => '103')
+                'telegram_clients', array('callback' => '103')
             ));
         }
-        catch(AccountNotFoundException $accountNotFoundException)
+        catch(TelegramClientNotFoundException $telegramClientNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_access', array('callback' => '101')
+                'telegram_clients', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_access', array('callback' => '102')
+                'telegram_clients', array('callback' => '102')
             ));
         }
     }
