@@ -49,7 +49,7 @@
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Applications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Devices</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('devices', [], true); ?>">Devices</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Known Hosts</a>

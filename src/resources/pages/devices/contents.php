@@ -28,38 +28,38 @@ use msqg\QueryBuilder;
 
     if(isset($_GET['filter']))
     {
-        if($_GET['filter'] == 'account_id')
+        if($_GET['filter'] == 'host_id')
         {
             if(isset($_GET['value']))
             {
-                $where = 'account_id';
+                $where = 'host_id';
                 $where_value = (int)$_GET['value'];
             }
         }
 
-        if($_GET['filter'] == 'chat_id')
+        if($_GET['filter'] == 'browser')
         {
             if(isset($_GET['value']))
             {
-                $where = 'chat_id';
-                $where_value = (int)$_GET['value'];
+                $where = 'browser';
+                $where_value = $_GET['value'];
             }
         }
 
-        if($_GET['filter'] == 'user_id')
+        if($_GET['filter'] == 'platform')
         {
             if(isset($_GET['value']))
             {
-                $where = 'user_id';
-                $where_value = (int)$_GET['value'];
+                $where = 'platform';
+                $where_value = $_GET['value'];
             }
         }
     }
 
-    $Results = get_results($IntellivoidAccounts->database, 5000, 'telegram_clients', 'id',
+    $Results = get_results($IntellivoidAccounts->database, 5000, 'tracking_user_agents', 'id',
         QueryBuilder::select(
-                'telegram_clients', ['id', 'public_id', 'available', 'account_id', 'chat', 'user', 'user_id', 'chat_id', 'last_activity'],
-                $where, $where_value, 'last_activity', SortBy::descending
+                'tracking_user_agents', ['id', 'tracking_id', 'platform', 'browser', 'version', 'host_id', 'last_seen'],
+                $where, $where_value, 'last_seen', SortBy::descending
         ),
     $where, $where_value);
 ?>
@@ -67,7 +67,7 @@ use msqg\QueryBuilder;
 <html lang="en">
     <head>
         <?PHP HTML::importSection('header'); ?>
-        <title>Intellivoid Staff - Telegram Clients</title>
+        <title>Intellivoid Staff - Devices</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">
@@ -81,7 +81,7 @@ use msqg\QueryBuilder;
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
-                                        <h4 class="card-title">Telegram Clients</h4>
+                                        <h4 class="card-title">Devices</h4>
                                         <div class="wrapper d-flex align-items-center">
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
                                                 <i class="mdi mdi-filter"></i>
@@ -97,170 +97,98 @@ use msqg\QueryBuilder;
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
-                                                        <th>Public ID</th>
-                                                        <th>Account ID</th>
-                                                        <th>User ID</th>
-                                                        <th>Chat ID</th>
-                                                        <th>Available</th>
-                                                        <th>Last Activity</th>
+                                                        <th>Tracking ID</th>
+                                                        <th>Platform</th>
+                                                        <th>Browser</th>
+                                                        <th>Version</th>
+                                                        <th>Host</th>
+                                                        <th>Last Seen</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                 <?PHP
-                                                foreach($Results['results'] as $telegram_client)
+                                                foreach($Results['results'] as $device)
                                                 {
-                                                    $public_id = $telegram_client['public_id'];
-                                                    $telegram_client['public_id'] = (strlen($telegram_client['public_id']) > 15) ? substr($telegram_client['public_id'], 0, 15) . '...' : $telegram_client['public_id'];
-                                                    $user_object = User::fromArray(ZiProto::decode($telegram_client['user']));
-                                                    $chat_object = Chat::fromArray(ZiProto::decode($telegram_client['chat']));
+                                                    $tracking_id = $device['tracking_id'];
+                                                    $device['tracking_id'] = (strlen($device['tracking_id']) > 15) ? substr($device['tracking_id'], 0, 15) . '...' : $device['tracking_id'];
                                                     ?>
                                                     <tr>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($telegram_client['id']); ?></td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($public_id); ?>"><?PHP HTML::print($telegram_client['public_id']); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($device['id']); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($tracking_id); ?>"><?PHP HTML::print($device['tracking_id']); ?></td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <div class="dropdown">
-                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($telegram_client['account_id']); ?></span>
+                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($device['platform']); ?></span>
                                                                 <div class="dropdown-menu p-3">
                                                                     <div class="d-flex text-white">
                                                                         <i class="mdi mdi-account text-white icon-md"></i>
                                                                         <div class="d-flex flex-column ml-2 mr-5">
-                                                                            <h6 class="mb-0">Account ID <?PHP HTML::print($telegram_client['account_id']); ?></h6>
+                                                                            <h6 class="mb-0"><?PHP HTML::print($device['platform']); ?></h6>
                                                                         </div>
                                                                     </div>
                                                                     <div class="border-top mt-3 mb-3"></div>
                                                                     <div class="row ml-auto">
-                                                                        <a href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $telegram_client['account_id']), true) ?>" class="text-white pl-2">
+                                                                        <a href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'platform', 'value' => $device['platform']), true) ?>" class="text-white pl-2">
+                                                                            <i class="mdi mdi-filter"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                            <div class="dropdown">
+                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($device['browser']); ?></span>
+                                                                <div class="dropdown-menu p-3">
+                                                                    <div class="d-flex text-white">
+                                                                        <i class="mdi mdi-account text-white icon-md"></i>
+                                                                        <div class="d-flex flex-column ml-2 mr-5">
+                                                                            <h6 class="mb-0"><?PHP HTML::print($device['browser']); ?></h6>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="border-top mt-3 mb-3"></div>
+                                                                    <div class="row ml-auto">
+                                                                        <a href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'browser', 'value' => $device['browser']), true) ?>" class="text-white pl-2">
+                                                                            <i class="mdi mdi-filter"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($device['version']); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                            <div class="dropdown">
+                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($device['host_id']); ?></span>
+                                                                <div class="dropdown-menu p-3">
+                                                                    <div class="d-flex text-white">
+                                                                        <i class="mdi mdi-account text-white icon-md"></i>
+                                                                        <div class="d-flex flex-column ml-2 mr-5">
+                                                                            <h6 class="mb-0">Host ID <?PHP HTML::print($device['host_id']); ?></h6>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="border-top mt-3 mb-3"></div>
+                                                                    <div class="row ml-auto">
+                                                                        <a href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'host_id', 'value' => $device['host_id']), true) ?>" class="text-white pl-2">
                                                                             <i class="mdi mdi-pencil"></i>
                                                                         </a>
-                                                                        <a href="<?PHP DynamicalWeb::getRoute('telegram_clients', array('filter' => 'account_id', 'value' => $telegram_client['account_id']), true) ?>" class="text-white pl-2">
+                                                                        <a href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'host_id', 'value' => $device['host_id']), true) ?>" class="text-white pl-2">
                                                                             <i class="mdi mdi-filter"></i>
                                                                         </a>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
-                                                            <div class="dropdown">
-                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($telegram_client['user_id']); ?></span>
-                                                                <div class="dropdown-menu p-3">
-                                                                    <div class="d-flex text-white">
-                                                                        <i class="mdi mdi-telegram text-white icon-md"></i>
-                                                                        <div class="d-flex flex-column ml-2 mr-5">
-                                                                            <?PHP
-                                                                                $DisplayName = "Unknown";
-
-                                                                                if($user_object->Username == null)
-                                                                                {
-                                                                                    if($user_object->LastName == null)
-                                                                                    {
-                                                                                        $DisplayName = htmlspecialchars($user_object->FirstName, ENT_QUOTES, 'UTF-8');
-                                                                                    }
-                                                                                    else
-                                                                                    {
-                                                                                        $DisplayName = htmlspecialchars($user_object->FirstName . ' ' . $user_object->LastName, ENT_QUOTES, 'UTF-8');
-                                                                                    }
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    $DisplayName = '@' . $user_object->Username;
-                                                                                    $DisplayName = "<a href=\"https://t.me/" . htmlspecialchars($user_object->Username, ENT_QUOTES, 'UTF-8') . "\">" . $DisplayName . "</a>";
-                                                                                }
-
-                                                                            ?>
-                                                                            <h6 class="mb-0"><?PHP HTML::print($DisplayName, false); ?></h6>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="border-top mt-3 mb-3"></div>
-                                                                    <div class="row ml-auto">
-                                                                        <a href="<?PHP DynamicalWeb::getRoute('telegram_clients', array('filter' => 'account_id', 'value' => $telegram_client['account_id']), true) ?>" class="text-white pl-2">
-                                                                            <i class="mdi mdi-filter"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
-                                                            <div class="dropdown">
-                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($telegram_client['chat_id']); ?></span>
-                                                                <div class="dropdown-menu p-3">
-                                                                    <div class="d-flex text-white">
-                                                                        <i class="mdi mdi-telegram text-white icon-md"></i>
-                                                                        <div class="d-flex flex-column ml-2 mr-5">
-                                                                            <?PHP
-                                                                                $DisplayName = "Unknown";
-
-                                                                                if($chat_object->Username == null)
-                                                                                {
-                                                                                    if($chat_object->Title == null)
-                                                                                    {
-                                                                                        if($chat_object->LastName == null)
-                                                                                        {
-                                                                                            $DisplayName = htmlspecialchars($chat_object->FirstName, ENT_QUOTES, 'UTF-8');
-                                                                                        }
-                                                                                        else
-                                                                                        {
-                                                                                            $DisplayName = htmlspecialchars($chat_object->FirstName . ' ' . $chat_object->LastName, ENT_QUOTES, 'UTF-8');
-                                                                                        }
-                                                                                    }
-                                                                                    else
-                                                                                    {
-                                                                                        $DisplayName = htmlspecialchars($chat_object->Title, ENT_QUOTES, 'UTF-8');
-                                                                                    }
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    $DisplayName = '@' . $chat_object->Username;
-                                                                                    $DisplayName = "<a href=\"https://t.me/" . htmlspecialchars($chat_object->Username, ENT_QUOTES, 'UTF-8') . "\">" . $DisplayName . "</a>";
-                                                                                }
-                                                                            ?>
-                                                                            <h6 class="mb-0"><?PHP HTML::print($DisplayName, false); ?></h6>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="border-top mt-3 mb-3"></div>
-                                                                    <div class="row ml-auto">
-                                                                        <a href="<?PHP DynamicalWeb::getRoute('telegram_clients', array('filter' => 'account_id', 'value' => $telegram_client['account_id']), true) ?>" class="text-white pl-2">
-                                                                            <i class="mdi mdi-filter"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
-                                                            <?PHP
-                                                            switch($telegram_client['available'])
-                                                            {
-                                                                case true:
-                                                                    HTML::print("<label class=\"badge badge-success\">Available</label>", false);
-                                                                    break;
-
-                                                                case false:
-                                                                    HTML::print("<label class=\"badge badge-danger\">Not Available</label>", false);
-                                                                    break;
-
-                                                                default:
-                                                                    HTML::print("<label class=\"badge badge-outline-primary\">Unknown</label>", false);
-                                                            }
-                                                            ?>
-                                                        </td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print(date("F j, Y, g:i a", $telegram_client['last_activity'])); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print(date("F j, Y, g:i a", $device['last_seen'])); ?></td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <div class="dropdown">
                                                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_telegram_client', array('id' => $telegram_client['id']), true); ?>">View Details</a>
-                                                                    <?PHP
-                                                                        if($telegram_client['account_id'] > 0)
-                                                                        {
-                                                                            ?>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $telegram_client['id']), true); ?>">Manage Account</a>
-                                                                            <?PHP
-                                                                        }
-                                                                    ?>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_device', array('id' => $device['id']), true); ?>">View Details</a>
                                                                     <div class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('telegram_clients', array('filter' => 'account_id', 'value' => $telegram_client['application_id']), true) ?>">Filter by Account</a>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('telegram_clients', array('filter' => 'chat_id', 'value' => $telegram_client['chat_id']), true) ?>">Filter by Chat ID</a>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('telegram_clients', array('filter' => 'user_id', 'value' => $telegram_client['user_id']), true) ?>">Filter by User ID</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_device', array('filter' => 'platform', 'value' => $device['platform']), true) ?>">Filter by Platform</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_device', array('filter' => 'browser', 'value' => $device['browser']), true) ?>">Filter by Browser</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_device', array('filter' => 'host_id', 'value' => $device['host_id']), true) ?>">Filter by Host ID</a>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -299,7 +227,7 @@ use msqg\QueryBuilder;
                                                                     $RedirectHref['page'] = $Results['current_page'] - 1;
                                                                     ?>
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', $RedirectHref, true); ?>">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('authentication_access', $RedirectHref, true); ?>">
                                                                             <i class="mdi mdi-chevron-left"></i>
                                                                         </a>
                                                                     </li>
@@ -322,7 +250,7 @@ use msqg\QueryBuilder;
                                                                         $RedirectHref['page'] = $current_count;
                                                                         ?>
                                                                         <li class="page-item">
-                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('authentication_access', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                         </li>
                                                                         <?PHP
                                                                     }
@@ -351,7 +279,7 @@ use msqg\QueryBuilder;
                                                                     $RedirectHref['page'] = $Results['current_page'] + 1;
                                                                     ?>
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', $RedirectHref, true); ?>">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('authentication_access', $RedirectHref, true); ?>">
                                                                             <i class="mdi mdi-chevron-right"></i>
                                                                         </a>
                                                                     </li>

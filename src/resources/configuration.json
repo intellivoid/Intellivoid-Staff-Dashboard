@@ -11,6 +11,8 @@
 
         {"path": "/cloud/applications/manage", "page": "manage_application"},
         {"path": "/cloud/applications", "page": "applications"},
+        {"path": "/cloud/devices", "page": "devices"},
+        {"path": "/cloud/devices/view", "page": "view_device"},
 
         {"path": "/tpa/telegram_clients", "page": "telegram_clients"},
         {"path": "/tpa/telegram_clients/view", "page": "view_telegram_client"},
