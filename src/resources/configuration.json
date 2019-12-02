@@ -14,6 +14,7 @@
         {"path": "/cloud/devices", "page": "devices"},
         {"path": "/cloud/devices/view", "page": "view_device"},
         {"path": "/cloud/known_hosts", "page": "known_hosts"},
+        {"path": "/cloud/known_hosts/view", "page": "view_known_host"},
 
         {"path": "/tpa/telegram_clients", "page": "telegram_clients"},
         {"path": "/tpa/telegram_clients/view", "page": "view_telegram_client"},
