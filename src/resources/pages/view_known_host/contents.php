@@ -38,6 +38,21 @@ use IntellivoidAccounts\IntellivoidAccounts;
     {
         Actions::redirect(DynamicalWeb::getRoute('known_hosts', array('callback' => '105')));
     }
+
+    HTML::importScript('block_host');
+
+    if(isset($_GET['action']))
+    {
+        if($_GET['action'] == 'block_host')
+        {
+            block_host($KnownHost, $IntellivoidAccounts);
+        }
+
+        if($_GET['action'] == 'unblock_host')
+        {
+            unblock_host($KnownHost, $IntellivoidAccounts);
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,10 +117,16 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                                         if($KnownHost->Blocked == 1)
                                                                         {
                                                                             HTML::print(" (Blocked)");
+                                                                            ?>
+                                                                            <a class="ml-2" href="<?PHP DynamicalWeb::getRoute('view_known_host', array('id' => $_GET['id'], 'action' => 'unblock_host'), true); ?>"> Unblock</a>
+                                                                            <?PHP
                                                                         }
                                                                         else
                                                                         {
                                                                             HTML::print(" (Not Blocked)");
+                                                                            ?>
+                                                                            <a class="ml-2" href="<?PHP DynamicalWeb::getRoute('view_known_host', array('id' => $_GET['id'], 'action' => 'block_host'), true); ?>"> Block</a>
+                                                                            <?PHP
                                                                         }
                                                                     ?>
                                                                 </td>

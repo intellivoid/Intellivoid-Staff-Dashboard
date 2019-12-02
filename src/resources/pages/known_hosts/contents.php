@@ -171,13 +171,13 @@ use msqg\QueryBuilder;
                                                                         if($host['blocked'] == 1)
                                                                         {
                                                                             ?>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_authentication_request', array('id' => $host['id']), true); ?>">Unblock Host</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_known_host', array('id' => $host['id'], 'action' => 'unblock_host', 'redirect' => 'known_hosts'), true); ?>">Unblock Host</a>
                                                                             <?PHP
                                                                         }
                                                                         else
                                                                         {
                                                                             ?>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_authentication_request', array('id' => $host['id']), true); ?>">Block Host</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_known_host', array('id' => $host['id'], 'action' => 'block_host', 'redirect' => 'known_hosts'), true); ?>">Block Host</a>
                                                                             <?PHP
                                                                         }
                                                                     ?>
@@ -219,7 +219,7 @@ use msqg\QueryBuilder;
                                                                     $RedirectHref['page'] = $Results['current_page'] - 1;
                                                                     ?>
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('view_known_host', $RedirectHref, true); ?>">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('known_hosts', $RedirectHref, true); ?>">
                                                                             <i class="mdi mdi-chevron-left"></i>
                                                                         </a>
                                                                     </li>
@@ -242,7 +242,7 @@ use msqg\QueryBuilder;
                                                                         $RedirectHref['page'] = $current_count;
                                                                         ?>
                                                                         <li class="page-item">
-                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('view_known_host', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('known_hosts', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                         </li>
                                                                         <?PHP
                                                                     }
@@ -271,7 +271,7 @@ use msqg\QueryBuilder;
                                                                     $RedirectHref['page'] = $Results['current_page'] + 1;
                                                                     ?>
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('view_known_host', $RedirectHref, true); ?>">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('known_hosts', $RedirectHref, true); ?>">
                                                                             <i class="mdi mdi-chevron-right"></i>
                                                                         </a>
                                                                     </li>

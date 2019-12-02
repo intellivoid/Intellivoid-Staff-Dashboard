@@ -32,5 +32,13 @@
                 RenderAlert('Internal Server Error', "danger", "mdi-alert-circle");
                 break;
 
+            case 106:
+                RenderAlert('The host has been blocked', "success", "mdi-checkbox-marked-circle-outline");
+                break;
+
+            case 107:
+                RenderAlert('The host has been unblocked', "success", "mdi-checkbox-marked-circle-outline");
+                break;
+
         }
     }
