@@ -5,7 +5,8 @@
     use DynamicalWeb\DynamicalWeb;
     use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
     use IntellivoidAccounts\Exceptions\TelegramClientNotFoundException;
-    use IntellivoidAccounts\IntellivoidAccounts;
+use IntellivoidAccounts\Exceptions\UserAgentNotFoundException;
+use IntellivoidAccounts\IntellivoidAccounts;
 
     if(isset($_GET['action']))
     {
@@ -51,7 +52,7 @@
         {
 
             $Device = $IntellivoidAccounts->getTrackingUserAgentManager()->getRecord(
-                $_GET['by'], $_GET['value']
+                $_POST['by'], $_POST['value']
             );
 
             Actions::redirect(DynamicalWeb::getRoute(
@@ -64,7 +65,7 @@
                 'devices', array('callback' => '103')
             ));
         }
-        catch(TelegramClientNotFoundException $telegramClientNotFoundException)
+        catch(UserAgentNotFoundException $userAgentNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
                 'devices', array('callback' => '101')

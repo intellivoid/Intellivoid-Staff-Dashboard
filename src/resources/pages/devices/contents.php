@@ -186,9 +186,9 @@ use msqg\QueryBuilder;
                                                                 <div class="dropdown-menu">
                                                                     <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_device', array('id' => $device['id']), true); ?>">View Details</a>
                                                                     <div class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_device', array('filter' => 'platform', 'value' => $device['platform']), true) ?>">Filter by Platform</a>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_device', array('filter' => 'browser', 'value' => $device['browser']), true) ?>">Filter by Browser</a>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_device', array('filter' => 'host_id', 'value' => $device['host_id']), true) ?>">Filter by Host ID</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'platform', 'value' => $device['platform']), true) ?>">Filter by Platform</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'browser', 'value' => $device['browser']), true) ?>">Filter by Browser</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'host_id', 'value' => $device['host_id']), true) ?>">Filter by Host ID</a>
                                                                 </div>
                                                             </div>
                                                         </td>
