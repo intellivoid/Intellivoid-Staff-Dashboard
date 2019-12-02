@@ -1,5 +1,7 @@
 <?PHP
     use DynamicalWeb\HTML;
+use DynamicalWeb\Javascript;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,11 +19,18 @@
                         <div class="row">
                             <?PHP HTML::importScript('render_stats'); ?>
                         </div>
+                        <div class="row">
+                            <?PHP HTML::importScript('render_device_usage'); ?>
+                            <?PHP HTML::importScript('render_browser_usage'); ?>
+                        </div>
                     </div>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
             </div>
         </div>
         <?PHP HTML::importSection('js_scripts'); ?>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <?PHP Javascript::importScript('deviceusage'); ?>
+        <?PHP Javascript::importScript('browserusage'); ?>
     </body>
 </html>

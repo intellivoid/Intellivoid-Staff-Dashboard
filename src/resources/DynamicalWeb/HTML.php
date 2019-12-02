@@ -133,7 +133,11 @@
         {
             $FormattedName = strtolower(stripslashes($sectionName));
 
-            $LocalResource = APP_CURRENT_PAGE_DIRECTORY . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR . $FormattedName . '.php';
+            $LocalResource = null;
+            if(defined("APP_CURRENT_PAGE_DIRECTORY"))
+            {
+                $LocalResource = APP_CURRENT_PAGE_DIRECTORY . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR . $FormattedName . '.php';
+            }
             $SharedResource = APP_RESOURCES_DIRECTORY . DIRECTORY_SEPARATOR . 'shared' . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR . $FormattedName . '.php';
 
             if(file_exists($LocalResource) == false)

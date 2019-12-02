@@ -109,6 +109,42 @@
     }
 
     /**
+     * Selects distinct items from the database
+     *
+     * @param mysqli $mysqli
+     * @param string $table
+     * @param string $by
+     * @return array
+     * @throws Exception
+     */
+    function get_distinct(mysqli $mysqli, string $table, string $by='id'): array
+    {
+        $by = $mysqli->real_escape_string($by);
+        $table = $mysqli->real_escape_string($table);
+
+        /** @noinspection SqlNoDataSourceInspection */
+        /** @noinspection SqlResolve */
+        $Query = "SELECT DISTINCT $by FROM $table";
+
+        $QueryResults = $mysqli->query($Query);
+        $ResultsArray = [];
+        if($QueryResults == false)
+        {
+            throw new Exception($mysqli->error);
+        }
+        else
+        {
+
+            while ($Row = $QueryResults->fetch_assoc())
+            {
+                $ResultsArray[] = $Row;
+            }
+        }
+
+        return $ResultsArray;
+    }
+
+    /**
      * Calculates the max amount of pages
      *
      * @param int $total_items
