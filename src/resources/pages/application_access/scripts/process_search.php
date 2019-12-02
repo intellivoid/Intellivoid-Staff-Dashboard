@@ -4,7 +4,8 @@
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
     use IntellivoidAccounts\Exceptions\AccountNotFoundException;
-    use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
+use IntellivoidAccounts\Exceptions\ApplicationAccessNotFoundException;
+use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
     use IntellivoidAccounts\IntellivoidAccounts;
 
     if(isset($_GET['action']))
@@ -23,14 +24,14 @@
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'applications', array('callback' => '100')
+                'application_access', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'applications', array('callback' => '100')
+                'application_access', array('callback' => '100')
             ));
         }
 
@@ -49,27 +50,30 @@
 
         try
         {
-            $Application = $IntellivoidAccounts->getApplicationManager()->getApplication($_POST['by'], $_POST['value']);
+            $ApplicationAccess = $IntellivoidAccounts->getCrossOverAuthenticationManager()->getApplicationAccessManager()->getApplicationAccess(
+                $_GET['by'], $_GET['value']
+            );
+
             Actions::redirect(DynamicalWeb::getRoute(
-                'manage_application', array('id' => $Application->ID)
+                'view_application_access', array('id' => $ApplicationAccess->ID)
             ));
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'applications', array('callback' => '103')
+                'application_access', array('callback' => '103')
             ));
         }
-        catch(AccountNotFoundException $accountNotFoundException)
+        catch(ApplicationAccessNotFoundException $accountNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'applications', array('callback' => '101')
+                'application_access', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'applications', array('callback' => '102')
+                'application_access', array('callback' => '102')
             ));
         }
     }
