@@ -11,6 +11,7 @@ use IntellivoidAccounts\Abstracts\AuthenticationRequestStatus;
 use IntellivoidAccounts\Abstracts\SearchMethods\ApplicationSearchMethod;
 use IntellivoidAccounts\IntellivoidAccounts;
 use IntellivoidAccounts\Objects\COA\Application;
+use IntellivoidAccounts\Objects\LocationData;
 use IntellivoidAccounts\Objects\TelegramClient\Chat;
 use IntellivoidAccounts\Objects\TelegramClient\User;
 use msqg\Abstracts\SortBy;
@@ -56,10 +57,10 @@ use msqg\QueryBuilder;
         }
     }
 
-    $Results = get_results($IntellivoidAccounts->database, 5000, 'tracking_user_agents', 'id',
+    $Results = get_results($IntellivoidAccounts->database, 5000, 'users_known_hosts', 'id',
         QueryBuilder::select(
-                'tracking_user_agents', ['id', 'tracking_id', 'platform', 'browser', 'version', 'host_id', 'last_seen'],
-                $where, $where_value, 'last_seen', SortBy::descending
+                'users_known_hosts', ['id', 'public_id', 'ip_address', 'blocked', 'last_used', 'location_data'],
+                $where, $where_value, 'last_used', SortBy::descending
         ),
     $where, $where_value);
 ?>
@@ -67,7 +68,8 @@ use msqg\QueryBuilder;
 <html lang="en">
     <head>
         <?PHP HTML::importSection('header'); ?>
-        <title>Intellivoid Staff - Devices</title>
+        <link rel="stylesheet" href="/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css" />
+        <title>Intellivoid Staff - Known Hosts</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">
@@ -83,9 +85,6 @@ use msqg\QueryBuilder;
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
                                         <h4 class="card-title">Devices</h4>
                                         <div class="wrapper d-flex align-items-center">
-                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
-                                                <i class="mdi mdi-filter"></i>
-                                            </button>
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#searchDialog" type="button">
                                                 <i class="mdi mdi-magnify"></i>
                                             </button>
@@ -97,98 +96,76 @@ use msqg\QueryBuilder;
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
-                                                        <th>Tracking ID</th>
-                                                        <th>Platform</th>
-                                                        <th>Browser</th>
-                                                        <th>Version</th>
-                                                        <th>Host</th>
-                                                        <th>Last Seen</th>
+                                                        <th>Public ID</th>
+                                                        <th>IP Address</th>
+                                                        <th>Location</th>
+                                                        <th>Blocked</th>
+                                                        <th>Last Used</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                 <?PHP
-                                                foreach($Results['results'] as $device)
-                                                {
-                                                    $tracking_id = $device['tracking_id'];
-                                                    $device['tracking_id'] = (strlen($device['tracking_id']) > 15) ? substr($device['tracking_id'], 0, 15) . '...' : $device['tracking_id'];
+                                                    foreach($Results['results'] as $host)
+                                                    {
+                                                        $public_id = $host['public_id'];
+                                                        $host['public_id'] = (strlen($host['public_id']) > 15) ? substr($host['public_id'], 0, 15) . '...' : $host['public_id'];
+                                                        $location_data = LocationData::fromArray(ZiProto::decode($host['location_data']));
+
+                                                        if($location_data->CountryName == null)
+                                                        {
+                                                            $LocationDetails = "Unknown";
+                                                        }
+                                                        else
+                                                        {
+                                                            if(isset($location_data->City))
+                                                            {
+                                                                $LocationDetails = $location_data->City;
+                                                                $LocationDetails .= ' ' . $location_data->CountryName;
+                                                            }
+                                                            else
+                                                            {
+                                                                $LocationDetails = $location_data->CountryName;
+                                                            }
+                                                        }
                                                     ?>
                                                     <tr>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($device['id']); ?></td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($tracking_id); ?>"><?PHP HTML::print($device['tracking_id']); ?></td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
-                                                            <div class="dropdown">
-                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($device['platform']); ?></span>
-                                                                <div class="dropdown-menu p-3">
-                                                                    <div class="d-flex text-white">
-                                                                        <i class="mdi mdi-account text-white icon-md"></i>
-                                                                        <div class="d-flex flex-column ml-2 mr-5">
-                                                                            <h6 class="mb-0"><?PHP HTML::print($device['platform']); ?></h6>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="border-top mt-3 mb-3"></div>
-                                                                    <div class="row ml-auto">
-                                                                        <a href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'platform', 'value' => $device['platform']), true) ?>" class="text-white pl-2">
-                                                                            <i class="mdi mdi-filter"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            <?PHP
+                                                            if($location_data->CountryName == null)
+                                                            {
+                                                                HTML::print("<i class=\"mdi mdi-map-marker-off\"></i>", false);
+                                                            }
+                                                            else
+                                                            {
+                                                                $CountryCode = strtolower($location_data->CountryCode);
+                                                                HTML::print("<i class=\"flag-icon flag-icon-$CountryCode\" title=\"$CountryCode\"></i>", false);
+                                                            }
+                                                            ?>
+                                                            <?PHP HTML::print($host['id']); ?>
+                                                        </td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($public_id); ?>"><?PHP HTML::print($host['public_id']); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($host['ip_address']); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($LocationDetails); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                            <?PHP
+                                                                if($host['blocked'] == 1)
+                                                                {
+                                                                    HTML::print("<label class=\"badge badge-danger\">Blocked</label>", false);
+                                                                }
+                                                                else
+                                                                {
+                                                                    HTML::print("<label class=\"badge badge-success\">Available</label>", false);
+                                                                }
+                                                            ?>
                                                         </td>
 
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
-                                                            <div class="dropdown">
-                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($device['browser']); ?></span>
-                                                                <div class="dropdown-menu p-3">
-                                                                    <div class="d-flex text-white">
-                                                                        <i class="mdi mdi-account text-white icon-md"></i>
-                                                                        <div class="d-flex flex-column ml-2 mr-5">
-                                                                            <h6 class="mb-0"><?PHP HTML::print($device['browser']); ?></h6>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="border-top mt-3 mb-3"></div>
-                                                                    <div class="row ml-auto">
-                                                                        <a href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'browser', 'value' => $device['browser']), true) ?>" class="text-white pl-2">
-                                                                            <i class="mdi mdi-filter"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($device['version']); ?></td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
-                                                            <div class="dropdown">
-                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($device['host_id']); ?></span>
-                                                                <div class="dropdown-menu p-3">
-                                                                    <div class="d-flex text-white">
-                                                                        <i class="mdi mdi-account text-white icon-md"></i>
-                                                                        <div class="d-flex flex-column ml-2 mr-5">
-                                                                            <h6 class="mb-0">Host ID <?PHP HTML::print($device['host_id']); ?></h6>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="border-top mt-3 mb-3"></div>
-                                                                    <div class="row ml-auto">
-                                                                        <a href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'host_id', 'value' => $device['host_id']), true) ?>" class="text-white pl-2">
-                                                                            <i class="mdi mdi-pencil"></i>
-                                                                        </a>
-                                                                        <a href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'host_id', 'value' => $device['host_id']), true) ?>" class="text-white pl-2">
-                                                                            <i class="mdi mdi-filter"></i>
-                                                                        </a>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print(date("F j, Y, g:i a", $device['last_seen'])); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print(date("F j, Y, g:i a", $host['last_used'])); ?></td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <div class="dropdown">
                                                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_device', array('id' => $device['id']), true); ?>">View Details</a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'platform', 'value' => $device['platform']), true) ?>">Filter by Platform</a>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'browser', 'value' => $device['browser']), true) ?>">Filter by Browser</a>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('devices', array('filter' => 'host_id', 'value' => $device['host_id']), true) ?>">Filter by Host ID</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_authentication_request', array('id' => $host['id']), true); ?>">View Details</a>
                                                                 </div>
                                                             </div>
                                                         </td>
