@@ -308,7 +308,7 @@ use msqg\QueryBuilder;
                                                             <div class="dropdown">
                                                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_authentication_access', array('id' => $telegram_client['id']), true); ?>">View Details</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_telegram_client', array('id' => $telegram_client['id']), true); ?>">View Details</a>
                                                                     <?PHP
                                                                         if($telegram_client['account_id'] > 0)
                                                                         {

@@ -13,6 +13,7 @@
         {"path": "/cloud/applications", "page": "applications"},
 
         {"path": "/tpa/telegram_clients", "page": "telegram_clients"},
+        {"path": "/tpa/telegram_clients/view", "page": "view_telegram_client"},
 
         {"path": "/coa/authentication_requests", "page": "authentication_requests"},
         {"path": "/coa/authentication_requests/view", "page": "view_authentication_request"},

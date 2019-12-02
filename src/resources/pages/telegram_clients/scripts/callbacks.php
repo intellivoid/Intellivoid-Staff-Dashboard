@@ -25,7 +25,7 @@
                 break;
 
             case 104:
-                RenderAlert('The Authentication Access was not found', "danger", "mdi-alert-circle");
+                RenderAlert('The Telegram Client was not found', "danger", "mdi-alert-circle");
                 break;
 
             case 105:
