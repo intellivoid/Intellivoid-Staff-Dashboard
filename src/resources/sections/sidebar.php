@@ -55,7 +55,7 @@
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('known_hosts', [], true); ?>">Known Hosts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Login Records</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('login_records', [], true); ?>">Login Records</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Audit Logs</a>

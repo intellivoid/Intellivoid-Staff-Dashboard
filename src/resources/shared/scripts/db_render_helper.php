@@ -176,6 +176,11 @@
      */
     function get_offset(int $max_items_per_page, int $current_page, int $total_pages): int
     {
+        if($total_pages == 0)
+        {
+            return 0;
+        }
+
         if($current_page > $total_pages)
         {
             return ceil($max_items_per_page * ($total_pages -1));
@@ -221,6 +226,7 @@
         $query = substr_replace($query, '', -1);
         $query .= " LIMIT " . (int)$Offset . ", " . (int)$max_items_page;
         $QueryResults = $mysqli->query($query);
+
         if($QueryResults == false)
         {
             throw new Exception($mysqli->error);

@@ -43,7 +43,7 @@ use msqg\QueryBuilder;
             if(isset($_GET['value']))
             {
                 $where = 'browser';
-                $where_value = $_GET['value'];
+                $where_value = $IntellivoidAccounts->database->real_escape_string($_GET['value']);
             }
         }
 
@@ -52,7 +52,7 @@ use msqg\QueryBuilder;
             if(isset($_GET['value']))
             {
                 $where = 'platform';
-                $where_value = $_GET['value'];
+                $where_value = $IntellivoidAccounts->database->real_escape_string($_GET['value']);
             }
         }
     }
