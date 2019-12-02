@@ -293,7 +293,6 @@ use msqg\QueryBuilder;
                         </div>
                     </div>
                     <?PHP HTML::importScript('search_dialog'); ?>
-                    <?PHP HTML::importScript('filter_dialog'); ?>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
             </div>

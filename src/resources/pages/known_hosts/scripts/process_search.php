@@ -3,7 +3,8 @@
 
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
-    use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
+use IntellivoidAccounts\Exceptions\HostNotKnownException;
+use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
     use IntellivoidAccounts\Exceptions\TelegramClientNotFoundException;
 use IntellivoidAccounts\Exceptions\UserAgentNotFoundException;
 use IntellivoidAccounts\IntellivoidAccounts;
@@ -24,14 +25,14 @@ use IntellivoidAccounts\IntellivoidAccounts;
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'devices', array('callback' => '100')
+                'known_hosts', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'devices', array('callback' => '100')
+                'known_hosts', array('callback' => '100')
             ));
         }
 
@@ -51,30 +52,30 @@ use IntellivoidAccounts\IntellivoidAccounts;
         try
         {
 
-            $Device = $IntellivoidAccounts->getTrackingUserAgentManager()->getRecord(
+            $KnownHost = $IntellivoidAccounts->getKnownHostsManager()->getHost(
                 $_POST['by'], $_POST['value']
             );
 
             Actions::redirect(DynamicalWeb::getRoute(
-                'view_device', array('id' => $Device->ID)
+                'view_known_host', array('id' => $KnownHost->ID)
             ));
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'devices', array('callback' => '103')
+                'known_hosts', array('callback' => '103')
             ));
         }
-        catch(UserAgentNotFoundException $userAgentNotFoundException)
+        catch(HostNotKnownException $hostNotKnownException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'devices', array('callback' => '101')
+                'known_hosts', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'devices', array('callback' => '102')
+                'known_hosts', array('callback' => '102')
             ));
         }
     }
