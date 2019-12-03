@@ -58,7 +58,7 @@
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('login_records', [], true); ?>">Login Records</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Audit Logs</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('audit_logs', [], true); ?>">Audit Logs</a>
                     </li>
                 </ul>
             </div>

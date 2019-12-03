@@ -16,6 +16,7 @@
         {"path": "/cloud/known_hosts", "page": "known_hosts"},
         {"path": "/cloud/known_hosts/view", "page": "view_known_host"},
         {"path": "/cloud/login_records", "page": "login_records"},
+        {"path": "/cloud/audit_logs", "page": "audit_logs"},
 
         {"path": "/tpa/telegram_clients", "page": "telegram_clients"},
         {"path": "/tpa/telegram_clients/view", "page": "view_telegram_client"},
