@@ -190,7 +190,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                             ?>
                                                         </div>
                                                         <div class="tab-pane fade" id="user-profile-kh" role="tabpanel" aria-labelledby="user-profile-kh-tab">
-                                                            <?PHP render_known_hosts($IntellivoidAccounts, $Account->Configuration->KnownHosts->KnownHosts); ?>
+                                                            <?PHP render_known_hosts($IntellivoidAccounts, $Account->Configuration->KnownHosts->KnownHosts, $Account); ?>
                                                         </div>
                                                         <div class="tab-pane fade" id="user-login-history" role="tabpanel" aria-labelledby="user-login-history-tab">
                                                             <?PHP render_login_history($IntellivoidAccounts, $Account);  ?>

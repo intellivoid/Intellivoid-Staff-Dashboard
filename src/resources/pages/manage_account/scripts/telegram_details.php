@@ -13,7 +13,7 @@
         ?>
         <h4 class="border-top mt-5 pt-4 mb-4">
             Telegram Client
-            <a href="#">
+            <a href="<?PHP DynamicalWeb::getRoute('view_telegram_client', array('id' => $TelegramClient->ID), true); ?>">
                 <i class="mdi mdi-database-search pl-2"></i>
             </a>
         </h4>

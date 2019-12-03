@@ -16,8 +16,27 @@ use IntellivoidAccounts\Abstracts\ApplicationStatus;
 
     $IntellivoidAccounts = new IntellivoidAccounts();
 
+
+    $where = null;
+    $where_value = null;
+
+    if(isset($_GET['filter']))
+    {
+        if($_GET['filter'] == 'account_id')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'account_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
+    }
+
     $Results = get_results($IntellivoidAccounts->database, 100, 'applications', 'id',
-        QueryBuilder::select('applications', ['id', 'public_app_id', 'name', 'status', 'flags', 'permissions'])
+        QueryBuilder::select('applications',
+            ['id', 'public_app_id', 'name', 'status', 'flags', 'permissions', 'account_id'],  $where, $where_value
+        ),
+        $where, $where_value
     );
 ?>
 <!DOCTYPE html>
@@ -53,6 +72,7 @@ use IntellivoidAccounts\Abstracts\ApplicationStatus;
                                                     <th>Name</th>
                                                     <th>ID</th>
                                                     <th>Public ID</th>
+                                                    <th>Account ID</th>
                                                     <th>Permissions</th>
                                                     <th>Status</th>
                                                     <th>Actions</th>
@@ -90,6 +110,28 @@ use IntellivoidAccounts\Abstracts\ApplicationStatus;
                                                         </td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($application['id']); ?></td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($application['public_app_id']); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                            <div class="dropdown">
+                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($application['account_id']); ?></span>
+                                                                <div class="dropdown-menu p-3">
+                                                                    <div class="d-flex text-white">
+                                                                        <i class="mdi mdi-account text-white icon-md"></i>
+                                                                        <div class="d-flex flex-column ml-2 mr-5">
+                                                                            <h6 class="mb-0">Account ID <?PHP HTML::print($application['account_id']); ?></h6>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="border-top mt-3 mb-3"></div>
+                                                                    <div class="row ml-auto">
+                                                                        <a href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $application['account_id']), true) ?>" class="text-white pl-2">
+                                                                            <i class="mdi mdi-pencil"></i>
+                                                                        </a>
+                                                                        <a href="<?PHP DynamicalWeb::getRoute('applications', array('filter' => 'account_id', 'value' => $application['account_id']), true) ?>" class="text-white pl-2">
+                                                                            <i class="mdi mdi-filter"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <?PHP
                                                             $application['permissions'] = ZiProto::decode($application['permissions']);

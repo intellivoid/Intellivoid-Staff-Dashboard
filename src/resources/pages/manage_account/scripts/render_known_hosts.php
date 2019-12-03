@@ -1,10 +1,12 @@
 <?PHP
 
+    use DynamicalWeb\DynamicalWeb;
     use DynamicalWeb\HTML;
     use IntellivoidAccounts\Abstracts\SearchMethods\KnownHostsSearchMethod;
     use IntellivoidAccounts\IntellivoidAccounts;
+    use IntellivoidAccounts\Objects\Account;
 
-    function render_known_hosts(IntellivoidAccounts $IntellivoidAccounts, array $known_hosts)
+    function render_known_hosts(IntellivoidAccounts $IntellivoidAccounts, array $known_hosts, Account $account)
     {
         if(count($known_hosts) > 0)
         {
@@ -54,7 +56,7 @@
                             <td><?PHP HTML::print($country); ?></td>
                             <td><?PHP HTML::print(date("F j, Y, g:i a", $KnownHost->LastUsed)); ?></td>
                             <td>
-                                <a class="text-primary" href="#">
+                                <a class="text-primary" href="<?PHP DynamicalWeb::getRoute('view_known_host', array('id' => $KnownHost->ID), true); ?>">
                                     <i class="pl-1 mdi mdi-database-search"></i> View details
                                 </a>
                             </td>
@@ -65,6 +67,7 @@
                     </tbody>
                 </table>
             </div>
+            <button class="btn btn-block btn-xs btn-outline-primary" onclick="location.href='<?PHP DynamicalWeb::getRoute('known_hosts', array('filter' => 'account_id', 'value' => $account->ID), true) ?>';">View More</button>
             <?PHP
         }
         else

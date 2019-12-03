@@ -127,6 +127,7 @@ use IntellivoidAccounts\Objects\KnownHost;
             }
             ?>
         </div>
+        <button class="btn btn-block btn-xs btn-outline-primary" onclick="location.href='<?PHP DynamicalWeb::getRoute('audit_logs', array('filter' => 'account_id', 'value' => $account->ID), true) ?>';">View More</button>
         <?PHP
 
     }
