@@ -94,6 +94,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Telegram Clients</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('otl_codes', [], true); ?>">OTL Codes</a>
+                    </li>
                 </ul>
             </div>
         </li>
