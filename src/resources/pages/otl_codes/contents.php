@@ -216,7 +216,7 @@ use msqg\QueryBuilder;
                                                                     $RedirectHref['page'] = $Results['current_page'] -1
                                                                     ?>
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('authentication_requests', $RedirectHref, true); ?>">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('otl_codes', $RedirectHref, true); ?>">
                                                                             <i class="mdi mdi-chevron-left"></i>
                                                                         </a>
                                                                     </li>
@@ -239,7 +239,7 @@ use msqg\QueryBuilder;
                                                                         $RedirectHref['page'] = $current_count;
                                                                         ?>
                                                                         <li class="page-item">
-                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('authentication_requests', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('otl_codes', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                         </li>
                                                                         <?PHP
                                                                     }
@@ -268,7 +268,7 @@ use msqg\QueryBuilder;
                                                                     $RedirectHref['page'] = $Results['current_page'] + 1;
                                                                     ?>
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('authentication_requests', $RedirectHref, true); ?>">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('otl_codes', $RedirectHref, true); ?>">
                                                                             <i class="mdi mdi-chevron-right"></i>
                                                                         </a>
                                                                     </li>
@@ -289,7 +289,6 @@ use msqg\QueryBuilder;
                             </div>
                         </div>
                     </div>
-                    <?PHP HTML::importScript('search_dialog'); ?>
                     <?PHP HTML::importScript('filter_dialog'); ?>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
