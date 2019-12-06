@@ -3,12 +3,14 @@
     "debugging_mode": true,
     "router": [
         {"path": "/", "page": "index"},
+
+        {"path": "/support_tickets", "page": "support_tickets"},
+
         {"path": "/auth/login", "page": "login"},
         {"path": "/auth/logout", "page": "logout"},
 
         {"path": "/cloud/accounts", "page": "accounts"},
         {"path": "/cloud/accounts/manage", "page": "manage_account"},
-
         {"path": "/cloud/applications", "page": "applications"},
         {"path": "/cloud/applications/manage", "page": "manage_application"},
         {"path": "/cloud/devices", "page": "devices"},
@@ -50,6 +52,13 @@
             "check_class_exists": true,
             "namespace": "msqg",
             "main_class": "msqg"
+        },
+        "TicketSupport": {
+            "directory_name": "Support",
+            "autoloader": "Support.php",
+            "check_class_exists": true,
+            "namespace": "Support",
+            "main_class": "Support"
         }
     },
     "runtime_scripts": {

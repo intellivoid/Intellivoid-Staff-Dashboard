@@ -35,7 +35,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('index', [], true); ?>">
+            <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('support_tickets', [], true); ?>">
                 <i class="menu-icon mdi mdi-ticket"></i>
                 <span class="menu-title">Support Tickets</span>
             </a>

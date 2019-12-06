@@ -44,9 +44,9 @@ use msqg\QueryBuilder;
         }
     }
 
-    $Results = get_results($IntellivoidAccounts->database, 5000, 'otl_codes', 'id',
-        QueryBuilder::select('otl_codes', ['id', 'code', 'vendor', 'account_id', 'status', 'expires' ,'created'],
-            $where, $where_value, 'created', SortBy::descending
+    $Results = get_results($IntellivoidAccounts->database, 5000, 'support_tickets', 'id',
+        QueryBuilder::select('support_tickets', ['id', 'ticket_number', 'source', 'subject', 'response_email', 'ticket_status', 'submission_timestamp'],
+            $where, $where_value, 'support_tickets', SortBy::descending
         ),
     $where, $where_value);
 
@@ -55,7 +55,7 @@ use msqg\QueryBuilder;
 <html lang="en">
     <head>
         <?PHP HTML::importSection('header'); ?>
-        <title>Intellivoid Staff - OTL Codes</title>
+        <title>Intellivoid Staff - Support Tickets</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">
@@ -69,7 +69,7 @@ use msqg\QueryBuilder;
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
-                                        <h4 class="card-title">OTL Codes</h4>
+                                        <h4 class="card-title">Support Tickets</h4>
                                         <div class="wrapper d-flex align-items-center">
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
                                                 <i class="mdi mdi-filter"></i>
@@ -82,71 +82,52 @@ use msqg\QueryBuilder;
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
-                                                        <th>Code</th>
-                                                        <th>Vendor</th>
-                                                        <th>Account ID</th>
+                                                        <th>Ticket Number</th>
+                                                        <th>Source</th>
+                                                        <th>Subject</th>
                                                         <th>Status</th>
-                                                        <th>Expires</th>
+                                                        <th>Timestamp</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                 <?PHP
-                                                foreach($Results['results'] as $otl_record)
+                                                foreach($Results['results'] as $support_ticket)
                                                 {
-                                                    $otl_code = $otl_record['code'];
-                                                    $otl_record['code'] = (strlen($otl_record['code']) > 15) ? substr($otl_record['code'], 0, 15) . '...' : $otl_record['code'];
+                                                    $ticket_number = $support_ticket['ticket_number'];
+                                                    $subject = $support_ticket['subject'];
+                                                    $support_ticket['ticket_number'] = (strlen($support_ticket['ticket_number']) > 15) ? substr($support_ticket['ticket_number'], 0, 15) . '...' : $support_ticket['ticket_number'];
+                                                    $support_ticket['subject'] = (strlen($support_ticket['subject']) > 20) ? substr($support_ticket['subject'], 0, 20) . '...' : $support_ticket['subject'];
                                                     ?>
                                                     <tr>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($otl_record['id']); ?></td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($otl_code); ?>"><?PHP HTML::print($otl_record['code']); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($support_ticket['id']); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($ticket_number); ?>"><?PHP HTML::print($support_ticket['ticket_number']); ?></td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <div class="dropdown">
-                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($otl_record['vendor']); ?></span>
+                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($support_ticket['source']); ?></span>
                                                                 <div class="dropdown-menu p-3">
                                                                     <div class="d-flex text-white">
                                                                         <i class="mdi mdi-account text-white icon-md"></i>
                                                                         <div class="d-flex flex-column ml-2 mr-5">
-                                                                            <h6 class="mb-0"><?PHP HTML::print($otl_record['vendor']); ?></h6>
+                                                                            <h6 class="mb-0"><?PHP HTML::print($support_ticket['source']); ?></h6>
                                                                         </div>
                                                                     </div>
                                                                     <div class="border-top mt-3 mb-3"></div>
                                                                     <div class="row ml-auto">
-                                                                        <a href="<?PHP DynamicalWeb::getRoute('otl_codes', array('filter' => 'vendor', 'value' => $otl_record['vendor']), true) ?>" class="text-white pl-2">
+                                                                        <a href="<?PHP DynamicalWeb::getRoute('support_tickets', array('filter' => 'source', 'value' => $support_ticket['source']), true) ?>" class="text-white pl-2">
                                                                             <i class="mdi mdi-filter"></i>
                                                                         </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;">
-                                                            <div class="dropdown">
-                                                                <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($otl_record['account_id']); ?></span>
-                                                                <div class="dropdown-menu p-3">
-                                                                    <div class="d-flex text-white">
-                                                                        <i class="mdi mdi-account text-white icon-md"></i>
-                                                                        <div class="d-flex flex-column ml-2 mr-5">
-                                                                            <h6 class="mb-0">Account ID <?PHP HTML::print($otl_record['account_id']); ?></h6>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="border-top mt-3 mb-3"></div>
-                                                                    <div class="row ml-auto">
-                                                                        <a href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $otl_record['account_id']), true) ?>" class="text-white pl-2">
-                                                                            <i class="mdi mdi-pencil"></i>
-                                                                        </a>
-                                                                        <a href="<?PHP DynamicalWeb::getRoute('otl_codes', array('filter' => 'account_id', 'value' => $otl_record['account_id']), true) ?>" class="text-white pl-2">
-                                                                            <i class="mdi mdi-filter"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($subject); ?>"><?PHP HTML::print($support_ticket['subject']); ?></td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <?PHP
-                                                                switch($otl_record['status'])
+                                                                switch($support_ticket['ticket_status'])
                                                                 {
-                                                                    case OtlStatus::Available:
-                                                                        if((int)time() > (int)$otl_record['expires'])
+                                                                    case ::Available:
+                                                                        if((int)time() > (int)$support_ticket['expires'])
                                                                         {
                                                                             HTML::print("<label class=\"badge badge-warning\">Expired</label>", false);
                                                                         }
