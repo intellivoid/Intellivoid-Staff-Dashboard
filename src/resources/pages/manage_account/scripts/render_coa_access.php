@@ -10,11 +10,13 @@ use IntellivoidAccounts\Exceptions\ApplicationNotFoundException;
 use IntellivoidAccounts\IntellivoidAccounts;
     use IntellivoidAccounts\Objects\Account;
     use IntellivoidAccounts\Objects\ApplicationAccess;
+use IntellivoidAccounts\Objects\COA\Application;
 
     function render_coa_access(IntellivoidAccounts $IntellivoidAccounts, Account $account)
     {
         $ApplicationAccessRecords = $IntellivoidAccounts->getCrossOverAuthenticationManager()->getApplicationAccessManager()->searchRecordsByAccount($_GET['id']);
         $TotalAccessCount = 0;
+        $Applications = array();
 
         if(count($ApplicationAccessRecords) > 0)
         {
@@ -23,6 +25,18 @@ use IntellivoidAccounts\IntellivoidAccounts;
                 if($record['status'] == ApplicationAccessStatus::Authorized)
                 {
                     $TotalAccessCount += 1;
+
+                    try
+                    {
+                        $Application = $IntellivoidAccounts->getApplicationManager()->getApplication(ApplicationSearchMethod::byId, $record['application_id']);
+                        $Applications[$record['application_id']] = $Application;
+                    }
+                    catch (ApplicationNotFoundException $e)
+                    {
+                        unset($e);
+                        $TotalAccessCount -= 1;
+                        continue;
+                    }
                 }
             }
         }
@@ -35,15 +49,16 @@ use IntellivoidAccounts\IntellivoidAccounts;
                 foreach($ApplicationAccessRecords as $access_record)
                 {
                     $ApplicationAccess = ApplicationAccess::fromArray($access_record);
+
                     if($ApplicationAccess->Status == ApplicationAccessStatus::Authorized)
                     {
-                        try
+                        if(isset($Applications[$ApplicationAccess->ApplicationID]))
                         {
-                            $Application = $IntellivoidAccounts->getApplicationManager()->getApplication(ApplicationSearchMethod::byId, $ApplicationAccess->ApplicationID);
+                            /** @var Application $Application */
+                            $Application = $Applications[$ApplicationAccess->ID];
                         }
-                        catch (ApplicationNotFoundException $e)
+                        else
                         {
-                            unset($e);
                             continue;
                         }
                         ?>

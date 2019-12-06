@@ -35,6 +35,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('index', [], true); ?>">
+                <i class="menu-icon mdi mdi-ticket"></i>
+                <span class="menu-title">Support Tickets</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#cloud-dropdown" aria-expanded="false" aria-controls="cloud-dropdown">
                 <i class="menu-icon mdi mdi-cloud"></i>
                 <span class="menu-title">Cloud</span>
