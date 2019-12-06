@@ -70,6 +70,32 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#finance-dropdown" aria-expanded="false" aria-controls="finance-dropdown">
+                <i class="menu-icon mdi mdi-currency-usd"></i>
+                <span class="menu-title">Finance</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="finance-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Subscription Plans</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Subscription Promotions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Active Subscriptions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Transaction Records</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Create Transaction</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#coa-dropdown" aria-expanded="false" aria-controls="coa-dropdown">
                 <i class="menu-icon mdi mdi-lock"></i>
                 <span class="menu-title">COA</span>
