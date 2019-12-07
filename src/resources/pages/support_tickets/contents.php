@@ -13,12 +13,16 @@ use IntellivoidAccounts\IntellivoidAccounts;
 use IntellivoidAccounts\Objects\COA\Application;
 use msqg\Abstracts\SortBy;
 use msqg\QueryBuilder;
-    use ZiProto\ZiProto;
+use Support\Abstracts\TicketStatus;
+use Support\Support;
+use ZiProto\ZiProto;
 
     Runtime::import('IntellivoidAccounts');
+    Runtime::import('TicketSupport');
     HTML::importScript('db_render_helper');
 
     $IntellivoidAccounts = new IntellivoidAccounts();
+    $SupportManager = new Support();
 
     $where = null;
     $where_value = null;
@@ -46,7 +50,7 @@ use msqg\QueryBuilder;
 
     $Results = get_results($IntellivoidAccounts->database, 5000, 'support_tickets', 'id',
         QueryBuilder::select('support_tickets', ['id', 'ticket_number', 'source', 'subject', 'response_email', 'ticket_status', 'submission_timestamp'],
-            $where, $where_value, 'support_tickets', SortBy::descending
+            $where, $where_value, 'submission_timestamp', SortBy::descending
         ),
     $where, $where_value);
 
@@ -126,23 +130,20 @@ use msqg\QueryBuilder;
                                                             <?PHP
                                                                 switch($support_ticket['ticket_status'])
                                                                 {
-                                                                    case ::Available:
-                                                                        if((int)time() > (int)$support_ticket['expires'])
-                                                                        {
-                                                                            HTML::print("<label class=\"badge badge-warning\">Expired</label>", false);
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            HTML::print("<label class=\"badge badge-success\">Active</label>", false);
-                                                                        }
+                                                                    case TicketStatus::Opened:
+                                                                        HTML::print("<label class=\"badge badge-outline-primary\">Opened</label>", false);
                                                                         break;
 
-                                                                    case OtlStatus::Used:
-                                                                        HTML::print("<label class=\"badge badge-success\">Used</label>", false);
+                                                                    case TicketStatus::InProgress:
+                                                                        HTML::print("<label class=\"badge badge-primary\">In Progress</label>", false);
                                                                         break;
 
-                                                                    case OtlStatus::Unavailable:
-                                                                        HTML::print("<label class=\"badge badge-danger\">Unavailable</label>", false);
+                                                                    case TicketStatus::UnableToResolve:
+                                                                        HTML::print("<label class=\"badge badge-danger\">Unabe to Resolve</label>", false);
+                                                                        break;
+
+                                                                    case TicketStatus::Resolved:
+                                                                        HTML::print("<label class=\"badge badge-success\">Resolved</label>", false);
                                                                         break;
 
                                                                     default:
@@ -151,13 +152,13 @@ use msqg\QueryBuilder;
                                                                 }
                                                             ?>
                                                         </td>
-                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print(date("F j, Y, g:i a", $otl_record['expires'])); ?></td>
+                                                        <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print(date("F j, Y, g:i a", $support_ticket['submission_timestamp'])); ?></td>
                                                         <td style="padding-top: 10px; padding-bottom: 10px;">
                                                             <div class="dropdown">
                                                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('otl_codes', array('filter' => 'account_id', 'value' => $otl_record['account_id']), true) ?>">Filter by Account ID</a>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('otl_codes', array('filter' => 'vendor', 'value' => $otl_record['vendor']), true) ?>">Filter by Vendor</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('support_tickets', array('id' => $support_ticket['source']), true) ?>">Manage</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('support_tickets', array('filter' => 'vendor', 'value' => $support_ticket['source']), true) ?>">Filter by Source</a>
                                                                 </div>
                                                             </div>
                                                         </td>
