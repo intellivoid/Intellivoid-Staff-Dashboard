@@ -17,11 +17,9 @@ use Support\Abstracts\TicketStatus;
 use Support\Support;
 use ZiProto\ZiProto;
 
-    Runtime::import('IntellivoidAccounts');
     Runtime::import('TicketSupport');
     HTML::importScript('db_render_helper');
 
-    $IntellivoidAccounts = new IntellivoidAccounts();
     $SupportManager = new Support();
 
     $where = null;
@@ -43,12 +41,12 @@ use ZiProto\ZiProto;
             if(isset($_GET['value']))
             {
                 $where = 'vendor';
-                $where_value = $IntellivoidAccounts->database->real_escape_string($_GET['value']);
+                $where_value = $SupportManager->getDatabase()->real_escape_string($_GET['value']);
             }
         }
     }
 
-    $Results = get_results($IntellivoidAccounts->database, 5000, 'support_tickets', 'id',
+    $Results = get_results($SupportManager->getDatabase(), 5000, 'support_tickets', 'id',
         QueryBuilder::select('support_tickets', ['id', 'ticket_number', 'source', 'subject', 'response_email', 'ticket_status', 'submission_timestamp'],
             $where, $where_value, 'submission_timestamp', SortBy::descending
         ),
@@ -139,7 +137,7 @@ use ZiProto\ZiProto;
                                                                         break;
 
                                                                     case TicketStatus::UnableToResolve:
-                                                                        HTML::print("<label class=\"badge badge-danger\">Unabe to Resolve</label>", false);
+                                                                        HTML::print("<label class=\"badge badge-danger\">Unable to Resolve</label>", false);
                                                                         break;
 
                                                                     case TicketStatus::Resolved:
@@ -198,7 +196,7 @@ use ZiProto\ZiProto;
                                                                     $RedirectHref['page'] = $Results['current_page'] -1
                                                                     ?>
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('otl_codes', $RedirectHref, true); ?>">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('support_tickets', $RedirectHref, true); ?>">
                                                                             <i class="mdi mdi-chevron-left"></i>
                                                                         </a>
                                                                     </li>
@@ -221,7 +219,7 @@ use ZiProto\ZiProto;
                                                                         $RedirectHref['page'] = $current_count;
                                                                         ?>
                                                                         <li class="page-item">
-                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('otl_codes', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                            <a class="page-link" href="<?PHP DynamicalWeb::getRoute('support_tickets', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                         </li>
                                                                         <?PHP
                                                                     }
@@ -250,7 +248,7 @@ use ZiProto\ZiProto;
                                                                     $RedirectHref['page'] = $Results['current_page'] + 1;
                                                                     ?>
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('otl_codes', $RedirectHref, true); ?>">
+                                                                        <a class="page-link" href="<?PHP DynamicalWeb::getRoute('support_tickets', $RedirectHref, true); ?>">
                                                                             <i class="mdi mdi-chevron-right"></i>
                                                                         </a>
                                                                     </li>

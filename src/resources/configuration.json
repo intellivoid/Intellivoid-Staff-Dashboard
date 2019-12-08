@@ -5,6 +5,7 @@
         {"path": "/", "page": "index"},
 
         {"path": "/support_tickets", "page": "support_tickets"},
+        {"path": "/support_tickets/view", "page": "view_support_ticket"},
 
         {"path": "/auth/login", "page": "login"},
         {"path": "/auth/logout", "page": "logout"},
