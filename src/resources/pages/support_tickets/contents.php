@@ -27,20 +27,11 @@ use ZiProto\ZiProto;
 
     if(isset($_GET['filter']))
     {
-        if($_GET['filter'] == 'account_id')
+        if($_GET['filter'] == 'source')
         {
             if(isset($_GET['value']))
             {
-                $where = 'account_id';
-                $where_value = (int)$_GET['value'];
-            }
-        }
-
-        if($_GET['filter'] == 'vendor')
-        {
-            if(isset($_GET['value']))
-            {
-                $where = 'vendor';
+                $where = 'source';
                 $where_value = $SupportManager->getDatabase()->real_escape_string($_GET['value']);
             }
         }
@@ -155,8 +146,9 @@ use ZiProto\ZiProto;
                                                             <div class="dropdown">
                                                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('support_tickets', array('id' => $support_ticket['source']), true) ?>">Manage</a>
-                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('support_tickets', array('filter' => 'vendor', 'value' => $support_ticket['source']), true) ?>">Filter by Source</a>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_support_ticket', array('id' => $support_ticket['id']), true) ?>">Manage</a>
+                                                                    <div class="dropdown-divider"></div>
+                                                                    <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('support_tickets', array('filter' => 'source', 'value' => $support_ticket['source']), true) ?>">Filter by Source</a>
                                                                 </div>
                                                             </div>
                                                         </td>
