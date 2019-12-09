@@ -26,14 +26,12 @@
 
         if($where !== null)
         {
-            if($where_value == null)
+            if($where_value !== null)
             {
-                throw new Exception("'where_value' cannot be null");
+                $where = $mysqli->real_escape_string($where);
+                $where_value = $mysqli->real_escape_string($where_value);
+                $Query .= " WHERE $where='$where_value'";
             }
-
-            $where = $mysqli->real_escape_string($where);
-            $where_value = $mysqli->real_escape_string($where_value);
-            $Query .= " WHERE $where='$where_value'";
         }
 
         $QueryResults = $mysqli->query($Query);
