@@ -4,8 +4,8 @@
     use DynamicalWeb\HTML;
     use DynamicalWeb\Runtime;
     use IntellivoidAccounts\Abstracts\AccountRequestPermissions;
-use IntellivoidAccounts\Abstracts\ApplicationFlags;
-use IntellivoidAccounts\Abstracts\ApplicationStatus;
+    use IntellivoidAccounts\Abstracts\ApplicationFlags;
+    use IntellivoidAccounts\Abstracts\ApplicationStatus;
     use IntellivoidAccounts\IntellivoidAccounts;
     use msqg\QueryBuilder;
     use ZiProto\ZiProto;
