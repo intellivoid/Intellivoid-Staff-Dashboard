@@ -10,6 +10,8 @@
         {"path": "/auth/login", "page": "login"},
         {"path": "/auth/logout", "page": "logout"},
 
+        {"path": "/finance/subscriptions/plans", "page": "subscription_plans"},
+
         {"path": "/cloud/accounts", "page": "accounts"},
         {"path": "/cloud/accounts/manage", "page": "manage_account"},
         {"path": "/cloud/applications", "page": "applications"},

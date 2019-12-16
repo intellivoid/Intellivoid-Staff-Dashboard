@@ -78,7 +78,7 @@
             <div class="collapse" id="finance-dropdown">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Subscription Plans</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('subscription_plans', [], true); ?>">Subscription Plans</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Subscription Promotions</a>
