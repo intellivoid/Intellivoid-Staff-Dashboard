@@ -88,5 +88,49 @@
                 RenderAlert('The application has been enabled', "success", "mdi-checkbox-marked-circle-outline");
                 break;
 
+            case 120:
+                RenderAlert('The given features data contains malformed JSON data', "danger", "mdi-alert-circle");
+                break;
+
+            case 121:
+                RenderAlert('The initial price cannot be lower than 0', "danger", "mdi-alert-circle");
+                break;
+
+            case 122:
+                RenderAlert('The cycle price cannot be lower than 0', "danger", "mdi-alert-circle");
+                break;
+
+            case 123:
+                RenderAlert('The unix billing cycle be lower than 86400', "danger", "mdi-alert-circle");
+                break;
+
+            case 124:
+                RenderAlert('There are one or more feature objects that are invalid', "danger", "mdi-alert-circle");
+                break;
+
+            case 125:
+                RenderAlert('The billing cycle contains an invalid value', "danger", "mdi-alert-circle");
+                break;
+
+            case 126:
+                RenderAlert('The cycle price contains an invalid value', "danger", "mdi-alert-circle");
+                break;
+
+            case 127:
+                RenderAlert('The initial price contains an invalid value', "danger", "mdi-alert-circle");
+                break;
+
+            case 128:
+                RenderAlert('The subscription name is invalid', "danger", "mdi-alert-circle");
+                break;
+
+            case 129:
+                RenderAlert('The subscription plan already exists', "danger", "mdi-alert-circle");
+                break;
+
+            case 130:
+                RenderAlert('The subscription plan has been created successfully', "success", "mdi-checkbox-marked-circle-outline");
+                break;
+
         }
     }
