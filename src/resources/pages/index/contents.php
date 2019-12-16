@@ -1,7 +1,6 @@
 <?PHP
     use DynamicalWeb\HTML;
 use DynamicalWeb\Javascript;
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

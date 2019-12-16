@@ -197,6 +197,20 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row flex-grow">
+                                    <div class="col-12 grid-margin">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Subscriptions</h4>
+                                                <button type="button" class="btn btn-outline-success btn-xs btn-block" data-toggle="modal" data-target="#createSubscriptionPlanDialog">
+                                                    <i class="mdi mdi-plus-circle"></i> Create Subscription Plan
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="col-md-8 grid-margin stretch-card">
@@ -307,6 +321,7 @@
                     </div>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
+                <?PHP HTML::importScript('create_subscription_plan_dialog'); ?>
             </div>
         </div>
         <?PHP HTML::importSection('js_scripts'); ?>

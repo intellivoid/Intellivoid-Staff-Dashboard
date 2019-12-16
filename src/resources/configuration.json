@@ -64,7 +64,7 @@
     },
     "runtime_scripts": {
         "initialize": [],
-        "on_page_load": ["auth.check.php"],
+        "on_page_load": ["download.feature_builder.php", "auth.check.php"],
         "page_loaded": [],
         "after_request": [],
         "on_request": [],
