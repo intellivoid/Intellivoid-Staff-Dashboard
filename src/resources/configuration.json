@@ -11,6 +11,7 @@
         {"path": "/auth/logout", "page": "logout"},
 
         {"path": "/finance/subscriptions/plans", "page": "subscription_plans"},
+        {"path": "/finance/subscriptions/plans/manage", "page": "manage_subscription_plan"},
 
         {"path": "/cloud/accounts", "page": "accounts"},
         {"path": "/cloud/accounts/manage", "page": "manage_account"},
