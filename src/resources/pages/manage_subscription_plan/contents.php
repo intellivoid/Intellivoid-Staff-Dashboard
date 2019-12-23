@@ -76,6 +76,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
 
     HTML::importScript('update_status');
     HTML::importScript('update_properties');
+    HTML::importScript('create_promotion');
 
 ?>
 <!DOCTYPE html>
@@ -98,53 +99,51 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                     <div class="col-12 grid-margin">
                                         <div class="card">
                                             <div class="card-body">
-                                                <form action="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $_GET['id'], 'action' => 'update_logo'), true); ?>" method="POST" enctype="multipart/form-data">
-                                                    <div class="d-flex align-items-start pb-3 border-bottom">
+                                                <div class="d-flex align-items-start pb-3 border-bottom">
+                                                    <?PHP
+                                                    if($ApplicationExists)
+                                                    {
+                                                        ?>
+                                                        <img class="img-md" src="<?PHP HTML::print(getApplicationUrl($Application->PublicAppId, 'tiny')); ?>" alt="brand logo">
                                                         <?PHP
+                                                    }
+                                                    else
+                                                    {
+                                                        ?>
+                                                        <i class="mdi mdi-information icon-lg"></i>
+                                                        <?PHP
+                                                    }
+                                                    ?>
+
+                                                    <div class="wrapper pl-4">
+                                                        <p class="font-weight-bold mb-0">
+                                                            <?PHP
                                                             if($ApplicationExists)
                                                             {
-                                                                ?>
-                                                                <img class="img-md" src="<?PHP HTML::print(getApplicationUrl($Application->PublicAppId, 'tiny')); ?>" alt="brand logo">
-                                                                <?PHP
+                                                                HTML::print($Application->Name);
+                                                                if(in_array(ApplicationFlags::Official, $Application->Flags))
+                                                                {
+                                                                    HTML::print("<i class=\"mdi mdi-verified text-primary pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is an official Intellivoid Application/Service\"></i>", false);
+
+                                                                }
+                                                                elseif(in_array(ApplicationFlags::Verified, $Application->Flags))
+                                                                {
+                                                                    HTML::print("<i class=\"mdi mdi-verified text-success pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is verified & trusted\"></i>", false);
+                                                                }
+                                                                elseif(in_array(ApplicationFlags::Untrusted, $Application->Flags))
+                                                                {
+                                                                    HTML::print("<i class=\"mdi mdi-alert text-danger pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is untrusted and unsafe\"></i>", false);
+                                                                }
                                                             }
                                                             else
                                                             {
-                                                                ?>
-                                                                <i class="mdi mdi-information icon-lg"></i>
-                                                                <?PHP
+                                                                HTML::print("Application not Found");
                                                             }
-                                                        ?>
-
-                                                        <div class="wrapper pl-4">
-                                                            <p class="font-weight-bold mb-0">
-                                                                <?PHP
-                                                                    if($ApplicationExists)
-                                                                    {
-                                                                        HTML::print($Application->Name);
-                                                                        if(in_array(ApplicationFlags::Official, $Application->Flags))
-                                                                        {
-                                                                            HTML::print("<i class=\"mdi mdi-verified text-primary pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is an official Intellivoid Application/Service\"></i>", false);
-
-                                                                        }
-                                                                        elseif(in_array(ApplicationFlags::Verified, $Application->Flags))
-                                                                        {
-                                                                            HTML::print("<i class=\"mdi mdi-verified text-success pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is verified & trusted\"></i>", false);
-                                                                        }
-                                                                        elseif(in_array(ApplicationFlags::Untrusted, $Application->Flags))
-                                                                        {
-                                                                            HTML::print("<i class=\"mdi mdi-alert text-danger pl-1\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"This is untrusted and unsafe\"></i>", false);
-                                                                        }
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        HTML::print("Application not Found");
-                                                                    }
-                                                                ?>
-                                                            </p>
-                                                        </div>
+                                                            ?>
+                                                        </p>
                                                     </div>
-                                                </form>
-                                                <button class="btn btn-block btn-outline-primary mt-3" onclick="location.href='<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $Application), true); ?>'">Manage Application</button>
+                                                </div>
+                                                <button class="btn btn-block btn-outline-primary mt-3" onclick="location.href='<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $Application->ID), true); ?>'">Manage Application</button>
                                             </div>
                                         </div>
                                     </div>
@@ -157,14 +156,14 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                 <form method="POST" action="<?PHP DynamicalWeb::getRoute('manage_subscription_plan', array('id' => $_GET['id'], 'action' => 'update_status'), true); ?>">
                                                     <div class="form-radio form-radio-flat">
                                                         <label class="form-check-label">
-                                                            <input type="radio" class="form-check-input" name="status" id="status" value="available"<?PHP if($SubscriptionPlan->Status == SubscriptionPlanStatus::Available){ HTML::print(" checked"); } ?>> Available
+                                                            <input type="radio" class="form-check-input" name="status" id="available_status" value="available"<?PHP if($SubscriptionPlan->Status == SubscriptionPlanStatus::Available){ HTML::print(" checked"); } ?>> Available
                                                             <i class="input-helper"></i>
                                                         </label>
                                                     </div>
 
                                                     <div class="form-radio form-radio-flat">
                                                         <label class="form-check-label">
-                                                            <input type="radio" class="form-check-input" name="status" id="status" value="unavailable"<?PHP if($SubscriptionPlan->Status == SubscriptionPlanStatus::Unavailable){ HTML::print(" checked"); } ?>> Unavailable
+                                                            <input type="radio" class="form-check-input" name="status" id="unavailable_status" value="unavailable"<?PHP if($SubscriptionPlan->Status == SubscriptionPlanStatus::Unavailable){ HTML::print(" checked"); } ?>> Unavailable
                                                             <i class="input-helper"></i>
                                                         </label>
                                                     </div>
@@ -183,8 +182,8 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                         <div class="card">
                                             <div class="card-body">
                                                 <h4 class="card-title">Subscriptions</h4>
-                                                <button type="button" class="btn btn-outline-success btn-xs btn-block" data-toggle="modal" data-target="#createSubscriptionPlanDialog">
-                                                    <i class="mdi mdi-plus-circle"></i> Create Subscription Plan
+                                                <button type="button" class="btn btn-outline-primary btn-xs btn-block" data-toggle="modal" data-target="#createPromotionDialog">
+                                                    <i class="mdi mdi-plus-circle"></i> Create Promotion
                                                 </button>
                                             </div>
                                         </div>
@@ -257,9 +256,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                 to generate valid JSON data
                                             </p>
                                         </form>
-
                                     </div>
-
                                     <div class="card-footer">
                                         <div class="row align-items-center">
                                             <button class="btn btn-success ml-auto mr-2" onclick="$('#details-form').submit();">Save Changes</button>
@@ -268,6 +265,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                 </div>
                             </div>
                         </div>
+                        <?PHP HTML::importScript('create_promotion_dialog'); ?>
                     </div>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>

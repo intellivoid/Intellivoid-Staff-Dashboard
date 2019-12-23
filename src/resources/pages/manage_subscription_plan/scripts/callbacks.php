@@ -44,5 +44,29 @@
                 RenderAlert('The properties has been updated successfully', "success", "mdi-checkbox-marked-circle-outline");
                 break;
 
+            case 109:
+                RenderAlert('The the given promotional code is invalid', "danger", "mdi-alert-circle");
+                break;
+
+            case 110:
+                RenderAlert('The account ID was not found in the system', "danger", "mdi-alert-circle");
+                break;
+
+            case 111:
+                RenderAlert('The initial price share cannot have a value that\'s lower than 0', "danger", "mdi-alert-circle");
+                break;
+
+            case 112:
+                RenderAlert('The cycle price share cannot have a value that\'s lower than 0', "danger", "mdi-alert-circle");
+                break;
+
+            case 113:
+                RenderAlert('The promotion already exists', "danger", "mdi-alert-circle");
+                break;
+
+            case 114:
+                RenderAlert('The promotion has been created successfully', "success", "mdi-checkbox-marked-circle-outline");
+                break;
+
         }
     }

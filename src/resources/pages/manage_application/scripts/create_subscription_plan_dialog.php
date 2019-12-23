@@ -15,7 +15,7 @@
         <div class="modal-content">
             <form method="POST" action="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $_GET['id'], 'action' => 'create_subscription'), true); ?>">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createSubscriptionPlanDialog">Create Subscription Plan</h5>
+                    <h5 class="modal-title" id="createSubscriptionPlanDialogLabel">Create Subscription Plan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             <i class="mdi mdi-close"></i>

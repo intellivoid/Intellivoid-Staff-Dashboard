@@ -162,7 +162,7 @@
 
             $Query = QueryBuilder::insert_into('subscription_promotions', array(
                 'public_id' => $public_id,
-                'promotion_cde' => $promotion_code,
+                'promotion_code' => $promotion_code,
                 'subscription_plan_id' => (int)$subscription_plan_id,
                 'initial_price' => (float)$initial_price,
                 'cycle_price' => (float)$cycle_price,
@@ -182,7 +182,7 @@
                 throw new DatabaseException($Query, $this->intellivoidAccounts->database->error);
             }
 
-            return $this->getSubscriptionPromotion(SubscriptionPromotionSearchMethod::byPromotionCode, $public_id);
+            return $this->getSubscriptionPromotion(SubscriptionPromotionSearchMethod::byPublicId, $public_id);
         }
 
         /**
