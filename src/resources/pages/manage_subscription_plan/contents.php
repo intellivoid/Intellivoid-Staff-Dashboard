@@ -75,6 +75,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
     DynamicalWeb::setMemoryObject('intellivoid_accounts', $IntellivoidAccounts);
 
     HTML::importScript('update_status');
+    HTML::importScript('update_properties');
 
 ?>
 <!DOCTYPE html>
@@ -233,35 +234,35 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                     </div>
 
                                     <div class="card-body">
-                                        <form>
-
+                                        <form method="POST" id="details-form" name="details-form" action="<?PHP DynamicalWeb::getRoute('manage_subscription_plan', array('id' => $_GET['id'], 'action' => 'update_properties'), true); ?>">
+                                            <h4 class="card-title text-muted">Properties</h4>
+                                            <div class="form-group pb-3">
+                                                <label for="initial_price">Initial Price (USD)</label>
+                                                <input type="text" class="form-control" name="initial_price" id="initial_price" value="<?PHP HTML::print($SubscriptionPlan->InitialPrice); ?>">
+                                            </div>
+                                            <div class="form-group pb-3">
+                                                <label for="cycle_price">Cycle Price (USD)</label>
+                                                <input type="text" class="form-control" name="cycle_price" id="cycle_price" value="<?PHP HTML::print($SubscriptionPlan->CyclePrice); ?>">
+                                            </div>
+                                            <div class="form-group pb-3">
+                                                <label for="billing_cycle">Unix Timestamp Billing Cycle</label>
+                                                <input type="text" class="form-control" name="billing_cycle" id="billing_cycle" value="<?PHP HTML::print($SubscriptionPlan->BillingCycle); ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="features">Features Structure (JSON)</label>
+                                                <textarea class="form-control" id="features" name="features" rows="10"><?PHP HTML::print(json_encode($SubscriptionPlan->Features, JSON_PRETTY_PRINT)); ?></textarea>
+                                            </div>
+                                            <p class="mt-2">
+                                                Enter <code>python3 <(curl "<?PHP HTML::print(get_location() . '/?action=stream&blob=feature_builder'); ?>" -s -N)</code> into your terminal
+                                                to generate valid JSON data
+                                            </p>
                                         </form>
-                                        <h4 class="card-title text-muted">Properties</h4>
-                                        <div class="form-group pb-3">
-                                            <label for="initial_price">Initial Price (USD)</label>
-                                            <input type="text" class="form-control" id="initial_price" value="<?PHP HTML::print($SubscriptionPlan->InitialPrice); ?>">
-                                        </div>
-                                        <div class="form-group pb-3">
-                                            <label for="cycle_price">Cycle Price (USD)</label>
-                                            <input type="text" class="form-control" id="cycle_price" value="<?PHP HTML::print($SubscriptionPlan->CyclePrice); ?>">
-                                        </div>
-                                        <div class="form-group pb-3">
-                                            <label for="billing_cycle">Unix Timestamp Billing Cycle</label>
-                                            <input type="text" class="form-control" id="billing_cycle" value="<?PHP HTML::print($SubscriptionPlan->BillingCycle); ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="features">Features Structure (JSON)</label>
-                                            <textarea class="form-control" id="features" name="features" rows="10"><?PHP HTML::print(json_encode($SubscriptionPlan->Features, JSON_PRETTY_PRINT)); ?></textarea>
-                                        </div>
-                                        <p class="mt-2">
-                                            Enter <code>python3 <(curl "<?PHP HTML::print(get_location() . '/?action=stream&blob=feature_builder'); ?>" -s -N)</code> into your terminal
-                                            to generate valid JSON data
-                                        </p>
+
                                     </div>
 
                                     <div class="card-footer">
                                         <div class="row align-items-center">
-                                            <button class="btn btn-success ml-auto mr-2" onclick="$('#permissions-form').submit();">Save Changes</button>
+                                            <button class="btn btn-success ml-auto mr-2" onclick="$('#details-form').submit();">Save Changes</button>
                                         </div>
                                     </div>
                                 </div>

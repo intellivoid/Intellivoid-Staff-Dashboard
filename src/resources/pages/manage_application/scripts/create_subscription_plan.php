@@ -194,8 +194,6 @@
         }
         catch(Exception $e)
         {
-            var_dump($e);
-            die();
             Actions::redirect(DynamicalWeb::getRoute('manage_application', array(
                 'callback' => '113',
                 'id' => $_GET['id']
