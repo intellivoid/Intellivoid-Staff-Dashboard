@@ -1,8 +1,8 @@
 <?PHP
     use DynamicalWeb\DynamicalWeb;
-use DynamicalWeb\HTML;
+    use DynamicalWeb\HTML;
 
-function get_location()
+    function get_location()
     {
         $protocol = (!empty($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1')) ? 'https://' : 'http://';
         $server = $_SERVER['SERVER_NAME'];

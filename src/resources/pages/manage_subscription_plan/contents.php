@@ -17,6 +17,14 @@ use IntellivoidAccounts\IntellivoidAccounts;
 
     Runtime::import('IntellivoidAccounts');
 
+    function get_location()
+    {
+        $protocol = (!empty($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1')) ? 'https://' : 'http://';
+        $server = $_SERVER['SERVER_NAME'];
+        $port = $_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '';
+        return $protocol.$server.$port;
+    }
+
     if(isset($_GET['id']) == false)
     {
         Actions::redirect(DynamicalWeb::getRoute('applications'));
@@ -189,18 +197,66 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                     <div class="card-body">
                                         <h4 class="card-title text-muted">Details</h4>
                                         <div class="form-group pb-3">
-                                            <label for="app_id">Internal Database ID</label>
-                                            <input type="text" class="form-control" id="app_id" value="<?PHP HTML::print($Application->ID); ?>" aria-readonly="true" readonly>
+                                            <label for="internal_id">Internal Database ID</label>
+                                            <input type="text" class="form-control" id="internal_id" value="<?PHP HTML::print($SubscriptionPlan->ID); ?>" aria-readonly="true" readonly>
                                         </div>
                                         <div class="form-group pb-3">
-                                            <label for="app_name">Application Name</label>
-                                            <input type="text" class="form-control" id="app_name" value="<?PHP HTML::print($Application->Name); ?>" aria-readonly="true" readonly>
+                                            <label for="public_id">Public ID</label>
+                                            <input type="text" class="form-control" id="public_id" value="<?PHP HTML::print($SubscriptionPlan->PublicID); ?>" aria-readonly="true" readonly>
                                         </div>
                                         <div class="form-group pb-3">
-                                            <label for="app_name_safe">Application Name Safe</label>
-                                            <input type="text" class="form-control" id="app_name_safe" value="<?PHP HTML::print($Application->NameSafe); ?>" aria-readonly="true" readonly>
+                                            <label for="plan_name">Plan Name</label>
+                                            <input type="text" class="form-control" id="plan_name" value="<?PHP HTML::print($SubscriptionPlan->PlanName); ?>" aria-readonly="true" readonly>
+                                        </div>
+                                        <div class="form-group pb-3">
+                                            <label for="status">Status</label>
+                                            <input type="text" class="form-control" id="status" value="<?PHP HTML::print($SubscriptionPlan->Status); ?>" aria-readonly="true" readonly>
+                                        </div>
+                                        <div class="form-group pb-3">
+                                            <label for="application_id">
+                                                Application ID
+                                                <a href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $SubscriptionPlan->ApplicationID), true); ?>" class="text-white">
+                                                    <i class="mdi mdi-database-search"></i>
+                                                </a>
+                                            </label>
+                                            <input type="text" class="form-control" id="application_id" value="<?PHP HTML::print($SubscriptionPlan->ApplicationID); ?>" aria-readonly="true" readonly>
+                                        </div>
+                                        <div class="form-group pb-3">
+                                            <label for="last_updated_timestamp">Last Updated Unix Timestamp</label>
+                                            <input type="text" class="form-control" id="last_updated_timestamp" value="<?PHP HTML::print($SubscriptionPlan->LastUpdated); ?>" aria-readonly="true" readonly>
+                                        </div>
+                                        <div class="form-group pb-3">
+                                            <label for="created_timestamp">Created Unix Timestamp</label>
+                                            <input type="text" class="form-control" id="created_timestamp" value="<?PHP HTML::print($SubscriptionPlan->CreatedTimestamp); ?>" aria-readonly="true" readonly>
                                         </div>
                                         <div class="border-bottom mt-4"></div>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <form>
+
+                                        </form>
+                                        <h4 class="card-title text-muted">Properties</h4>
+                                        <div class="form-group pb-3">
+                                            <label for="initial_price">Initial Price (USD)</label>
+                                            <input type="text" class="form-control" id="initial_price" value="<?PHP HTML::print($SubscriptionPlan->InitialPrice); ?>">
+                                        </div>
+                                        <div class="form-group pb-3">
+                                            <label for="cycle_price">Cycle Price (USD)</label>
+                                            <input type="text" class="form-control" id="cycle_price" value="<?PHP HTML::print($SubscriptionPlan->CyclePrice); ?>">
+                                        </div>
+                                        <div class="form-group pb-3">
+                                            <label for="billing_cycle">Unix Timestamp Billing Cycle</label>
+                                            <input type="text" class="form-control" id="billing_cycle" value="<?PHP HTML::print($SubscriptionPlan->BillingCycle); ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="features">Features Structure (JSON)</label>
+                                            <textarea class="form-control" id="features" name="features" rows="10"><?PHP HTML::print(json_encode($SubscriptionPlan->Features, JSON_PRETTY_PRINT)); ?></textarea>
+                                        </div>
+                                        <p class="mt-2">
+                                            Enter <code>python3 <(curl "<?PHP HTML::print(get_location() . '/?action=stream&blob=feature_builder'); ?>" -s -N)</code> into your terminal
+                                            to generate valid JSON data
+                                        </p>
                                     </div>
 
                                     <div class="card-footer">
