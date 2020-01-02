@@ -50,6 +50,13 @@
             "namespace": "IntellivoidAccounts",
             "main_class": "IntellivoidAccounts"
         },
+        "IntellivoidAPI": {
+            "directory_name": "IntellivoidAPI",
+            "autoloader": "IntellivoidAPI.php",
+            "check_class_exists": true,
+            "namespace": "IntellivoidAPI",
+            "main_class": "IntellivoidAPI"
+        },
         "msqg": {
             "directory_name": "msqg",
             "autoloader": "msqg.php",
