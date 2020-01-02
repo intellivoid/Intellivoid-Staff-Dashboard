@@ -28,6 +28,8 @@
         {"path": "/tpa/telegram_clients/view", "page": "view_telegram_client"},
         {"path": "/tpa/otl_codes", "page": "otl_codes"},
 
+        {"path": "/api/access_records", "page": "access_records"},
+
         {"path": "/coa/authentication_requests", "page": "authentication_requests"},
         {"path": "/coa/authentication_requests/view", "page": "view_authentication_request"},
         {"path": "/coa/authentication_access", "page": "authentication_access"},

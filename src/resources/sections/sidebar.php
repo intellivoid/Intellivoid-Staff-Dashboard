@@ -124,7 +124,7 @@
             <div class="collapse" id="api-dropdown">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('authentication_requests', [], true); ?>">Access Records</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('access_records', [], true); ?>">Access Records</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('authentication_access', [], true); ?>">Request Records</a>
