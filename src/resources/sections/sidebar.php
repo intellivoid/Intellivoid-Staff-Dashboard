@@ -116,6 +116,26 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#api-dropdown" aria-expanded="false" aria-controls="api-dropdown">
+                <i class="menu-icon mdi mdi-code-brackets"></i>
+                <span class="menu-title">API Management</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="api-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('authentication_requests', [], true); ?>">Access Records</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('authentication_access', [], true); ?>">Request Records</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('application_access', [], true); ?>">Exceptions</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#tpa-dropdown" aria-expanded="false" aria-controls="tpa-dropdown">
                 <i class="menu-icon mdi mdi-network"></i>
                 <span class="menu-title">Third-Party Access</span>
