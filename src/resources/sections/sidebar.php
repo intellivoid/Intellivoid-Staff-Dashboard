@@ -133,7 +133,7 @@
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('exception_records', [], true); ?>">Exceptions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('application_access', [], true); ?>">Access Key Changes</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('access_key_changes', [], true); ?>">Access Key Changes</a>
                     </li>
                 </ul>
             </div>
