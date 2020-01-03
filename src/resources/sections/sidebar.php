@@ -127,10 +127,13 @@
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('access_records', [], true); ?>">Access Records</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('authentication_access', [], true); ?>">Request Records</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('request_records', [], true); ?>">Request Records</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('application_access', [], true); ?>">Exceptions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('application_access', [], true); ?>">Access Key Changes</a>
                     </li>
                 </ul>
             </div>
