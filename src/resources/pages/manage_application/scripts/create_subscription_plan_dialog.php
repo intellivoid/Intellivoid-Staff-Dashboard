@@ -1,8 +1,8 @@
 <?PHP
     use DynamicalWeb\DynamicalWeb;
-use DynamicalWeb\HTML;
+    use DynamicalWeb\HTML;
 
-function get_location()
+    function get_location()
     {
         $protocol = (!empty($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1')) ? 'https://' : 'http://';
         $server = $_SERVER['SERVER_NAME'];
@@ -15,7 +15,7 @@ function get_location()
         <div class="modal-content">
             <form method="POST" action="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $_GET['id'], 'action' => 'create_subscription'), true); ?>">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createSubscriptionPlanDialog">Create Subscription Plan</h5>
+                    <h5 class="modal-title" id="createSubscriptionPlanDialogLabel">Create Subscription Plan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             <i class="mdi mdi-close"></i>
@@ -25,7 +25,7 @@ function get_location()
                 <div class="modal-body">
                     <div class="from-group">
                         <label for="plan_name">Plan Name</label>
-                        <input class="form-control" type="text" name="plan_name" id="plan_name" placeholder="Filter Value">
+                        <input class="form-control" type="text" name="plan_name" id="plan_name" placeholder="Plan Name (Basic, Professional, Free, etc.)">
                     </div>
                     <div class="from-group mt-3">
                         <label for="initial_price">Initial Price (USD)</label>
@@ -37,11 +37,11 @@ function get_location()
                     </div>
                     <div class="from-group mt-3">
                         <label for="unix_billing_cycle">Unix Billing Cycle</label>
-                        <input class="form-control" type="number" name="unix_billing_cycle" id="unix_billing_cycle" placeholder="2628000" value="2628000">
+                        <input class="form-control" type="text" name="unix_billing_cycle" id="unix_billing_cycle" placeholder="2628000" value="2628000">
                     </div>
                     <div class="form-group mt-3">
                         <label for="features">Features Structure (JSON)</label>
-                        <textarea class="form-control" id="features" rows="4"></textarea>
+                        <textarea class="form-control" id="features" name="features" rows="4"></textarea>
                     </div>
                     <p class="mt-2">
                         Enter <code>python3 <(curl "<?PHP HTML::print(get_location() . '/?action=stream&blob=feature_builder'); ?>" -s -N)</code> into your terminal

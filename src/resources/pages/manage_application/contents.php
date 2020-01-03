@@ -41,6 +41,7 @@
 
     HTML::importScript('update_secret_key');
     HTML::importScript('update_logo');
+    HTML::importScript('create_subscription_plan');
     HTML::importScript('update_permissions');
     HTML::importScript('delete_application');
     HTML::importScript('disable_application');

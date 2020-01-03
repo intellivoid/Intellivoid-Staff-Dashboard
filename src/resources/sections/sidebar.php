@@ -78,7 +78,7 @@
             <div class="collapse" id="finance-dropdown">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Subscription Plans</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('subscription_plans', [], true); ?>">Subscription Plans</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Subscription Promotions</a>
@@ -111,6 +111,29 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('application_access', [], true); ?>">Application Access</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#api-dropdown" aria-expanded="false" aria-controls="api-dropdown">
+                <i class="menu-icon mdi mdi-code-brackets"></i>
+                <span class="menu-title">API Management</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="api-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('access_records', [], true); ?>">Access Records</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('request_records', [], true); ?>">Request Records</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('exception_records', [], true); ?>">Exceptions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('application_access', [], true); ?>">Access Key Changes</a>
                     </li>
                 </ul>
             </div>
