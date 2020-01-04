@@ -31,6 +31,7 @@
         {"path": "/api/access_records", "page": "access_records"},
         {"path": "/api/access_records/view", "page": "view_access_record"},
         {"path": "/api/request_records", "page": "request_records"},
+        {"path": "/api/request_records/view", "page": "view_request_record"},
         {"path": "/api/exception_records", "page": "exception_records"},
         {"path": "/api/access_key_changes", "page": "access_key_changes"},
 
