@@ -137,12 +137,16 @@ use IntellivoidAPI\IntellivoidAPI;
                                                     <tr>
                                                         <td><?PHP HTML::print("Rate Limit Configuration"); ?></td>
                                                         <td><?PHP HTML::print(gettype($AccessRecord->RateLimitConfiguration)); ?></td>
-                                                        <td><?PHP HTML::print(json_encode($AccessRecord->RateLimitConfiguration, JSON_PRETTY_PRINT)); ?></td>
+                                                        <td>
+                                                            <pre class="text-white"><?PHP HTML::print(json_encode($AccessRecord->RateLimitConfiguration, JSON_PRETTY_PRINT)); ?></pre>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td><?PHP HTML::print("Variables"); ?></td>
                                                         <td><?PHP HTML::print(gettype($AccessRecord->Variables)); ?></td>
-                                                        <td><?PHP HTML::print(json_encode($AccessRecord->Variables, JSON_PRETTY_PRINT)); ?></td>
+                                                        <td>
+                                                            <pre class="text-white"><?PHP HTML::print(json_encode($AccessRecord->Variables, JSON_PRETTY_PRINT)); ?></pre>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td><?PHP HTML::print("Last Activity"); ?></td>
