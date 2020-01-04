@@ -133,7 +133,9 @@ use IntellivoidAPI\IntellivoidAPI;
                                                     <tr>
                                                         <td><?PHP HTML::print("Request Payload"); ?></td>
                                                         <td><?PHP HTML::print(gettype($RequestRecord->RequestPayload)); ?></td>
-                                                        <td><?PHP HTML::print(json_encode($RequestRecord->RequestPayload, JSON_PRETTY_PRINT)); ?></td>
+                                                        <td>
+                                                            <pre class="text-white"><?PHP HTML::print(json_encode($RequestRecord->RequestPayload, JSON_PRETTY_PRINT)); ?></pre>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td><?PHP HTML::print("IP Address"); ?></td>
