@@ -78,7 +78,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
-                                        <h4 class="card-title">Subscription Promotions</h4>
+                                        <h4 class="card-title">Active Subscriptions</h4>
                                         <div class="wrapper d-flex align-items-center">
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
                                                 <i class="mdi mdi-filter"></i>
