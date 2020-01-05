@@ -3,7 +3,8 @@
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
     use DynamicalWeb\Runtime;
-    use IntellivoidAccounts\Exceptions\AccountNotFoundException;
+use IntellivoidAccounts\Abstracts\SearchMethods\AccountSearchMethod;
+use IntellivoidAccounts\Exceptions\AccountNotFoundException;
     use IntellivoidAccounts\Exceptions\InvalidFundsValueException;
     use IntellivoidAccounts\Exceptions\InvalidVendorException;
     use IntellivoidAccounts\IntellivoidAccounts;
@@ -78,6 +79,24 @@
         }
         if($Amount < 0)
         {
+            try
+            {
+                $Account = $IntellivoidAccounts->getAccountManager()->getAccount(AccountSearchMethod::byId, $_POST['account_id']);
+
+                if(($_POST['amount'] * -1) > $Account->Configuration->Balance)
+                {
+                    Actions::redirect(DynamicalWeb::getRoute('create_transaction', array('callback' => '106')));
+                }
+            }
+            catch (AccountNotFoundException $e)
+            {
+                Actions::redirect(DynamicalWeb::getRoute('create_transaction', array('callback' => '104')));
+            }
+            catch(Exception $e)
+            {
+                Actions::redirect(DynamicalWeb::getRoute('create_transaction', array('callback' => '101')));
+            }
+
             try
             {
                 $IntellivoidAccounts->getTransactionManager()->processPayment(

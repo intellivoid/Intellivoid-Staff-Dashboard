@@ -32,6 +32,9 @@
                 RenderAlert('the transaction has been processed successfully', "success", "mdi-checkbox-marked-circle");
                 break;
 
+            case 106:
+                RenderAlert('The account lacks the sufficient funds', "danger", "mdi-alert-circle");
+                break;
 
         }
     }
