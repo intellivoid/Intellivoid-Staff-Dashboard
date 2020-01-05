@@ -4,7 +4,8 @@
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
     use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
-    use IntellivoidAccounts\Exceptions\SubscriptionPromotionNotFoundException;
+use IntellivoidAccounts\Exceptions\SubscriptionPlanNotFoundException;
+use IntellivoidAccounts\Exceptions\SubscriptionPromotionNotFoundException;
     use IntellivoidAccounts\IntellivoidAccounts;
 
     if(isset($_GET['action']))
@@ -23,14 +24,14 @@
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'subscription_promotions', array('callback' => '100')
+                'active_subscriptions', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'subscription_promotions', array('callback' => '100')
+                'active_subscriptions', array('callback' => '100')
             ));
         }
 
@@ -49,7 +50,7 @@
 
         try
         {
-            $SubscriptionPromotion = $IntellivoidAccounts->getSubscriptionPromotionManager()->getSubscriptionPromotion(
+            $ActiveSubscription = $IntellivoidAccounts->getSubscriptionManager()->getSubscription(
                 $_POST['by'], $_POST['value']
             );
             // TODO: Add redirect here
@@ -57,19 +58,19 @@
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'subscription_promotions', array('callback' => '103')
+                'active_subscriptions', array('callback' => '103')
             ));
         }
-        catch(SubscriptionPromotionNotFoundException $authenticationRequestNotFoundException)
+        catch(SubscriptionPlanNotFoundException $authenticationRequestNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'subscription_promotions', array('callback' => '101')
+                'active_subscriptions', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'subscription_promotions', array('callback' => '102')
+                'active_subscriptions', array('callback' => '102')
             ));
         }
     }
