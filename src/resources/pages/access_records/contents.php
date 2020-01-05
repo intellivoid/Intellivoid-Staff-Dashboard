@@ -24,14 +24,14 @@ use msqg\Abstracts\SortBy;
 
     if(isset($_GET['filter']))
     {
-        //if($_GET['filter'] == 'account_id')
-        //{
-        //    if(isset($_GET['value']))
-        //    {
-        //        $where = 'account_id';
-        //        $where_value = (int)$_GET['value'];
-        //    }
-        //}
+        if($_GET['filter'] == 'account_id')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'account_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
 
     }
 

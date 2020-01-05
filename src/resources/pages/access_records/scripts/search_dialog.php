@@ -1,12 +1,12 @@
 <?PHP
     use DynamicalWeb\DynamicalWeb;
 ?>
-<div class="modal fade" id="filterDialog" tabindex="-1" role="dialog" aria-labelledby="filterDialogLabel" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="searchDialog" tabindex="-1" role="dialog" aria-labelledby="searchDialogLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="GET" action="<?PHP DynamicalWeb::getRoute('access_records', array(), true); ?>">
+            <form method="POST" action="<?PHP DynamicalWeb::getRoute('authentication_requests', array('action' => 'search'), true); ?>">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="filterDialog">Filter Login Records</h5>
+                    <h5 class="modal-title" id="searchDialog">Authentication Requests Search</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             <i class="mdi mdi-close"></i>
@@ -15,19 +15,20 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="filter">By</label>
-                        <select name="filter" id="filter" class="form-control">
-                            <option value="application_id">Application ID</option>
+                        <label for="by">By</label>
+                        <select name="by" id="by" class="form-control">
+                            <option value="id">ID</option>
+                            <option value="request_token">Request Token</option>
                         </select>
                     </div>
                     <div class="from-group">
-                        <label for="value">Filter Value</label>
-                        <input class="form-control" type="text" name="value" id="value" placeholder="Filter Value">
+                        <label for="value">Value</label>
+                        <input class="form-control" type="text" name="value" id="value" placeholder="Search Values">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-                    <input type="submit" class="btn btn-primary" value="Filter Results">
+                    <input type="submit" class="btn btn-primary" value="Search">
                 </div>
             </form>
 
