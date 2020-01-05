@@ -16,6 +16,7 @@
         {"path": "/finance/subscriptions/active", "page": "active_subscriptions"},
 
         {"path": "/finance/transactions", "page": "transaction_records"},
+        {"path": "/finance/transactions/create", "page": "create_transaction"},
 
         {"path": "/cloud/accounts", "page": "accounts"},
         {"path": "/cloud/accounts/manage", "page": "manage_account"},

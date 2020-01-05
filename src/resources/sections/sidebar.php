@@ -90,7 +90,7 @@
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('transaction_records', [], true); ?>">Transaction Records</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Create Transaction</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('create_transaction', [], true); ?>">Create Transaction</a>
                     </li>
                 </ul>
             </div>
