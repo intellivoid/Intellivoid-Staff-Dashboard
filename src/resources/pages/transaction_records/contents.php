@@ -139,7 +139,23 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                                         </div>
                                                                     </td>
                                                                     <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($transaction_record['vendor']); ?></td>
-                                                                    <td style="padding-top: 10px; padding-bottom: 10px;">$<?PHP HTML::print($transaction_record['amount']); ?> USD</td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                                        <?PHP
+                                                                            $Amount = "$0 USD";
+                                                                            if($transaction_record['amount'] < 0)
+                                                                            {
+                                                                                HTML::print("<span class=\"text-danger\">", false);
+                                                                                HTML::print("-$" . (float)$transaction_record['amount'] * -1 . " USD");
+                                                                                HTML::print("<span>", false);
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                HTML::print("<span class=\"text-success\">", false);
+                                                                                HTML::print("$" . $transaction_record['amount'] . " USD");
+                                                                                HTML::print("<span>", false);
+                                                                            }
+                                                                        ?>
+                                                                    </td>
                                                                     <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print(date("F j, Y, g:i a", $transaction_record['timestamp'])); ?></td>
                                                                     <td style="padding-top: 10px; padding-bottom: 10px;">
                                                                         <div class="dropdown">
