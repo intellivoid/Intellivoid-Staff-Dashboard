@@ -6,7 +6,7 @@
         <div class="modal-content">
             <form method="GET" action="<?PHP DynamicalWeb::getRoute('access_records', array(), true); ?>">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="filterDialog">Filter Login Records</h5>
+                    <h5 class="modal-title" id="filterDialog">Filter Access Records</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             <i class="mdi mdi-close"></i>

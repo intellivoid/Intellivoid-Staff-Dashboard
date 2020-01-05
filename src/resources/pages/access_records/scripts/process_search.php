@@ -3,9 +3,9 @@
 
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
-    use IntellivoidAccounts\Exceptions\AuthenticationRequestNotFoundException;
-    use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
-    use IntellivoidAccounts\IntellivoidAccounts;
+    use IntellivoidAPI\Exceptions\AccessRecordNotFoundException;
+    use IntellivoidAPI\Exceptions\InvalidSearchMethodException;
+    use IntellivoidAPI\IntellivoidAPI;
 
     if(isset($_GET['action']))
     {
@@ -23,55 +23,45 @@
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '100')
+                'access_records', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '100')
+                'access_records', array('callback' => '100')
             ));
         }
 
-        if(isset(DynamicalWeb::$globalObjects["intellivoid_accounts"]) == false)
-        {
-            /** @var IntellivoidAccounts $IntellivoidAccounts */
-            $IntellivoidAccounts = DynamicalWeb::setMemoryObject(
-                "intellivoid_accounts", new IntellivoidAccounts()
-            );
-        }
-        else
-        {
-            /** @var IntellivoidAccounts $IntellivoidAccounts */
-            $IntellivoidAccounts = DynamicalWeb::getMemoryObject("intellivoid_accounts");
-        }
+        $IntellivoidAPI = new IntellivoidAPI();
 
         try
         {
-            $AuthenticationRequest = $IntellivoidAccounts->getCrossOverAuthenticationManager()->getAuthenticationRequestManager()->getAuthenticationRequest(
+            $AccessRecord = $IntellivoidAPI->getAccessKeyManager()->getAccessRecord(
                 $_POST['by'], $_POST['value']
             );
+
             Actions::redirect(DynamicalWeb::getRoute(
-                'view_authentication_request', array('id' => $AuthenticationRequest->Id)
+                'view_access_record', array('id' => $AccessRecord->ID)
             ));
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '103')
+                'access_records', array('callback' => '103')
             ));
         }
-        catch(AuthenticationRequestNotFoundException $authenticationRequestNotFoundException)
+        catch(AccessRecordNotFoundException $authenticationRequestNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '101')
+                'access_records', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '102')
+                'access_records', array('callback' => '102')
             ));
         }
     }
