@@ -2,6 +2,13 @@
     use DynamicalWeb\HTML;
 use DynamicalWeb\Javascript;
 
+    $HotlinkAccountID = "";
+
+    if(isset($_GET['account_id']))
+    {
+        $HotlinkAccountID = 'value="' . htmlspecialchars($_GET['account_id'], ENT_QUOTES, 'UTF-8') . '"';
+    }
+
     HTML::importScript('process_transaction');
 ?>
 <!DOCTYPE html>
@@ -26,7 +33,7 @@ use DynamicalWeb\Javascript;
                                         <div class="form-group row">
                                             <label for="account_id" class="col-sm-2 col-form-label">Account ID</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="account_id" name="account_id" placeholder="0" required>
+                                                <input type="text" class="form-control" id="account_id" name="account_id" placeholder="0" <?PHP HTML::print($HotlinkAccountID, false); ?> required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
