@@ -8,15 +8,18 @@
     use IntellivoidAccounts\IntellivoidAccounts;
     use IntellivoidAccounts\Objects\KnownHost;
     use IntellivoidAccounts\Objects\UserLoginRecord;
+use IntellivoidAPI\Abstracts\AccessRecordStatus;
 use IntellivoidAPI\IntellivoidAPI;
+use IntellivoidAPI\Objects\AccessKeyChangeRecord;
 use IntellivoidAPI\Objects\AccessRecord;
+use IntellivoidAPI\Objects\ExceptionRecord;
+use IntellivoidAPI\Objects\RequestRecord;
 use msqg\Abstracts\SortBy;
     use msqg\QueryBuilder;
     use ZiProto\ZiProto;
 
     Runtime::import('IntellivoidAPI');
     HTML::importScript('db_render_helper');
-    HTML::importScript('process_search');
 
     $IntellivoidAPI = new IntellivoidAPI();
 
@@ -25,20 +28,21 @@ use msqg\Abstracts\SortBy;
 
     if(isset($_GET['filter']))
     {
-        if($_GET['filter'] == 'application_id')
-        {
-            if(isset($_GET['value']))
-            {
-                $where = 'application_id';
-                $where_value = (int)$_GET['value'];
-            }
-        }
+        //if($_GET['filter'] == 'account_id')
+        //{
+        //    if(isset($_GET['value']))
+        //    {
+        //        $where = 'account_id';
+        //        $where_value = (int)$_GET['value'];
+        //    }
+        //}
+
     }
 
-    $Results = get_results($IntellivoidAPI->getDatabase(), 5000, 'access_records', 'id',
+    $Results = get_results($IntellivoidAPI->getDatabase(), 5000, 'access_key_changes', 'id',
         QueryBuilder::select(
-                'access_records', ['id', 'access_key', 'application_id', 'subscription_id', 'status', 'last_activity'],
-                $where, $where_value, 'last_activity', SortBy::descending
+                'access_key_changes', ['id', 'access_record_id', 'old_access_key', 'new_access_key', 'timestamp'],
+                $where, $where_value, 'timestamp', SortBy::descending
         ),
     $where, $where_value);
 
@@ -48,7 +52,7 @@ use msqg\Abstracts\SortBy;
     <head>
         <?PHP HTML::importSection('header'); ?>
         <link rel="stylesheet" href="/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css" />
-        <title>Intellivoid Staff - API Access Records</title>
+        <title>Intellivoid Staff - Access Key Changes</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">
@@ -62,13 +66,10 @@ use msqg\Abstracts\SortBy;
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
-                                        <h4 class="card-title">User Login Records</h4>
+                                        <h4 class="card-title">Access Key Changes</h4>
                                         <div class="wrapper d-flex align-items-center">
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
                                                 <i class="mdi mdi-filter"></i>
-                                            </button>
-                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#searchDialog" type="button">
-                                                <i class="mdi mdi-magnify"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -82,57 +83,36 @@ use msqg\Abstracts\SortBy;
                                                         <thead>
                                                             <tr>
                                                                 <th>ID</th>
-                                                                <th>Access Key</th>
-                                                                <th>Application ID</th>
-                                                                <th>Subscription ID</th>
-                                                                <th>Status</th>
-                                                                <th>Last Activity</th>
+                                                                <th>Access Record ID</th>
+                                                                <th>Old Access Key</th>
+                                                                <th>New Access Key</th>
+                                                                <th>Timestamp</th>
                                                                 <th>Actions</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                         <?PHP
-                                                        foreach($Results['results'] as $accessRecord)
+                                                        foreach($Results['results'] as $changeRecord)
                                                         {
-                                                            $access_key = $accessRecord['access_key'];
-                                                            $accessRecord['access_key'] = (strlen($accessRecord['access_key']) > 15) ? substr($accessRecord['access_key'], 0, 15) . '...' : $accessRecord['access_key'];
-                                                            /** @var UserLoginRecord $loginRecord */
-                                                            $accessRecordObject = AccessRecord::fromArray($accessRecord);
+                                                            $old_access_key = $changeRecord['old_access_key'];
+                                                            $new_access_key = $changeRecord['new_access_key'];
+                                                            $changeRecord['old_access_key'] = (strlen($changeRecord['old_access_key']) > 15) ? substr($changeRecord['old_access_key'], 0, 15) . '...' : $changeRecord['old_access_key'];
+                                                            $changeRecord['new_access_key'] = (strlen($changeRecord['new_access_key']) > 15) ? substr($changeRecord['new_access_key'], 0, 15) . '...' : $changeRecord['new_access_key'];
+
+                                                            /** @var AccessKeyChangeRecord $changeRecordObject */
+                                                            $changeRecordObject = AccessKeyChangeRecord::fromArray($changeRecord);
 
                                                             ?>
                                                             <tr>
-                                                                <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($accessRecordObject->ID); ?></td>
-                                                                <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($access_key); ?>"><?PHP HTML::print($accessRecordObject->AccessKey); ?></td>
+                                                                <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($changeRecordObject->ID); ?></td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;">
                                                                     <div class="dropdown">
-                                                                        <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($accessRecordObject->ApplicationID); ?></span>
+                                                                        <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($changeRecordObject->AccessRecordID); ?></span>
                                                                         <div class="dropdown-menu p-3">
                                                                             <div class="d-flex text-white">
                                                                                 <i class="mdi mdi-application text-white icon-md"></i>
                                                                                 <div class="d-flex flex-column ml-2 mr-5">
-                                                                                    <h6 class="mb-0"><?PHP HTML::print($accessRecordObject->ApplicationID); ?></h6>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="border-top mt-3 mb-3"></div>
-                                                                            <div class="row ml-auto">
-                                                                                <a href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $accessRecordObject->ApplicationID), true) ?>" class="text-white pl-2">
-                                                                                    <i class="mdi mdi-database-search"></i>
-                                                                                </a>
-                                                                                <a href="<?PHP DynamicalWeb::getRoute('access_records', array('filter' => 'application_id', 'value' => $accessRecordObject->ApplicationID), true) ?>" class="text-white pl-2">
-                                                                                    <i class="mdi mdi-filter"></i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td style="padding-top: 10px; padding-bottom: 10px;">
-                                                                    <div class="dropdown">
-                                                                        <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($accessRecordObject->SubscriptionID); ?></span>
-                                                                        <div class="dropdown-menu p-3">
-                                                                            <div class="d-flex text-white">
-                                                                                <i class="mdi mdi-application text-white icon-md"></i>
-                                                                                <div class="d-flex flex-column ml-2 mr-5">
-                                                                                    <h6 class="mb-0"><?PHP HTML::print($accessRecordObject->SubscriptionID); ?></h6>
+                                                                                    <h6 class="mb-0"><?PHP HTML::print($changeRecordObject->AccessRecordID); ?></h6>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="border-top mt-3 mb-3"></div>
@@ -140,58 +120,21 @@ use msqg\Abstracts\SortBy;
                                                                                 <a href="#" class="text-white pl-2">
                                                                                     <i class="mdi mdi-database-search"></i>
                                                                                 </a>
-                                                                                <a href="<?PHP DynamicalWeb::getRoute('access_records', array('filter' => 'subscription_id', 'value' => $accessRecordObject->SubscriptionID), true) ?>" class="text-white pl-2">
+                                                                                <a href="<?PHP DynamicalWeb::getRoute('access_key_changes', array('filter' => 'access_record_id', 'value' => $changeRecordObject->AccessRecordID), true) ?>" class="text-white pl-2">
                                                                                     <i class="mdi mdi-filter"></i>
                                                                                 </a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </td>
-                                                                <td style="padding-top: 10px; padding-bottom: 10px;">
-                                                                    <div class="dropdown">
-                                                                        <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-                                                                            <?PHP
-                                                                            switch($accessRecordObject->Status)
-                                                                            {
-                                                                                case \IntellivoidAPI\Abstracts\AccessRecordStatus::Available:
-                                                                                    HTML::print("<div class=\"badge badge-success\">", false);
-                                                                                    HTML::print("Available");
-                                                                                    HTML::print("</div>", false);
-                                                                                    break;
-
-                                                                                case \IntellivoidAPI\Abstracts\AccessRecordStatus::Disabled:
-                                                                                    HTML::print("<div class=\"badge badge-danger\">", false);
-                                                                                    HTML::print("Disabled");
-                                                                                    HTML::print("</div>", false);
-                                                                                    break;
-
-                                                                                case \IntellivoidAPI\Abstracts\AccessRecordStatus::BillingError:
-                                                                                    HTML::print("<div class=\"badge badge-warning\">", false);
-                                                                                    HTML::print("Billing Error");
-                                                                                    HTML::print("</div>", false);
-                                                                                    break;
-
-                                                                                default:
-                                                                                    HTML::print("<div class=\"badge badge-info\">", false);
-                                                                                    HTML::print("Unknown");
-                                                                                    HTML::print("</div>", false);
-                                                                                    break;
-                                                                            }
-                                                                            ?>
-                                                                        </span>
-                                                                    </div>
-                                                                </td>
-
-                                                                <td style="padding-top: 10px; padding-bottom: 10px;"> <?PHP HTML::print(gmdate("j/m/Y, g:i a", $accessRecordObject->LastActivity)); ?> </td>
+                                                                <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($old_access_key); ?>"><?PHP HTML::print($changeRecordObject->OldAccessKey); ?></td>
+                                                                <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($new_access_key); ?>"><?PHP HTML::print($changeRecordObject->NewAccessKey); ?></td>
+                                                                <td style="padding-top: 10px; padding-bottom: 10px;"> <?PHP HTML::print(gmdate("j/m/Y, g:i a", $changeRecordObject->Timestamp)); ?> </td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;">
                                                                     <div class="dropdown">
                                                                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_access_record', array('id' => $accessRecordObject->ID), true); ?>">View Details</a>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $accessRecordObject->ApplicationID), true); ?>">View Application</a>
-                                                                            <a class="dropdown-item" href="#">View Subscription</a>
-                                                                            <div class="dropdown-divider"></div>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('access_records', array('filter' => 'application_id', 'value' => $accessRecordObject->ApplicationID), true); ?>">Filter by Application ID</a>
+                                                                            <a class="dropdown-item" href="#">Placeholder</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -230,7 +173,7 @@ use msqg\Abstracts\SortBy;
                                                                             $RedirectHref['page'] = $Results['current_page'] - 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('access_records', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('access_key_changes', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-left"></i>
                                                                                 </a>
                                                                             </li>
@@ -253,7 +196,7 @@ use msqg\Abstracts\SortBy;
                                                                                 $RedirectHref['page'] = $current_count;
                                                                                 ?>
                                                                                 <li class="page-item">
-                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('access_records', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('access_key_changes', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                                 </li>
                                                                                 <?PHP
                                                                             }
@@ -282,7 +225,7 @@ use msqg\Abstracts\SortBy;
                                                                             $RedirectHref['page'] = $Results['current_page'] + 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('access_records', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('access_key_changes', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-right"></i>
                                                                                 </a>
                                                                             </li>
@@ -319,7 +262,6 @@ use msqg\Abstracts\SortBy;
                         </div>
                     </div>
                     <?PHP HTML::importScript('filter_dialog'); ?>
-                    <?PHP HTML::importScript('search_dialog'); ?>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
             </div>

@@ -7,6 +7,7 @@
     use IntellivoidAccounts\Abstracts\AuthenticationRequestStatus;
     use IntellivoidAccounts\Abstracts\SearchMethods\ApplicationSearchMethod;
 use IntellivoidAccounts\Abstracts\SubscriptionPlanStatus;
+use IntellivoidAccounts\Abstracts\SubscriptionPromotionStatus;
 use IntellivoidAccounts\IntellivoidAccounts;
     use IntellivoidAccounts\Objects\COA\Application;
     use msqg\Abstracts\SortBy;
@@ -24,105 +25,46 @@ use IntellivoidAccounts\IntellivoidAccounts;
 
     if(isset($_GET['filter']))
     {
-        if($_GET['filter'] == 'application_id')
+        if($_GET['filter'] == 'subscription_plan_id')
         {
             if(isset($_GET['value']))
             {
-                $where = 'application_id';
+                $where = 'subscription_plan_id';
                 $where_value = (int)$_GET['value'];
             }
         }
 
-        if($_GET['filter'] == 'host_id')
+        if($_GET['filter'] == 'affiliation_account_id')
         {
             if(isset($_GET['value']))
             {
-                $where = 'host_id';
+                $where = 'subscription_plan_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
+
+        if($_GET['filter'] == 'status')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'subscription_plan_id';
                 $where_value = (int)$_GET['value'];
             }
         }
     }
 
-    $Results = get_results($IntellivoidAccounts->database, 5000, 'subscription_plans', 'id',
-        QueryBuilder::select('subscription_plans', ['id', 'public_id', 'application_id', 'plan_name', 'initial_price', 'cycle_price', 'status'],
+    $Results = get_results($IntellivoidAccounts->database, 5000, 'subscription_promotions', 'id',
+        QueryBuilder::select('subscription_promotions', ['id', 'public_id', 'promotion_code', 'subscription_plan_id', 'initial_price', 'cycle_price', 'affiliation_account_id', 'status', 'created_timestamp'],
             $where, $where_value, 'created_timestamp', SortBy::descending
         ),
     $where, $where_value);
 
-    function render_app_dropdown(IntellivoidAccounts $intellivoidAccounts, int $id)
-    {
-        try
-        {
-            $ApplicationStatus = DynamicalWeb::getBoolean("APP_$id");
-        }
-        catch (Exception $e)
-        {
-            try
-            {
-                $Application = $intellivoidAccounts->getApplicationManager()->getApplication(
-                    ApplicationSearchMethod::byId, $id
-                );
-
-                DynamicalWeb::setMemoryObject("APP_$id", $Application);
-                DynamicalWeb::setBoolean("APP_$id", true);
-                $ApplicationStatus = true;
-
-            }
-            catch(Exception $exception)
-            {
-                DynamicalWeb::setBoolean("APP_$id", false);
-                $ApplicationStatus = false;
-            }
-        }
-
-        if($ApplicationStatus == true)
-        {
-            /** @var Application $Application */
-            $Application = DynamicalWeb::getMemoryObject("APP_$id");
-
-            ?>
-            <div class="d-flex text-white">
-                <img src="<?PHP HTML::print(getApplicationUrl($Application->PublicAppId, 'tiny')); ?>" class="img-fluid rounded-circle" alt="<?PHP HTML::print($Application->Name); ?>">
-                <div class="d-flex flex-column ml-2 mr-5">
-                    <h6 class="mb-0"><?PHP HTML::print($Application->Name); ?></h6>
-                </div>
-            </div>
-            <div class="border-top mt-3 mb-3"></div>
-            <div class="row ml-auto">
-                <a href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $id), true) ?>" class="text-white">
-                    <i class="mdi mdi-pencil"></i>
-                </a>
-                <a href="<?PHP DynamicalWeb::getRoute('subscription_plans', array('filter' => 'application_id', 'value' => $id), true) ?>" class="text-white pl-2">
-                    <i class="mdi mdi-filter"></i>
-                </a>
-            </div>
-            <?PHP
-        }
-        else
-        {
-            ?>
-            <div class="d-flex text-white">
-                <i class="mdi mdi-block-helper text-danger icon-md"></i>
-                <div class="d-flex flex-column ml-2 mr-5">
-                    <h6 class="mb-0">Application not Found</h6>
-                </div>
-            </div>
-            <div class="border-top mt-3 mb-3"></div>
-            <div class="row ml-auto">
-                <a href="<?PHP DynamicalWeb::getRoute('subscription_plans', array('filter' => 'application_id', 'value' => $id), true) ?>" class="text-white">
-                    <i class="mdi mdi-filter"></i>
-                </a>
-            </div>
-            <?PHP
-        }
-
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <?PHP HTML::importSection('header'); ?>
-        <title>Intellivoid Staff - Subscription Plans</title>
+        <title>Intellivoid Staff - Subscription Promotions</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">
@@ -136,7 +78,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
-                                        <h4 class="card-title">COA Authentication Requests</h4>
+                                        <h4 class="card-title">Subscription Promotions</h4>
                                         <div class="wrapper d-flex align-items-center">
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
                                                 <i class="mdi mdi-filter"></i>
@@ -157,45 +99,87 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                             <tr>
                                                                 <th>ID</th>
                                                                 <th>Public ID</th>
-                                                                <th>Application ID</th>
-                                                                <th>Plan Name</th>
+                                                                <th>Promotion Code</th>
+                                                                <th>Subscription Plan ID</th>
                                                                 <th>Initial Price</th>
                                                                 <th>Cycle Price</th>
+                                                                <th>Affiliation Account ID</th>
                                                                 <th>Status</th>
+                                                                <th>Created Timestamp</th>
                                                                 <th>Actions</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?PHP
-                                                            foreach($Results['results'] as $subscription_plan)
+                                                            foreach($Results['results'] as $subscription_promotion)
                                                             {
-                                                                $public_id = $subscription_plan['public_id'];
-                                                                $subscription_plan['public_id'] = (strlen($subscription_plan['public_id']) > 15) ? substr($subscription_plan['public_id'], 0, 15) . '...' : $subscription_plan['public_id'];
+                                                                $public_id = $subscription_promotion['public_id'];
+                                                                $subscription_promotion['public_id'] = (strlen($subscription_promotion['public_id']) > 15) ? substr($subscription_promotion['public_id'], 0, 15) . '...' : $subscription_promotion['public_id'];
                                                                 ?>
                                                                 <tr>
-                                                                    <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($subscription_plan['id']); ?></td>
-                                                                    <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($public_id); ?>"><?PHP HTML::print($subscription_plan['public_id']); ?></td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($subscription_promotion['id']); ?></td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($public_id); ?>"><?PHP HTML::print($subscription_promotion['public_id']); ?></td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($subscription_promotion['promotion_code']); ?></td>
                                                                     <td style="padding-top: 10px; padding-bottom: 10px;">
                                                                         <div class="dropdown">
-                                                                            <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" > <?PHP HTML::print($subscription_plan['application_id']); ?></span>
+                                                                            <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($subscription_promotion['subscription_plan_id']); ?></span>
                                                                             <div class="dropdown-menu p-3">
-                                                                                <?PHP render_app_dropdown($IntellivoidAccounts, $subscription_plan['application_id']); ?>
+                                                                                <div class="d-flex text-white">
+                                                                                    <i class="mdi mdi-application text-white icon-md"></i>
+                                                                                    <div class="d-flex flex-column ml-2 mr-5">
+                                                                                        <h6 class="mb-0"><?PHP HTML::print($subscription_promotion['subscription_plan_id']); ?></h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="border-top mt-3 mb-3"></div>
+                                                                                <div class="row ml-auto">
+                                                                                    <a href="<?PHP DynamicalWeb::getRoute('manage_subscription_plan', array('id' => $subscription_promotion['subscription_plan_id']), true) ?>" class="text-white pl-2">
+                                                                                        <i class="mdi mdi-database-search"></i>
+                                                                                    </a>
+                                                                                    <a href="<?PHP DynamicalWeb::getRoute('subscription_promotions', array('filter' => 'subscription_plan_id', 'value' => $subscription_promotion['subscription_plan_id']), true) ?>" class="text-white pl-2">
+                                                                                        <i class="mdi mdi-filter"></i>
+                                                                                    </a>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($subscription_plan['plan_name']); ?></td>
-                                                                    <td style="padding-top: 10px; padding-bottom: 10px;">$<?PHP HTML::print($subscription_plan['initial_price']); ?> USD</td>
-                                                                    <td style="padding-top: 10px; padding-bottom: 10px;">$<?PHP HTML::print($subscription_plan['cycle_price']); ?> USD</td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;">$<?PHP HTML::print($subscription_promotion['initial_price']); ?> USD</td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;">$<?PHP HTML::print($subscription_promotion['cycle_price']); ?> USD</td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                                        <div class="dropdown">
+                                                                            <span  data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><?PHP HTML::print($subscription_promotion['affiliation_account_id']); ?></span>
+                                                                            <div class="dropdown-menu p-3">
+                                                                                <div class="d-flex text-white">
+                                                                                    <i class="mdi mdi-application text-white icon-md"></i>
+                                                                                    <div class="d-flex flex-column ml-2 mr-5">
+                                                                                        <h6 class="mb-0"><?PHP HTML::print($subscription_promotion['affiliation_account_id']); ?></h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="border-top mt-3 mb-3"></div>
+                                                                                <div class="row ml-auto">
+                                                                                    <a href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $subscription_promotion['affiliation_account_id']), true) ?>" class="text-white pl-2">
+                                                                                        <i class="mdi mdi-database-search"></i>
+                                                                                    </a>
+                                                                                    <a href="<?PHP DynamicalWeb::getRoute('subscription_promotions', array('filter' => 'affiliation_account_id', 'value' => $subscription_promotion['affiliation_account_id']), true) ?>" class="text-white pl-2">
+                                                                                        <i class="mdi mdi-filter"></i>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
                                                                     <td style="padding-top: 10px; padding-bottom: 10px;">
                                                                         <?PHP
-                                                                        switch($subscription_plan['status'])
+                                                                        switch($subscription_promotion['status'])
                                                                         {
-                                                                            case SubscriptionPlanStatus::Available:
-                                                                                HTML::print("<label class=\"badge badge-success\">Available</label>", false);
+                                                                            case SubscriptionPromotionStatus::Active:
+                                                                                HTML::print("<label class=\"badge badge-success\">Active</label>", false);
                                                                                 break;
 
-                                                                            case SubscriptionPlanStatus::Unavailable:
-                                                                                HTML::print("<label class=\"badge badge-danger\">Unavailable</label>", false);
+                                                                            case SubscriptionPromotionStatus::Disabled:
+                                                                                HTML::print("<label class=\"badge badge-warning\">Disabled</label>", false);
+                                                                                break;
+
+                                                                            case SubscriptionPromotionStatus::Expired:
+                                                                                HTML::print("<label class=\"badge badge-danger\">Expired</label>", false);
                                                                                 break;
 
                                                                             default:
@@ -203,12 +187,12 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                                         }
                                                                         ?>
                                                                     </td>
+                                                                    <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print(date("F j, Y, g:i a", $subscription_promotion['created_timestamp'])); ?></td>
                                                                     <td style="padding-top: 10px; padding-bottom: 10px;">
                                                                         <div class="dropdown">
                                                                             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                             <div class="dropdown-menu">
-                                                                                <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_subscription_plan', array('id' => $subscription_plan['id']), true); ?>">View Details</a>
-
+                                                                                <a class="dropdown-item" href="#">View Details</a>
                                                                             </div>
                                                                         </div>
                                                                     </td>
@@ -247,7 +231,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                                             $RedirectHref['page'] = $Results['current_page'] -1
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('subscription_plans', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('subscription_promotions', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-left"></i>
                                                                                 </a>
                                                                             </li>
@@ -270,7 +254,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                                                 $RedirectHref['page'] = $current_count;
                                                                                 ?>
                                                                                 <li class="page-item">
-                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('subscription_plans', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('subscription_promotions', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                                 </li>
                                                                                 <?PHP
                                                                             }
@@ -299,7 +283,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                                             $RedirectHref['page'] = $Results['current_page'] + 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('subscription_plans', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('subscription_promotions', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-right"></i>
                                                                                 </a>
                                                                             </li>

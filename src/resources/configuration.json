@@ -12,6 +12,8 @@
 
         {"path": "/finance/subscriptions/plans", "page": "subscription_plans"},
         {"path": "/finance/subscriptions/plans/manage", "page": "manage_subscription_plan"},
+        {"path": "/finance/subscriptions/promotions", "page": "subscription_promotions"},
+        {"path": "/finance/subscriptions/active", "page": "active_subscriptions"},
 
         {"path": "/cloud/accounts", "page": "accounts"},
         {"path": "/cloud/accounts/manage", "page": "manage_account"},
@@ -29,8 +31,12 @@
         {"path": "/tpa/otl_codes", "page": "otl_codes"},
 
         {"path": "/api/access_records", "page": "access_records"},
+        {"path": "/api/access_records/view", "page": "view_access_record"},
         {"path": "/api/request_records", "page": "request_records"},
+        {"path": "/api/request_records/view", "page": "view_request_record"},
         {"path": "/api/exception_records", "page": "exception_records"},
+        {"path": "/api/exception_records/view", "page": "view_exception"},
+        {"path": "/api/access_key_changes", "page": "access_key_changes"},
 
         {"path": "/coa/authentication_requests", "page": "authentication_requests"},
         {"path": "/coa/authentication_requests/view", "page": "view_authentication_request"},

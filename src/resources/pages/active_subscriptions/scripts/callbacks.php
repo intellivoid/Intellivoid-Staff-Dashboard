@@ -25,7 +25,7 @@
                 break;
 
             case 104:
-                RenderAlert('The Access Record was not found', "danger", "mdi-alert-circle");
+                RenderAlert('The Subscription Plan was not found', "danger", "mdi-alert-circle");
                 break;
 
             case 105:

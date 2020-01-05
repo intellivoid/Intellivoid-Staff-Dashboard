@@ -4,9 +4,9 @@
 <div class="modal fade" id="filterDialog" tabindex="-1" role="dialog" aria-labelledby="filterDialogLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="GET" action="<?PHP DynamicalWeb::getRoute('access_records', array(), true); ?>">
+            <form method="GET" action="<?PHP DynamicalWeb::getRoute('subscription_promotions', array(), true); ?>">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="filterDialog">Filter Access Records</h5>
+                    <h5 class="modal-title" id="filterDialog">Filter Subscription Promotions</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             <i class="mdi mdi-close"></i>
@@ -17,7 +17,9 @@
                     <div class="form-group">
                         <label for="filter">By</label>
                         <select name="filter" id="filter" class="form-control">
-                            <option value="application_id">Application ID</option>
+                            <option value="subscription_plan_id">Subscription Plan ID</option>
+                            <option value="affiliation_account_id">Affiliation Account ID</option>
+                            <option value="status">Status</option>
                         </select>
                     </div>
                     <div class="from-group">
