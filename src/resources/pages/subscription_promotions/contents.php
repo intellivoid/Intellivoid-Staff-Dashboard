@@ -25,11 +25,29 @@ use IntellivoidAccounts\IntellivoidAccounts;
 
     if(isset($_GET['filter']))
     {
-        if($_GET['filter'] == 'application_id')
+        if($_GET['filter'] == 'subscription_plan_id')
         {
             if(isset($_GET['value']))
             {
-                $where = 'application_id';
+                $where = 'subscription_plan_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
+
+        if($_GET['filter'] == 'affiliation_account_id')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'subscription_plan_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
+
+        if($_GET['filter'] == 'status')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'subscription_plan_id';
                 $where_value = (int)$_GET['value'];
             }
         }
