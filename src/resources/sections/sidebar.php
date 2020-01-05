@@ -81,7 +81,7 @@
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('subscription_plans', [], true); ?>">Subscription Plans</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Subscription Promotions</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('subscription_promotions', [], true); ?>">Subscription Promotions</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Active Subscriptions</a>

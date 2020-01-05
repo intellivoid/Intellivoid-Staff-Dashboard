@@ -12,6 +12,7 @@
 
         {"path": "/finance/subscriptions/plans", "page": "subscription_plans"},
         {"path": "/finance/subscriptions/plans/manage", "page": "manage_subscription_plan"},
+        {"path": "/finance/subscriptions/promotions", "page": "subscription_promotions"},
 
         {"path": "/cloud/accounts", "page": "accounts"},
         {"path": "/cloud/accounts/manage", "page": "manage_account"},
