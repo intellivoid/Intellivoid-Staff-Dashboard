@@ -3,8 +3,8 @@
 
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
-    use IntellivoidAccounts\Exceptions\AuthenticationRequestNotFoundException;
     use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
+    use IntellivoidAccounts\Exceptions\SubscriptionPromotionNotFoundException;
     use IntellivoidAccounts\IntellivoidAccounts;
 
     if(isset($_GET['action']))
@@ -23,14 +23,14 @@
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '100')
+                'subscription_promotions', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '100')
+                'subscription_promotions', array('callback' => '100')
             ));
         }
 
@@ -49,29 +49,27 @@
 
         try
         {
-            $AuthenticationRequest = $IntellivoidAccounts->getCrossOverAuthenticationManager()->getAuthenticationRequestManager()->getAuthenticationRequest(
+            $SubscriptionPromotion = $IntellivoidAccounts->getSubscriptionPromotionManager()->getSubscriptionPromotion(
                 $_POST['by'], $_POST['value']
             );
-            Actions::redirect(DynamicalWeb::getRoute(
-                'view_authentication_request', array('id' => $AuthenticationRequest->Id)
-            ));
+            // TODO: Add redirect here
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '103')
+                'subscription_promotions', array('callback' => '103')
             ));
         }
-        catch(AuthenticationRequestNotFoundException $authenticationRequestNotFoundException)
+        catch(SubscriptionPromotionNotFoundException $authenticationRequestNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '101')
+                'subscription_promotions', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '102')
+                'subscription_promotions', array('callback' => '102')
             ));
         }
     }
