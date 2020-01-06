@@ -92,6 +92,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('create_transaction', [], true); ?>">Create Transaction</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('transfer_funds', [], true); ?>">Transfer Funds</a>
+                    </li>
                 </ul>
             </div>
         </li>
