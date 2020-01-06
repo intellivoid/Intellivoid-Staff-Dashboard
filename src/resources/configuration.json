@@ -18,6 +18,7 @@
         {"path": "/finance/transactions", "page": "transaction_records"},
         {"path": "/finance/transactions/create", "page": "create_transaction"},
         {"path": "/finance/transactions/transfer", "page": "transfer_funds"},
+        {"path": "/finance/transactions/invoice", "page": "view_invoice"},
 
         {"path": "/cloud/accounts", "page": "accounts"},
         {"path": "/cloud/accounts/manage", "page": "manage_account"},

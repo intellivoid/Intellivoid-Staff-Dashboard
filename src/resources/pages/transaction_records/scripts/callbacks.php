@@ -25,11 +25,15 @@
                 break;
 
             case 104:
-                RenderAlert('The Subscription Plan was not found', "danger", "mdi-alert-circle");
+                RenderAlert('The Transaction Record was not found', "danger", "mdi-alert-circle");
                 break;
 
             case 105:
                 RenderAlert('Internal Server Error', "danger", "mdi-alert-circle");
+                break;
+
+            case 106:
+                RenderAlert('The Invoice cannot be created because the Account ID attached to the transaction was not found', "danger", "mdi-alert-circle");
                 break;
 
         }
