@@ -185,7 +185,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                 <button type="button" class="btn btn-outline-primary btn-xs btn-block" data-toggle="modal" data-target="#createPromotionDialog">
                                                     <i class="mdi mdi-plus-circle"></i> Create Promotion
                                                 </button>
-                                                <button type="button" class="btn btn-outline-primary btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('') ?>';">
+                                                <button type="button" class="btn btn-outline-primary btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('subscription_promotions', array('filter' => 'subscription_plan_id', 'value' => $SubscriptionPlan->ID), true) ?>';">
                                                     <i class="mdi mdi-view-list"></i> View Promotions
                                                 </button>
                                             </div>
