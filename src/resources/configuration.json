@@ -13,6 +13,7 @@
         {"path": "/finance/subscriptions/plans", "page": "subscription_plans"},
         {"path": "/finance/subscriptions/plans/manage", "page": "manage_subscription_plan"},
         {"path": "/finance/subscriptions/promotions", "page": "subscription_promotions"},
+        {"path": "/finance/subscriptions/promotions/manage", "page": "manage_subscription_promotion"},
         {"path": "/finance/subscriptions/active", "page": "active_subscriptions"},
 
         {"path": "/finance/transactions", "page": "transaction_records"},
