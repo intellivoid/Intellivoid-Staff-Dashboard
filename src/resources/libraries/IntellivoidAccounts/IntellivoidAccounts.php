@@ -40,6 +40,7 @@
     include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'SearchMethods' . DIRECTORY_SEPARATOR . 'TelegramClientSearchMethod.php');
     include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'SearchMethods' . DIRECTORY_SEPARATOR . 'TelegramVerificationCodeSearchMethod.php');
     include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'SearchMethods' . DIRECTORY_SEPARATOR . 'TrackingUserAgentSearchMethod.php');
+    include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'SearchMethods' . DIRECTORY_SEPARATOR . 'TransactionLogSearchMethod.php');
     include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'AccountRequestPermissions.php');
     include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'AccountStatus.php');
     include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'ApplicationAccessStatus.php');
@@ -116,6 +117,7 @@
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'TelegramServicesNotAvailableException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'TelegramVerificationCodeNotFound.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'TooManyPromptRequestsException.php');
+    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'TransactionRecordNotFoundException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'UserAgentNotFoundException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'UsernameAlreadyExistsException.php');
 

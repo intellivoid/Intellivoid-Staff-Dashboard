@@ -3,9 +3,12 @@
 
     namespace IntellivoidAccounts\Managers;
 
-
+    use IntellivoidAccounts\Abstracts\SearchMethods\TransactionLogSearchMethod;
     use IntellivoidAccounts\Exceptions\DatabaseException;
+    use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
+    use IntellivoidAccounts\Exceptions\TransactionRecordNotFoundException;
     use IntellivoidAccounts\IntellivoidAccounts;
+    use IntellivoidAccounts\Objects\TransactionRecord;
     use IntellivoidAccounts\Utilities\Hashing;
     use msqg\Abstracts\SortBy;
     use msqg\QueryBuilder;
@@ -62,6 +65,60 @@
             }
 
             return true;
+        }
+
+        /**
+         * Gets an existing Transaction Record from the database
+         *
+         * @param string $search_method
+         * @param $value
+         * @return TransactionRecord
+         * @throws DatabaseException
+         * @throws InvalidSearchMethodException
+         * @throws TransactionRecordNotFoundException
+         */
+        public function getTransactionRecord(string $search_method, $value): TransactionRecord
+        {
+            switch($search_method)
+            {
+                case TransactionLogSearchMethod::byId:
+                    $search_method = $this->intellivoidAccounts->database->real_escape_string($search_method);
+                    $value = (int)$value;
+                    break;
+
+                case TransactionLogSearchMethod::byPublicId:
+                    $search_method = $this->intellivoidAccounts->database->real_escape_string($search_method);
+                    $value = $this->intellivoidAccounts->database->real_escape_string($value);
+                    break;
+
+                default:
+                    throw new InvalidSearchMethodException();
+            }
+
+            $Query = QueryBuilder::select('transaction_records', [
+                'id',
+                'public_id',
+                'account_id',
+                'vendor',
+                'amount',
+                'timestamp'
+            ], $search_method, $value);
+            $QueryResults = $this->intellivoidAccounts->database->query($Query);
+
+            if($QueryResults == false)
+            {
+                throw new DatabaseException($Query, $this->intellivoidAccounts->database->error);
+            }
+            else
+            {
+                if($QueryResults->num_rows !== 1)
+                {
+                    throw new TransactionRecordNotFoundException();
+                }
+
+                $Row = $QueryResults->fetch_array(MYSQLI_ASSOC);
+                return TransactionRecord::fromArray($Row);
+            }
         }
 
 

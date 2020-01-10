@@ -192,7 +192,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                                         <div class="dropdown">
                                                                             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                             <div class="dropdown-menu">
-                                                                                <a class="dropdown-item" href="#">View Details</a>
+                                                                                <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_subscription_promotion', array('id' => $subscription_promotion['id']), true); ?>">Manage Promotion</a>
                                                                             </div>
                                                                         </div>
                                                                     </td>

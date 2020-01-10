@@ -27,7 +27,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
 
     if(isset($_GET['id']) == false)
     {
-        Actions::redirect(DynamicalWeb::getRoute('applications'));
+        Actions::redirect(DynamicalWeb::getRoute('subscription_plans'));
     }
 
     $IntellivoidAccounts = new IntellivoidAccounts();
@@ -184,6 +184,9 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                 <h4 class="card-title">Subscriptions</h4>
                                                 <button type="button" class="btn btn-outline-primary btn-xs btn-block" data-toggle="modal" data-target="#createPromotionDialog">
                                                     <i class="mdi mdi-plus-circle"></i> Create Promotion
+                                                </button>
+                                                <button type="button" class="btn btn-outline-primary btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('subscription_promotions', array('filter' => 'subscription_plan_id', 'value' => $SubscriptionPlan->ID), true) ?>';">
+                                                    <i class="mdi mdi-view-list"></i> View Promotions
                                                 </button>
                                             </div>
                                         </div>

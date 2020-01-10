@@ -13,11 +13,13 @@
         {"path": "/finance/subscriptions/plans", "page": "subscription_plans"},
         {"path": "/finance/subscriptions/plans/manage", "page": "manage_subscription_plan"},
         {"path": "/finance/subscriptions/promotions", "page": "subscription_promotions"},
+        {"path": "/finance/subscriptions/promotions/manage", "page": "manage_subscription_promotion"},
         {"path": "/finance/subscriptions/active", "page": "active_subscriptions"},
 
         {"path": "/finance/transactions", "page": "transaction_records"},
         {"path": "/finance/transactions/create", "page": "create_transaction"},
         {"path": "/finance/transactions/transfer", "page": "transfer_funds"},
+        {"path": "/finance/transactions/invoice", "page": "view_invoice"},
 
         {"path": "/cloud/accounts", "page": "accounts"},
         {"path": "/cloud/accounts/manage", "page": "manage_account"},
