@@ -76,7 +76,8 @@ use IntellivoidAccounts\IntellivoidAccounts;
                     <div class="content-wrapper">
                         <?PHP HTML::importScript('callbacks'); ?>
                         <div class="row">
-                            <div class="col-md-12 grid-margin">
+
+                            <div class="col-md-6 grid-margin">
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title text-muted">Details</h4>
@@ -95,7 +96,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                         <div class="form-group pb-3">
                                             <label for="subscription_plan_id">
                                                 Subscription Plan ID
-                                                <a href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $SubscriptionPromotion->SubscriptionPlanID), true); ?>" class="text-white">
+                                                <a href="<?PHP DynamicalWeb::getRoute('manage_subscription_plan', array('id' => $SubscriptionPromotion->SubscriptionPlanID), true); ?>" class="text-white">
                                                     <i class="mdi mdi-database-search"></i>
                                                 </a>
                                             </label>
@@ -109,9 +110,11 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                             <label for="created_timestamp">Created Unix Timestamp</label>
                                             <input type="text" class="form-control" id="created_timestamp" value="<?PHP HTML::print($SubscriptionPromotion->CreatedTimestamp); ?>" aria-readonly="true" readonly>
                                         </div>
-                                        <div class="border-bottom mt-4"></div>
                                     </div>
-
+                                </div>
+                            </div>
+                            <div class="col-md-6 grid-margin">
+                                <div class="card">
                                     <div class="card-body">
                                         <form method="POST" id="details-form" name="details-form" action="<?PHP DynamicalWeb::getRoute('manage_subscription_promotion', array('id' => $_GET['id'], 'action' => 'update_properties'), true); ?>">
                                             <h4 class="card-title text-muted">Properties</h4>
