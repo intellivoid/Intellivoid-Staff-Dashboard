@@ -28,14 +28,14 @@ use msqg\Abstracts\SortBy;
 
     if(isset($_GET['filter']))
     {
-        //if($_GET['filter'] == 'account_id')
-        //{
-        //    if(isset($_GET['value']))
-        //    {
-        //        $where = 'account_id';
-        //        $where_value = (int)$_GET['value'];
-        //    }
-        //}
+        if($_GET['filter'] == 'access_record_id')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'access_record_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
 
     }
 
@@ -134,7 +134,8 @@ use msqg\Abstracts\SortBy;
                                                                     <div class="dropdown">
                                                                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="#">Placeholder</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_access_record', array('id' => $changeRecordObject->AccessRecordID), true); ?>">View Access Record ID</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('access_key_changes', array('filter' => 'access_record_id', 'value' => $changeRecordObject->AccessRecordID), true); ?>">Filter by Access Record ID</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
