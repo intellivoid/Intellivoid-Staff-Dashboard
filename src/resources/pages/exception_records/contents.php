@@ -51,7 +51,7 @@ use msqg\Abstracts\SortBy;
     <head>
         <?PHP HTML::importSection('header'); ?>
         <link rel="stylesheet" href="/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css" />
-        <title>Intellivoid Staff - API Exceptions </title>
+        <title>Intellivoid Staff - API Exceptions</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">
@@ -65,7 +65,7 @@ use msqg\Abstracts\SortBy;
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
-                                        <h4 class="card-title">User Login Records</h4>
+                                        <h4 class="card-title">API Exception Records</h4>
                                         <div class="wrapper d-flex align-items-center">
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
                                                 <i class="mdi mdi-filter"></i>
