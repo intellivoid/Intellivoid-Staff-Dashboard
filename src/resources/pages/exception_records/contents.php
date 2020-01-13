@@ -19,6 +19,7 @@ use msqg\Abstracts\SortBy;
 
     Runtime::import('IntellivoidAPI');
     HTML::importScript('db_render_helper');
+    HTML::importScript('process_search');
 
     $IntellivoidAPI = new IntellivoidAPI();
 
@@ -27,15 +28,23 @@ use msqg\Abstracts\SortBy;
 
     if(isset($_GET['filter']))
     {
-        //if($_GET['filter'] == 'account_id')
-        //{
-        //    if(isset($_GET['value']))
-        //    {
-        //        $where = 'account_id';
-        //        $where_value = (int)$_GET['value'];
-        //    }
-        //}
+        if($_GET['filter'] == 'application_id')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'application_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
 
+        if($_GET['filter'] == 'access_record_id')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'access_record_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
     }
 
     $Results = get_results($IntellivoidAPI->getDatabase(), 5000, 'exception_records', 'id',
@@ -51,7 +60,7 @@ use msqg\Abstracts\SortBy;
     <head>
         <?PHP HTML::importSection('header'); ?>
         <link rel="stylesheet" href="/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css" />
-        <title>Intellivoid Staff - API Exceptions </title>
+        <title>Intellivoid Staff - API Exception Records</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">
@@ -65,10 +74,13 @@ use msqg\Abstracts\SortBy;
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
-                                        <h4 class="card-title">User Login Records</h4>
+                                        <h4 class="card-title">API Exception Records</h4>
                                         <div class="wrapper d-flex align-items-center">
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
                                                 <i class="mdi mdi-filter"></i>
+                                            </button>
+                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#searchDialog" type="button">
+                                                <i class="mdi mdi-magnify"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -171,7 +183,10 @@ use msqg\Abstracts\SortBy;
                                                                     <div class="dropdown">
                                                                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="#">Placeholder</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_exception_record', array('id' => $exceptionRecordObject->ID), true); ?>">View Details</a>
+                                                                            <div class="dropdown-divider"></div>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('exception_records', array('filter' => 'application_id', 'value' => $exceptionRecordObject->ApplicationID), true); ?>">Filter by Application ID</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('exception_records', array('filter' => 'access_record_id', 'value' => $exceptionRecordObject->AccessRecordID), true); ?>">Filter by Access Record ID</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -299,6 +314,7 @@ use msqg\Abstracts\SortBy;
                         </div>
                     </div>
                     <?PHP HTML::importScript('filter_dialog'); ?>
+                    <?PHP HTML::importScript('search_dialog'); ?>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
             </div>

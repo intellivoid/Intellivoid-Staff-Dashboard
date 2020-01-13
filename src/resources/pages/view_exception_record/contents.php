@@ -40,6 +40,11 @@ use IntellivoidAPI\IntellivoidAPI;
     {
         Actions::redirect(DynamicalWeb::getRoute('exception_records', array('callback' => '105')));
     }
+
+    DynamicalWeb::setMemoryObject('intellivoid_api', $IntellivoidAPI);
+    DynamicalWeb::setMemoryObject('exception_record', $ExceptionRecord);
+
+    HTML::importScript('export_exception_record');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,6 +63,14 @@ use IntellivoidAPI\IntellivoidAPI;
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
+                                    <div class="card-header header-sm d-flex justify-content-between align-items-center">
+                                        <h4 class="card-title">Exception Record - <?PHP HTML::print($ExceptionRecord->ID); ?></h4>
+                                        <div class="wrapper d-flex align-items-center">
+                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" onclick="location.href='<?PHP DynamicalWeb::getRoute('view_exception_record', array('id' => $_GET['id'], 'action' => 'export'), true); ?>'" type="button">
+                                                <i class="mdi mdi-export"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-bordered">
@@ -78,7 +91,7 @@ use IntellivoidAPI\IntellivoidAPI;
                                                         <td><?PHP HTML::print("Request Record ID"); ?></td>
                                                         <td><?PHP HTML::print(gettype($ExceptionRecord->RequestRecordID)); ?></td>
                                                         <td>
-                                                            <a href="#">
+                                                            <a href="<?PHP DynamicalWeb::getRoute('view_request_record', array('id' => $ExceptionRecord->RequestRecordID), true); ?>">
                                                                 <?PHP HTML::print($ExceptionRecord->RequestRecordID); ?>
                                                             </a>
                                                         </td>
@@ -87,7 +100,7 @@ use IntellivoidAPI\IntellivoidAPI;
                                                         <td><?PHP HTML::print("Application ID"); ?></td>
                                                         <td><?PHP HTML::print(gettype($ExceptionRecord->ApplicationID)); ?></td>
                                                         <td>
-                                                            <a href="#">
+                                                            <a href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $ExceptionRecord->ApplicationID), true); ?>">
                                                                 <?PHP HTML::print($ExceptionRecord->ApplicationID); ?>
                                                             </a>
                                                         </td>
@@ -96,7 +109,7 @@ use IntellivoidAPI\IntellivoidAPI;
                                                         <td><?PHP HTML::print("Access Record ID"); ?></td>
                                                         <td><?PHP HTML::print(gettype($ExceptionRecord->AccessRecordID)); ?></td>
                                                         <td>
-                                                            <a href="#">
+                                                            <a href="<?PHP DynamicalWeb::getRoute('view_access_record', array('id' => $ExceptionRecord->AccessRecordID), true); ?>">
                                                                 <?PHP HTML::print($ExceptionRecord->AccessRecordID); ?>
                                                             </a>
                                                         </td>
@@ -112,6 +125,11 @@ use IntellivoidAPI\IntellivoidAPI;
                                                         <td><?PHP HTML::print($ExceptionRecord->File); ?></td>
                                                     </tr>
                                                     <tr>
+                                                        <td><?PHP HTML::print("Line"); ?></td>
+                                                        <td><?PHP HTML::print(gettype($ExceptionRecord->Line)); ?></td>
+                                                        <td><?PHP HTML::print($ExceptionRecord->Line); ?></td>
+                                                    </tr>
+                                                    <tr>
                                                         <td><?PHP HTML::print("Code"); ?></td>
                                                         <td><?PHP HTML::print(gettype($ExceptionRecord->Code)); ?></td>
                                                         <td><?PHP HTML::print($ExceptionRecord->Code); ?></td>
@@ -123,6 +141,7 @@ use IntellivoidAPI\IntellivoidAPI;
                                                             <pre class="text-white"><?PHP HTML::print(json_encode($ExceptionRecord->Trace, JSON_PRETTY_PRINT)); ?></pre>
                                                         </td>
                                                     </tr>
+
                                                     <tr>
                                                         <td><?PHP HTML::print("Timestamp"); ?></td>
                                                         <td><?PHP HTML::print(gettype($ExceptionRecord->Timestamp)); ?></td>
