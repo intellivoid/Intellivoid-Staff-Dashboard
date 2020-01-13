@@ -44,7 +44,7 @@ use IntellivoidAPI\IntellivoidAPI;
     DynamicalWeb::setMemoryObject('intellivoid_api', $IntellivoidAPI);
     DynamicalWeb::setMemoryObject('exception_record', $ExceptionRecord);
 
-    HTML::importScript('export_request_record');
+    HTML::importScript('export_exception_record');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +66,7 @@ use IntellivoidAPI\IntellivoidAPI;
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
                                         <h4 class="card-title">Exception Record - <?PHP HTML::print($ExceptionRecord->ID); ?></h4>
                                         <div class="wrapper d-flex align-items-center">
-                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" onclick="location.href='<?PHP DynamicalWeb::getRoute('view_request_record', array('id' => $_GET['id'], 'action' => 'export'), true); ?>'" type="button">
+                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" onclick="location.href='<?PHP DynamicalWeb::getRoute('view_exception_record', array('id' => $_GET['id'], 'action' => 'export'), true); ?>'" type="button">
                                                 <i class="mdi mdi-export"></i>
                                             </button>
                                         </div>
