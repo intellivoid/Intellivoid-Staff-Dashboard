@@ -217,6 +217,18 @@ use msqg\Abstracts\SortBy;
                                                                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                         <div class="dropdown-menu">
                                                                             <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_request_record', array('id' => $requestRecordObject->ID), true); ?>">View Details</a>
+                                                                            <div class="dropdown-divider"></div>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_access_record', array('id' => $requestRecordObject->AccessRecordID), true); ?>">View Access Record</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $requestRecordObject->ApplicationID), true); ?>">View Application</a>
+                                                                            <a class="dropdown-item" href="#">View Exception</a>
+                                                                            <div class="dropdown-divider"></div>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'request_method', 'value' => $requestRecordObject->RequestMethod), true); ?>">Filter by Request Method</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'version', 'value' => $requestRecordObject->Version), true); ?>">Filter by Version</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'path', 'value' => $requestRecordObject->Path), true); ?>">Filter by Path</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'ip_address', 'value' => $requestRecordObject->IPAddress), true); ?>">Filter by IP Address</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'response_code', 'value' => $requestRecordObject->ResponseCode), true); ?>">Filter by Response Code</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'access_record_id', 'value' => $requestRecordObject->AccessRecordID), true); ?>">Filter Access Record ID</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'application_id', 'value' => $requestRecordObject->ApplicationID), true); ?>">Filter Application ID</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
