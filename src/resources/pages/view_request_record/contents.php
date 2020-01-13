@@ -38,6 +38,11 @@ use IntellivoidAPI\IntellivoidAPI;
     {
         Actions::redirect(DynamicalWeb::getRoute('request_records', array('callback' => '105')));
     }
+
+    DynamicalWeb::setMemoryObject('intellivoid_api', $IntellivoidAPI);
+    DynamicalWeb::setMemoryObject('request_record', $RequestRecord);
+
+    HTML::importScript('export_request_record');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +61,14 @@ use IntellivoidAPI\IntellivoidAPI;
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
+                                    <div class="card-header header-sm d-flex justify-content-between align-items-center">
+                                        <h4 class="card-title">Request Record - <?PHP HTML::print($RequestRecord->ID); ?></h4>
+                                        <div class="wrapper d-flex align-items-center">
+                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" onclick="location.href='<?PHP DynamicalWeb::getRoute('view_request_record', array('id' => $_GET['id'], 'action' => 'export'), true); ?>'" type="button">
+                                                <i class="mdi mdi-export"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-bordered">
