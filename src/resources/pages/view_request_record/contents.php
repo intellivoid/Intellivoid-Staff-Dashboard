@@ -81,7 +81,7 @@ use IntellivoidAPI\IntellivoidAPI;
                                                         <td><?PHP HTML::print("Access Record ID"); ?></td>
                                                         <td><?PHP HTML::print(gettype($RequestRecord->AccessRecordID)); ?></td>
                                                         <td>
-                                                            <a href="#">
+                                                            <a href="<?PHP DynamicalWeb::getRoute('view_access_record', array('id' => $RequestRecord->AccessRecordID), true); ?>">
                                                                 <?PHP HTML::print($RequestRecord->AccessRecordID); ?>
                                                             </a>
                                                         </td>
@@ -90,7 +90,7 @@ use IntellivoidAPI\IntellivoidAPI;
                                                         <td><?PHP HTML::print("Application ID"); ?></td>
                                                         <td><?PHP HTML::print(gettype($RequestRecord->ApplicationID)); ?></td>
                                                         <td>
-                                                            <a href="#">
+                                                            <a href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $RequestRecord->ApplicationID), true); ?>">
                                                                 <?PHP HTML::print($RequestRecord->ApplicationID); ?>
                                                             </a>
                                                         </td>
