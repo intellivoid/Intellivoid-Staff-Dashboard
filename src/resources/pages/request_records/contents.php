@@ -162,7 +162,7 @@ use msqg\Abstracts\SortBy;
                                                                     <div class="dropdown">
                                                                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="#">Placeholder</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_request_record', array('id' => $requestRecordObject->ID), true); ?>">View Details</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
