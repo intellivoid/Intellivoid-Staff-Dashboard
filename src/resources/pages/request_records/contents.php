@@ -196,7 +196,7 @@ use msqg\Abstracts\SortBy;
                                                                             <div class="d-flex text-white">
                                                                                 <i class="mdi mdi-application text-white icon-md"></i>
                                                                                 <div class="d-flex flex-column ml-2 mr-5">
-                                                                                    <h6 class="mb-0"><?PHP HTML::print($requestRecordObject->ApplicationID); ?></h6>
+                                                                                    <h6 class="mb-0">Application <?PHP HTML::print($requestRecordObject->ApplicationID); ?></h6>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="border-top mt-3 mb-3"></div>
