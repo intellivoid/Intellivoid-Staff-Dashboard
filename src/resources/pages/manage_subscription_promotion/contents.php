@@ -58,7 +58,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
     DynamicalWeb::setMemoryObject('subscription_promotion', $SubscriptionPromotion);
     DynamicalWeb::setMemoryObject('intellivoid_accounts', $IntellivoidAccounts);
 
-    //HTML::importScript('update_status');
+    HTML::importScript('update_properties');
 
 ?>
 <!DOCTYPE html>
@@ -127,7 +127,12 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                 <input type="text" class="form-control" name="cycle_price" id="cycle_price" value="<?PHP HTML::print($SubscriptionPromotion->CyclePrice); ?>" required>
                                             </div>
                                             <div class="form-group pb-3">
-                                                <label for="affiliation_account_id">Affiliation Account ID</label>
+                                                <label for="affiliation_account_id">
+                                                    Affiliation Account ID
+                                                    <a href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $SubscriptionPromotion->AffiliationAccountID), true); ?>" class="text-white">
+                                                        <i class="mdi mdi-database-search"></i>
+                                                    </a>
+                                                </label>
                                                 <input type="text" class="form-control" name="affiliation_account_id" id="affiliation_account_id" value="<?PHP HTML::print($SubscriptionPromotion->AffiliationAccountID); ?>" required>
                                             </div>
                                             <div class="form-group pb-3">
