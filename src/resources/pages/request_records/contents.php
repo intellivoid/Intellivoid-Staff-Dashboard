@@ -18,6 +18,7 @@ use msqg\Abstracts\SortBy;
 
     Runtime::import('IntellivoidAPI');
     HTML::importScript('db_render_helper');
+    HTML::importScript('process_search');
 
     $IntellivoidAPI = new IntellivoidAPI();
 
@@ -122,6 +123,9 @@ use msqg\Abstracts\SortBy;
                                         <div class="wrapper d-flex align-items-center">
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
                                                 <i class="mdi mdi-filter"></i>
+                                            </button>
+                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#searchDialog" type="button">
+                                                <i class="mdi mdi-magnify"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -356,6 +360,7 @@ use msqg\Abstracts\SortBy;
                         </div>
                     </div>
                     <?PHP HTML::importScript('filter_dialog'); ?>
+                    <?PHP HTML::importScript('search_dialog'); ?>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
             </div>
