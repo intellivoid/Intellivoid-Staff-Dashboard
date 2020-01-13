@@ -169,7 +169,31 @@ use msqg\Abstracts\SortBy;
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($requestRecordObject->Version); ?></td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($requestRecordObject->Path); ?></td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($requestRecordObject->IPAddress); ?></td>
-                                                                <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($requestRecordObject->ResponseCode); ?></td>
+                                                                <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                                    <?PHP
+                                                                        if($requestRecordObject->ResponseCode >= 100)
+                                                                        {
+                                                                            $BadgeColor = "info";
+                                                                        }
+                                                                        if($requestRecordObject->ResponseCode >= 200)
+                                                                        {
+                                                                            $BadgeColor = "success";
+                                                                        }
+                                                                        if($requestRecordObject->ResponseCode >= 300)
+                                                                        {
+                                                                            $BadgeColor = "primary";
+                                                                        }
+                                                                        if($requestRecordObject->ResponseCode >= 400)
+                                                                        {
+                                                                            $BadgeColor = "warning";
+                                                                        }
+                                                                        if($requestRecordObject->ResponseCode >= 500)
+                                                                        {
+                                                                            $BadgeColor = "danger";
+                                                                        }
+                                                                    ?>
+                                                                    <span class="badge badge-<?PHP HTML::print($BadgeColor); ?>"><?PHP HTML::print($requestRecordObject->ResponseCode); ?></span>
+                                                                </td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($requestRecordObject->ResponseTime); ?>ms</td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;">
                                                                     <div class="dropdown">
