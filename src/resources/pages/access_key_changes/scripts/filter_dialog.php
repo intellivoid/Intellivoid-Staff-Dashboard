@@ -4,9 +4,9 @@
 <div class="modal fade" id="filterDialog" tabindex="-1" role="dialog" aria-labelledby="filterDialogLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="GET" action="<?PHP DynamicalWeb::getRoute('login_records', array(), true); ?>">
+            <form method="GET" action="<?PHP DynamicalWeb::getRoute('access_key_changes', array(), true); ?>">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="filterDialog">Filter Login Records</h5>
+                    <h5 class="modal-title" id="filterDialog">Filter Access Key Changes</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             <i class="mdi mdi-close"></i>
@@ -17,10 +17,7 @@
                     <div class="form-group">
                         <label for="filter">By</label>
                         <select name="filter" id="filter" class="form-control">
-                            <option value="origin">Origin</option>
-                            <option value="host_id">Host ID</option>
-                            <option value="account_id">Account ID</option>
-                            <option value="status">Status (INT)</option>
+                            <option value="access_record_id">Access Record ID</option>
                         </select>
                     </div>
                     <div class="from-group">
