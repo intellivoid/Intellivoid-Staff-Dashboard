@@ -26,14 +26,68 @@ use msqg\Abstracts\SortBy;
 
     if(isset($_GET['filter']))
     {
-        //if($_GET['filter'] == 'account_id')
-        //{
-        //    if(isset($_GET['value']))
-        //    {
-        //        $where = 'account_id';
-        //        $where_value = (int)$_GET['value'];
-        //    }
-        //}
+        if($_GET['filter'] == 'request_method')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'request_method';
+                $where_value = $IntellivoidAPI->getDatabase()->real_escape_string($_GET['value']);
+            }
+        }
+
+        if($_GET['filter'] == 'version')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'version';
+                $where_value = $IntellivoidAPI->getDatabase()->real_escape_string($_GET['value']);
+            }
+        }
+
+        if($_GET['filter'] == 'path')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'path';
+                $where_value = $IntellivoidAPI->getDatabase()->real_escape_string($_GET['value']);
+            }
+        }
+
+        if($_GET['filter'] == 'ip_address')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'ip_address';
+                $where_value = $IntellivoidAPI->getDatabase()->real_escape_string($_GET['value']);
+            }
+        }
+
+        if($_GET['filter'] == 'response_code')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'response_code';
+                $where_value = (int)$_GET['value'];
+            }
+        }
+
+        if($_GET['filter'] == 'access_record_id')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'access_record_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
+
+        if($_GET['filter'] == 'application_id')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'application_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
 
     }
 
@@ -64,7 +118,7 @@ use msqg\Abstracts\SortBy;
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
-                                        <h4 class="card-title">User Login Records</h4>
+                                        <h4 class="card-title">API Request Records</h4>
                                         <div class="wrapper d-flex align-items-center">
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
                                                 <i class="mdi mdi-filter"></i>
