@@ -59,6 +59,7 @@ use IntellivoidAccounts\IntellivoidAccounts;
     DynamicalWeb::setMemoryObject('intellivoid_accounts', $IntellivoidAccounts);
 
     HTML::importScript('update_properties');
+    HTML::importScript('delete_promotion');
 
 ?>
 <!DOCTYPE html>
@@ -155,7 +156,8 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                     </div>
                                     <div class="card-footer">
                                         <div class="row align-items-center">
-                                            <button class="btn btn-success ml-auto mr-2" onclick="$('#details-form').submit();">Save Changes</button>
+                                            <button class="btn btn-danger ml-auto mr-2" onclick="location.href='<?PHP DynamicalWeb::getRoute('manage_subscription_promotion', array('id' => $_GET['id'], 'action' => 'delete'), true); ?>';">Delete</button>
+                                            <button class="btn btn-success mr-2" onclick="$('#details-form').submit();">Save Changes</button>
                                         </div>
                                     </div>
                                 </div>

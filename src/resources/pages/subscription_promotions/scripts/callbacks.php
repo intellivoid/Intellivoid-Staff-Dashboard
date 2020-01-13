@@ -32,5 +32,9 @@
                 RenderAlert('Internal Server Error', "danger", "mdi-alert-circle");
                 break;
 
+            case 106:
+                RenderAlert('The subscription promotion has been deleted successfully', "success", "mdi-checkbox-marked-circle-outline");
+                break;
+
         }
     }
