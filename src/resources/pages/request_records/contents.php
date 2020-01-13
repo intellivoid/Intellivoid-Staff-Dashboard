@@ -18,6 +18,7 @@ use msqg\Abstracts\SortBy;
 
     Runtime::import('IntellivoidAPI');
     HTML::importScript('db_render_helper');
+    HTML::importScript('process_search');
 
     $IntellivoidAPI = new IntellivoidAPI();
 
@@ -26,14 +27,68 @@ use msqg\Abstracts\SortBy;
 
     if(isset($_GET['filter']))
     {
-        //if($_GET['filter'] == 'account_id')
-        //{
-        //    if(isset($_GET['value']))
-        //    {
-        //        $where = 'account_id';
-        //        $where_value = (int)$_GET['value'];
-        //    }
-        //}
+        if($_GET['filter'] == 'request_method')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'request_method';
+                $where_value = $IntellivoidAPI->getDatabase()->real_escape_string($_GET['value']);
+            }
+        }
+
+        if($_GET['filter'] == 'version')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'version';
+                $where_value = $IntellivoidAPI->getDatabase()->real_escape_string($_GET['value']);
+            }
+        }
+
+        if($_GET['filter'] == 'path')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'path';
+                $where_value = $IntellivoidAPI->getDatabase()->real_escape_string($_GET['value']);
+            }
+        }
+
+        if($_GET['filter'] == 'ip_address')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'ip_address';
+                $where_value = $IntellivoidAPI->getDatabase()->real_escape_string($_GET['value']);
+            }
+        }
+
+        if($_GET['filter'] == 'response_code')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'response_code';
+                $where_value = (int)$_GET['value'];
+            }
+        }
+
+        if($_GET['filter'] == 'access_record_id')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'access_record_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
+
+        if($_GET['filter'] == 'application_id')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'application_id';
+                $where_value = (int)$_GET['value'];
+            }
+        }
 
     }
 
@@ -64,10 +119,13 @@ use msqg\Abstracts\SortBy;
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
-                                        <h4 class="card-title">User Login Records</h4>
+                                        <h4 class="card-title">API Request Records</h4>
                                         <div class="wrapper d-flex align-items-center">
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
                                                 <i class="mdi mdi-filter"></i>
+                                            </button>
+                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#searchDialog" type="button">
+                                                <i class="mdi mdi-magnify"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -111,7 +169,31 @@ use msqg\Abstracts\SortBy;
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($requestRecordObject->Version); ?></td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($requestRecordObject->Path); ?></td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($requestRecordObject->IPAddress); ?></td>
-                                                                <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($requestRecordObject->ResponseCode); ?></td>
+                                                                <td style="padding-top: 10px; padding-bottom: 10px;">
+                                                                    <?PHP
+                                                                        if($requestRecordObject->ResponseCode >= 100)
+                                                                        {
+                                                                            $BadgeColor = "info";
+                                                                        }
+                                                                        if($requestRecordObject->ResponseCode >= 200)
+                                                                        {
+                                                                            $BadgeColor = "success";
+                                                                        }
+                                                                        if($requestRecordObject->ResponseCode >= 300)
+                                                                        {
+                                                                            $BadgeColor = "primary";
+                                                                        }
+                                                                        if($requestRecordObject->ResponseCode >= 400)
+                                                                        {
+                                                                            $BadgeColor = "warning";
+                                                                        }
+                                                                        if($requestRecordObject->ResponseCode >= 500)
+                                                                        {
+                                                                            $BadgeColor = "danger";
+                                                                        }
+                                                                    ?>
+                                                                    <span class="badge badge-<?PHP HTML::print($BadgeColor); ?>"><?PHP HTML::print($requestRecordObject->ResponseCode); ?></span>
+                                                                </td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($requestRecordObject->ResponseTime); ?>ms</td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;">
                                                                     <div class="dropdown">
@@ -120,12 +202,12 @@ use msqg\Abstracts\SortBy;
                                                                             <div class="d-flex text-white">
                                                                                 <i class="mdi mdi-application text-white icon-md"></i>
                                                                                 <div class="d-flex flex-column ml-2 mr-5">
-                                                                                    <h6 class="mb-0"><?PHP HTML::print($requestRecordObject->AccessRecordID); ?></h6>
+                                                                                    <h6 class="mb-0">Access Record ID <?PHP HTML::print($requestRecordObject->AccessRecordID); ?></h6>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="border-top mt-3 mb-3"></div>
                                                                             <div class="row ml-auto">
-                                                                                <a href="#" class="text-white pl-2">
+                                                                                <a href="<?PHP DynamicalWeb::getRoute('view_access_record', array('id' => $requestRecordObject->AccessRecordID), true); ?>" class="text-white pl-2">
                                                                                     <i class="mdi mdi-database-search"></i>
                                                                                 </a>
                                                                                 <a href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'access_record_id', 'value' => $requestRecordObject->AccessRecordID), true) ?>" class="text-white pl-2">
@@ -142,7 +224,7 @@ use msqg\Abstracts\SortBy;
                                                                             <div class="d-flex text-white">
                                                                                 <i class="mdi mdi-application text-white icon-md"></i>
                                                                                 <div class="d-flex flex-column ml-2 mr-5">
-                                                                                    <h6 class="mb-0"><?PHP HTML::print($requestRecordObject->ApplicationID); ?></h6>
+                                                                                    <h6 class="mb-0">Application <?PHP HTML::print($requestRecordObject->ApplicationID); ?></h6>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="border-top mt-3 mb-3"></div>
@@ -162,7 +244,19 @@ use msqg\Abstracts\SortBy;
                                                                     <div class="dropdown">
                                                                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="#">Placeholder</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_request_record', array('id' => $requestRecordObject->ID), true); ?>">View Details</a>
+                                                                            <div class="dropdown-divider"></div>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_access_record', array('id' => $requestRecordObject->AccessRecordID), true); ?>">View Access Record</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $requestRecordObject->ApplicationID), true); ?>">View Application</a>
+                                                                            <a class="dropdown-item" href="#">View Exception</a>
+                                                                            <div class="dropdown-divider"></div>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'request_method', 'value' => $requestRecordObject->RequestMethod), true); ?>">Filter by Request Method</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'version', 'value' => $requestRecordObject->Version), true); ?>">Filter by Version</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'path', 'value' => $requestRecordObject->Path), true); ?>">Filter by Path</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'ip_address', 'value' => $requestRecordObject->IPAddress), true); ?>">Filter by IP Address</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'response_code', 'value' => $requestRecordObject->ResponseCode), true); ?>">Filter by Response Code</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'access_record_id', 'value' => $requestRecordObject->AccessRecordID), true); ?>">Filter Access Record ID</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'application_id', 'value' => $requestRecordObject->ApplicationID), true); ?>">Filter Application ID</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -290,6 +384,7 @@ use msqg\Abstracts\SortBy;
                         </div>
                     </div>
                     <?PHP HTML::importScript('filter_dialog'); ?>
+                    <?PHP HTML::importScript('search_dialog'); ?>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
             </div>
