@@ -91,12 +91,12 @@
             /** @var Feature $feature */
             foreach($features as $feature)
             {
-                if($feature->Name == null)
+                if(is_null($feature->Name))
                 {
                     throw new InvalidFeatureException();
                 }
 
-                if($feature->Value == null)
+                if(is_null($feature->Value))
                 {
                     throw new InvalidFeatureException();
                 }
@@ -319,6 +319,52 @@
             else
             {
                 throw new DatabaseException($Query, $this->intellivoidAccounts->database->error);
+            }
+        }
+
+        /**
+         * Returns the subscription plans associated with an application
+         *
+         * @param int $application_id
+         * @return array
+         * @throws DatabaseException
+         */
+        public function getSubscriptionPlansByApplication(int $application_id): array
+        {
+            $application_id = (int)$application_id;
+
+            $Query = QueryBuilder::select('subscription_plans', [
+                'id',
+                'public_id',
+                'application_id',
+                'plan_name',
+                'features',
+                'initial_price',
+                'cycle_price',
+                'billing_cycle',
+                'status',
+                'flags',
+                'last_updated',
+                'created_timestamp'
+            ], 'application_id', $application_id);
+            $QueryResults = $this->intellivoidAccounts->database->query($Query);
+
+            if($QueryResults == false)
+            {
+                throw new DatabaseException($Query, $this->intellivoidAccounts->database->error);
+            }
+            else
+            {
+                $ResultsArray = [];
+
+                while($Row = $QueryResults->fetch_assoc())
+                {
+                    $Row['features'] = ZiProto::decode($Row['features']);
+                    $Row['flags'] = ZiProto::decode($Row['flags']);
+                    $ResultsArray[] = SubscriptionPlan::fromArray($Row);
+                }
+
+                return $ResultsArray;
             }
         }
     }
