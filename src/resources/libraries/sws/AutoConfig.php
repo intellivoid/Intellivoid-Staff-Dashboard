@@ -8,7 +8,7 @@
         include_once(__DIR__ . DIRECTORY_SEPARATOR . 'acm' . DIRECTORY_SEPARATOR . 'acm.php');
     }
 
-    $acm = new acm(__DIR__, 'sws');
+    $acm = new acm(__DIR__, 'Intellivoid Staff');
 
     $DatabaseSchema = new Schema();
     $DatabaseSchema->setDefinition('Host', 'localhost');
