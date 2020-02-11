@@ -1,5 +1,6 @@
 <?PHP
 
+    use DynamicalWeb\DynamicalWeb;
     use DynamicalWeb\HTML;
 
     HTML::importScript('avatar');
@@ -44,10 +45,10 @@
                             </div>
                         </div>
                     </a>
-                    <a class="dropdown-item mt-2"> Manage Accounts </a>
-                    <a class="dropdown-item"> Change Password </a>
-                    <a class="dropdown-item"> Check Inbox </a>
-                    <a class="dropdown-item"> Sign Out </a>
+                    <a class="dropdown-item mt-2">Manage Accounts</a>
+                    <a class="dropdown-item">Change Password</a>
+                    <a class="dropdown-item">Check Inbox</a>
+                    <a class="dropdown-item">Sign Out</a>
                 </div>
             </li>
         </ul>
