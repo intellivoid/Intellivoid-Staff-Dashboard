@@ -86,6 +86,13 @@
             "check_class_exists": true,
             "namespace": "Support",
             "main_class": "Support"
+        },
+        "OpenBlu": {
+            "directory_name": "OpenBlu",
+            "autoloader": "OpenBlu.php",
+            "check_class_exists": true,
+            "namespace": "OpenBlu",
+            "main_class": "OpenBlu"
         }
     },
     "runtime_scripts": {
