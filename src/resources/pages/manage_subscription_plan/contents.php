@@ -188,6 +188,9 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                 <button type="button" class="btn btn-outline-primary btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('subscription_promotions', array('filter' => 'subscription_plan_id', 'value' => $SubscriptionPlan->ID), true) ?>';">
                                                     <i class="mdi mdi-view-list"></i> View Promotions
                                                 </button>
+                                                <button type="button" class="btn btn-outline-primary btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('active_subscriptions', array('filter' => 'subscription_plan_id', 'value' => $SubscriptionPlan->ID), true) ?>';">
+                                                    <i class="mdi mdi-view-list"></i> View Active Subscriptions
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

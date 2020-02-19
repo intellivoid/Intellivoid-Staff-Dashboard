@@ -217,7 +217,9 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                                             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                             <div class="dropdown-menu">
                                                                                 <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_subscription_plan', array('id' => $subscription_plan['id']), true); ?>">View Details</a>
-
+                                                                                <div class="dropdown-divider"></div>
+                                                                                <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('subscription_promotions', array('filter' => 'subscription_plan_id', 'value' => $SubscriptionPlan->ID), true) ?>">View Promotions</a>
+                                                                                <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('active_subscriptions', array('filter' => 'subscription_plan_id', 'value' => $SubscriptionPlan->ID), true) ?>">View Active Subscriptions</a>
                                                                             </div>
                                                                         </div>
                                                                     </td>
