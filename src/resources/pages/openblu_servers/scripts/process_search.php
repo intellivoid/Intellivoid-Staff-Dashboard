@@ -3,11 +3,11 @@
 
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
-use OpenBlu\Exceptions\InvalidSearchMethodException;
-use OpenBlu\Exceptions\VPNNotFoundException;
-use OpenBlu\OpenBlu;
+    use OpenBlu\Exceptions\InvalidSearchMethodException;
+    use OpenBlu\Exceptions\VPNNotFoundException;
+    use OpenBlu\OpenBlu;
 
-if(isset($_GET['action']))
+    if(isset($_GET['action']))
     {
         if($_GET['action'] == 'search')
         {
@@ -44,7 +44,7 @@ if(isset($_GET['action']))
             );
 
             Actions::redirect(DynamicalWeb::getRoute(
-                'view_known_host', array('id' => $KnownHost->ID)
+                'view_openblu_server', array('id' => $KnownHost->ID)
             ));
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)

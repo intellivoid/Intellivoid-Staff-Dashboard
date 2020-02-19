@@ -116,8 +116,7 @@
                                                                     <div class="dropdown">
                                                                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_known_host', array('id' => $server['id']), true); ?>">View Details</a>
-                                                                            <div class="dropdown-divider"></div>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_openblu_server', array('id' => $server['id']), true); ?>">View Details</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
