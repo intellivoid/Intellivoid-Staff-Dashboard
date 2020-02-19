@@ -33,11 +33,20 @@ use IntellivoidAccounts\IntellivoidAccounts;
             }
         }
 
-        if($_GET['filter'] == 'host_id')
+        if($_GET['filter'] == 'plan_name')
         {
             if(isset($_GET['value']))
             {
-                $where = 'host_id';
+                $where = 'plan_name';
+                $where_value = $IntellivoidAccounts->database->real_escape_string($_GET['value']);
+            }
+        }
+
+        if($_GET['filter'] == 'status')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'status';
                 $where_value = (int)$_GET['value'];
             }
         }
