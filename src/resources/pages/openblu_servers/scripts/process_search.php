@@ -3,13 +3,11 @@
 
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
-use IntellivoidAccounts\Exceptions\HostNotKnownException;
-use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
-    use IntellivoidAccounts\Exceptions\TelegramClientNotFoundException;
-use IntellivoidAccounts\Exceptions\UserAgentNotFoundException;
-use IntellivoidAccounts\IntellivoidAccounts;
+use OpenBlu\Exceptions\InvalidSearchMethodException;
+use OpenBlu\Exceptions\VPNNotFoundException;
+use OpenBlu\OpenBlu;
 
-    if(isset($_GET['action']))
+if(isset($_GET['action']))
     {
         if($_GET['action'] == 'search')
         {
@@ -25,34 +23,23 @@ use IntellivoidAccounts\IntellivoidAccounts;
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'known_hosts', array('callback' => '100')
+                'openblu_servers', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'known_hosts', array('callback' => '100')
+                'openblu_servers', array('callback' => '100')
             ));
         }
 
-        if(isset(DynamicalWeb::$globalObjects["intellivoid_accounts"]) == false)
-        {
-            /** @var IntellivoidAccounts $IntellivoidAccounts */
-            $IntellivoidAccounts = DynamicalWeb::setMemoryObject(
-                "intellivoid_accounts", new IntellivoidAccounts()
-            );
-        }
-        else
-        {
-            /** @var IntellivoidAccounts $IntellivoidAccounts */
-            $IntellivoidAccounts = DynamicalWeb::getMemoryObject("intellivoid_accounts");
-        }
+        $OpenBlu = new OpenBlu();
 
         try
         {
 
-            $KnownHost = $IntellivoidAccounts->getKnownHostsManager()->getHost(
+            $KnownHost = $OpenBlu->getVPNManager()->getVPN(
                 $_POST['by'], $_POST['value']
             );
 
@@ -63,19 +50,19 @@ use IntellivoidAccounts\IntellivoidAccounts;
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'known_hosts', array('callback' => '103')
+                'openblu_servers', array('callback' => '103')
             ));
         }
-        catch(HostNotKnownException $hostNotKnownException)
+        catch(VPNNotFoundException $hostNotKnownException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'known_hosts', array('callback' => '101')
+                'openblu_servers', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'known_hosts', array('callback' => '102')
+                'openblu_servers', array('callback' => '102')
             ));
         }
     }

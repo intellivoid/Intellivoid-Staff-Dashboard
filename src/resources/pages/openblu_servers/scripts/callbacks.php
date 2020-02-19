@@ -25,19 +25,11 @@
                 break;
 
             case 104:
-                RenderAlert('The Host was not found', "danger", "mdi-alert-circle");
+                RenderAlert('The Server was not found', "danger", "mdi-alert-circle");
                 break;
 
             case 105:
                 RenderAlert('Internal Server Error', "danger", "mdi-alert-circle");
-                break;
-
-            case 106:
-                RenderAlert('The host has been blocked', "success", "mdi-checkbox-marked-circle-outline");
-                break;
-
-            case 107:
-                RenderAlert('The host has been unblocked', "success", "mdi-checkbox-marked-circle-outline");
                 break;
 
         }

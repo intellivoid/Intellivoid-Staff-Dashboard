@@ -6,7 +6,6 @@
     use msqg\Abstracts\SortBy;
     use msqg\QueryBuilder;
     use OpenBlu\OpenBlu;
-    use ZiProto\ZiProto;
 
     Runtime::import('OpenBlu');
     HTML::importScript('process_search');
@@ -19,11 +18,20 @@
 
     if(isset($_GET['filter']))
     {
-        if($_GET['filter'] == 'platform')
+        if($_GET['filter'] == 'country')
         {
             if(isset($_GET['value']))
             {
-                $where = 'platform';
+                $where = 'country';
+                $where_value = $OpenBlu->database->real_escape_string($_GET['value']);
+            }
+        }
+
+        if($_GET['filter'] == 'country_short')
+        {
+            if(isset($_GET['value']))
+            {
+                $where = 'country_short';
                 $where_value = $OpenBlu->database->real_escape_string($_GET['value']);
             }
         }
@@ -57,6 +65,9 @@
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
                                         <h4 class="card-title">Devices</h4>
                                         <div class="wrapper d-flex align-items-center">
+                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#filterDialog" type="button">
+                                                <i class="mdi mdi-filter"></i>
+                                            </button>
                                             <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" data-toggle="modal" data-target="#searchDialog" type="button">
                                                 <i class="mdi mdi-magnify"></i>
                                             </button>
@@ -227,12 +238,12 @@
                                             }
                                         ?>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                     <?PHP HTML::importScript('search_dialog'); ?>
+                    <?PHP HTML::importScript('filter_dialog'); ?>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
             </div>
