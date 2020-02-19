@@ -52,7 +52,8 @@
         {"path": "/coa/application_access/view", "page": "view_application_access"},
 
         {"path": "/openblu/servers", "page": "openblu_servers"},
-        {"path": "/openblu/servers/view", "page": "view_openblu_server"}
+        {"path": "/openblu/servers/view", "page": "view_openblu_server"},
+        {"path": "/openblu/subscriptions", "page": "openblu_subscriptions"}
     ],
     "libraries": {
         "SecuredWebSessions": {

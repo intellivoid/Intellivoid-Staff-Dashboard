@@ -169,6 +169,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_servers', [], true); ?>">Servers</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_subscriptions', [], true); ?>">Subscriptions (LOCAL)</a>
+                    </li>
                 </ul>
             </div>
         </li>
