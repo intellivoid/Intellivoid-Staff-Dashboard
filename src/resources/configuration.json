@@ -49,7 +49,9 @@
         {"path": "/coa/authentication_access", "page": "authentication_access"},
         {"path": "/coa/authentication_access/view", "page": "view_authentication_access"},
         {"path": "/coa/application_access", "page": "application_access"},
-        {"path": "/coa/application_access/view", "page": "view_application_access"}
+        {"path": "/coa/application_access/view", "page": "view_application_access"},
+
+        {"path": "/openblu/servers", "page": "openblu_servers"}
     ],
     "libraries": {
         "SecuredWebSessions": {

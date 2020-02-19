@@ -158,5 +158,19 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#openblu-dropdown" aria-expanded="false" aria-controls="openblu-dropdown">
+                <i class="menu-icon mdi mdi-vpn"></i>
+                <span class="menu-title">OpenBlu</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="openblu-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_servers', [], true); ?>">Servers</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
     </ul>
 </nav>
