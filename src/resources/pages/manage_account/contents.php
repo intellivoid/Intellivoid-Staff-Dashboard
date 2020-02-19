@@ -100,6 +100,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
     HTML::importScript('telegram_details');
     HTML::importScript('render_status');
     HTML::importScript('render_audit_logs');
+    HTML::importScript('render_balance');
 
 ?>
 <!DOCTYPE html>
@@ -225,6 +226,24 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
+                                                    <h5 class="my-4">Account Balance</h5>
+                                                    <div class="wrapper mt-4">
+                                                        <div class="mb-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <h1 class="font-weight-medium mb-2">$<?PHP HTML::print($Account->Configuration->Balance); ?> USD</h1>
+                                                            </div>
+                                                            <div class="d-flex align-items-center">
+                                                                <p class="text-muted mb-0 ml-1">
+                                                                    <a class="text-primary" href="<?PHP DynamicalWeb::getRoute('transaction_records', array('filter' => 'account_id', 'value' => $Account->ID), true); ?>"><?PHP HTML::print("View transaction records"); ?></a>
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex align-items-center">
+                                                                <p class="text-muted mb-0 ml-1">
+                                                                    <a class="text-primary" href="<?PHP DynamicalWeb::getRoute('active_subscriptions', array('filter' => 'account_id', 'value' => $Account->ID), true); ?>"><?PHP HTML::print("View Active Subscriptions"); ?></a>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <h5 class="my-4">Status</h5>
                                                     <?PHP render_status($Account); ?>
                                                     <div class="mt-4 border-top"></div>
