@@ -100,7 +100,6 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
     HTML::importScript('telegram_details');
     HTML::importScript('render_status');
     HTML::importScript('render_audit_logs');
-    HTML::importScript('render_balance');
 
 ?>
 <!DOCTYPE html>
@@ -244,6 +243,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="mt-4 border-top"></div>
                                                     <h5 class="my-4">Status</h5>
                                                     <?PHP render_status($Account); ?>
                                                     <div class="mt-4 border-top"></div>
