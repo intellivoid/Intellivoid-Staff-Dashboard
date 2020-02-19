@@ -258,6 +258,7 @@ use IntellivoidAccounts\Objects\UserAgentRecord;
                             </div>
                         </div>
                     </div>
+                    <?PHP HTML::importScript('gba_dialog'); ?>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
             </div>

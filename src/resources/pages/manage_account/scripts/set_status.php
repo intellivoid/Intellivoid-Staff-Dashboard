@@ -54,6 +54,10 @@ use IntellivoidAccounts\Abstracts\AuditEventType;
                 $Status = AccountStatus::VerificationRequired;
                 break;
 
+            case "GBA_MODE":
+                $Status = AccountStatus::BlockedDueToGovernmentBackedAttack;
+                break;
+
             default:
                 Actions::redirect(DynamicalWeb::getRoute('manage_account', array(
                     'callback' => '114', 'id' => $_GET['id']
