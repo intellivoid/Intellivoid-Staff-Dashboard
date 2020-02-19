@@ -142,17 +142,26 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                                     <td style="padding-top: 10px; padding-bottom: 10px;">
                                                                         <?PHP
                                                                             $Amount = "$0 USD";
-                                                                            if($transaction_record['amount'] < 0)
+                                                                            if($transaction_record['amount'] == 0)
                                                                             {
-                                                                                HTML::print("<span class=\"text-danger\">", false);
-                                                                                HTML::print("-$" . (float)$transaction_record['amount'] * -1 . " USD");
+                                                                                HTML::print("<span class=\"text-muted\">", false);
+                                                                                HTML::print("$0 USD");
                                                                                 HTML::print("<span>", false);
                                                                             }
                                                                             else
                                                                             {
-                                                                                HTML::print("<span class=\"text-success\">", false);
-                                                                                HTML::print("$" . $transaction_record['amount'] . " USD");
-                                                                                HTML::print("<span>", false);
+                                                                                if($transaction_record['amount'] < 0)
+                                                                                {
+                                                                                    HTML::print("<span class=\"text-danger\">", false);
+                                                                                    HTML::print("-$" . (float)$transaction_record['amount'] * -1 . " USD");
+                                                                                    HTML::print("<span>", false);
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    HTML::print("<span class=\"text-success\">", false);
+                                                                                    HTML::print("$" . $transaction_record['amount'] . " USD");
+                                                                                    HTML::print("<span>", false);
+                                                                                }
                                                                             }
                                                                         ?>
                                                                     </td>
