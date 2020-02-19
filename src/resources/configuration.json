@@ -105,6 +105,13 @@
             "check_class_exists": true,
             "namespace": "CoffeeHouse",
             "main_class": "CoffeeHouse"
+        },
+        "COASniffle": {
+            "directory_name": "COASniffle",
+            "autoloader": "COASniffle.php",
+            "check_class_exists": true,
+            "namespace": "COASniffle",
+            "main_class": "COASniffle"
         }
     },
     "runtime_scripts": {

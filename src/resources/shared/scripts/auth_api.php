@@ -31,7 +31,7 @@
 
         if($response['status'] == false)
         {
-            throw new Exception($response['message'], $response['response_code']);
+            throw new Exception($response['message'], $response['status_code']);
         }
 
         return $response['host_id'];
@@ -58,7 +58,7 @@
 
         if($response['status'] == false)
         {
-            throw new Exception($response['message'], $response['response_code']);
+            throw new Exception($response['message'], $response['status_code']);
         }
 
         return $response['account'];
