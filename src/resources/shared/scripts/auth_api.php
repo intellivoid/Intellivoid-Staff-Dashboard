@@ -1,17 +1,14 @@
 <?php
 
-    use DynamicalWeb\DynamicalWeb;
-    use DynamicalWeb\HTML;
+    use COASniffle\COASniffle;
+    use COASniffle\Exceptions\KhmException;
+    use COASniffle\Exceptions\OtlException;
+    use COASniffle\Handlers\KHM;
+    use COASniffle\Handlers\OTL;
+    use DynamicalWeb\Runtime;
 
-    $AuthenticationConfiguration = DynamicalWeb::getConfiguration('auth');
-    if($AuthenticationConfiguration['localhost_development'])
-    {
-        define('AUTH_ENDPOINT', "http://" . $AuthenticationConfiguration['local_host'] . "/auth/");
-    }
-    else
-    {
-        define('AUTH_ENDPOINT', "https://" . $AuthenticationConfiguration['remote_endpoint'] . "/auth/");
-    }
+    Runtime::import('COASniffle');
+    new COASniffle();
 
     /**
      * Gets the host ID from an IP Address and User Agent
@@ -23,18 +20,14 @@
      */
     function khm_GetHostId(string $ip_address, string $user_agent): string
     {
-        $ip_address = urlencode($ip_address);
-        $user_agent = urlencode($user_agent);
-
-        $request_url = AUTH_ENDPOINT . "khm?remote_host=" . $ip_address . "&user_agent=" . $user_agent;
-        $response = json_decode(file_get_contents($request_url), true);
-
-        if($response['status'] == false)
+        try
         {
-            throw new Exception($response['message'], $response['status_code']);
+            return KHM::registerHost($ip_address, $user_agent);
         }
-
-        return $response['host_id'];
+        catch (KhmException $e)
+        {
+            throw new Exception($e->getErrorMessage(), $e->getStatusCode());
+        }
     }
 
     /**
@@ -48,18 +41,14 @@
      */
     function otl_VerifyCode(string $code, string $host_id, string $user_agent): array
     {
-        $vendor = urlencode("Intellivoid Staff Dashboard");
-        $host_id = urlencode($host_id);
-        $code = urlencode($code);
-        $user_agent = urlencode($user_agent);
-
-        $request_url = AUTH_ENDPOINT . "otl?auth_code=" . $code . "&host_id=" . $host_id . "&user_agent=" . $user_agent . "&vendor=" . $vendor;
-        $response = json_decode(file_get_contents($request_url), true);
-
-        if($response['status'] == false)
+        try
         {
-            throw new Exception($response['message'], $response['status_code']);
-        }
+            $OTLUser = OTL::verifyCode($code, $host_id, $user_agent, "Intellivoid Staff Dashboard");
 
-        return $response['account'];
+            return $OTLUser->toArray();
+        }
+        catch (OtlException $e)
+        {
+            throw new Exception($e->getErrorMessage(), $e->getStatusCode());
+        }
     }

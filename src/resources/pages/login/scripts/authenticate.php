@@ -25,7 +25,6 @@
             'error' => 'khm'
         )));
     }
-
     try
     {
         $Response = otl_VerifyCode($_POST['authentication_code'], $KnownHost, CLIENT_USER_AGENT);
@@ -65,7 +64,7 @@
     if($DetermineRole == 'NONE')
     {
         Actions::redirect(DynamicalWeb::getRoute('login', array(
-            'callback' => '106'
+            'callback' => '101'
         )));
     }
 

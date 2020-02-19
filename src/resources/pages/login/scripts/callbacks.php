@@ -35,10 +35,6 @@
                     case 105:
                         RenderAlert('IP Address blocked for security reasons', "danger", "mdi-alert-circle");
                         break;
-
-                    case 106:
-                        RenderAlert('You do not have the required permissions to access this resource', "danger", "mdi-alert-circle");
-                        break;
                 }
             }
 
@@ -109,6 +105,10 @@
             {
                 case 100:
                     RenderAlert('There was an issue with your request', "danger", "mdi-alert-circle");
+                    break;
+
+                case 101:
+                    RenderAlert('You do not have the required permissions to access this resource', "danger", "mdi-alert-circle");
                     break;
             }
         }
