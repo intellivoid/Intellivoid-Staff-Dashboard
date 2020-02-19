@@ -170,7 +170,10 @@
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_servers', [], true); ?>">Servers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_subscriptions', [], true); ?>">Subscriptions (LOCAL)</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_subscriptions', [], true); ?>">User Subscriptions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('redirect_openblu_api_requests', [], true); ?>">API Requests</a>
                     </li>
                 </ul>
             </div>

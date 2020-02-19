@@ -52,6 +52,7 @@
         {"path": "/coa/application_access/view", "page": "view_application_access"},
 
         {"path": "/openblu/servers", "page": "openblu_servers"},
+        {"path": "/openblu/api_requests", "page": "redirect_openblu_api_requests"},
         {"path": "/openblu/servers/view", "page": "view_openblu_server"},
         {"path": "/openblu/subscriptions", "page": "openblu_subscriptions"}
     ],
