@@ -57,7 +57,8 @@
         {"path": "/openblu/subscriptions", "page": "openblu_subscriptions"},
 
         {"path": "/coffeehouse/lydia/sessions", "page": "coffeehouse_lydia_sessions"},
-        {"path": "/coffeehouse/lydia/sessions/view", "page": "view_coffeehouse_lydia_session"}
+        {"path": "/coffeehouse/lydia/sessions/view", "page": "view_coffeehouse_lydia_session"},
+        {"path": "/coffeehouse/subscriptions", "page": "coffeehouse_subscriptions"}
     ],
     "libraries": {
         "SecuredWebSessions": {

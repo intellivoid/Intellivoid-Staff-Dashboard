@@ -191,7 +191,7 @@
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse_lydia_sessions', [], true); ?>">Lydia Sessions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_subscriptions', [], true); ?>">User Subscriptions</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse_subscriptions', [], true); ?>">User Subscriptions</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('redirect_openblu_api_requests', [], true); ?>">API Requests</a>
