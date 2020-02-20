@@ -58,7 +58,8 @@
 
         {"path": "/coffeehouse/lydia/sessions", "page": "coffeehouse_lydia_sessions"},
         {"path": "/coffeehouse/lydia/sessions/view", "page": "view_coffeehouse_lydia_session"},
-        {"path": "/coffeehouse/subscriptions", "page": "coffeehouse_subscriptions"}
+        {"path": "/coffeehouse/subscriptions", "page": "coffeehouse_subscriptions"},
+        {"path": "/coffeehouse/api_requests", "page": "redirect_coffeehouse_api_requests"}
     ],
     "libraries": {
         "SecuredWebSessions": {

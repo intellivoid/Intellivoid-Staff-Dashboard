@@ -194,7 +194,7 @@
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse_subscriptions', [], true); ?>">User Subscriptions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('redirect_openblu_api_requests', [], true); ?>">API Requests</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('redirect_coffeehouse_api_requests', [], true); ?>">API Requests</a>
                     </li>
                 </ul>
             </div>
