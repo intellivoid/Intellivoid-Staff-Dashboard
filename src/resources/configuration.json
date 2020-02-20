@@ -54,7 +54,9 @@
         {"path": "/openblu/servers", "page": "openblu_servers"},
         {"path": "/openblu/api_requests", "page": "redirect_openblu_api_requests"},
         {"path": "/openblu/servers/view", "page": "view_openblu_server"},
-        {"path": "/openblu/subscriptions", "page": "openblu_subscriptions"}
+        {"path": "/openblu/subscriptions", "page": "openblu_subscriptions"},
+
+        {"path": "/coffeehouse/lydia/sessions", "page": "coffeehouse_lydia_sessions"}
     ],
     "libraries": {
         "SecuredWebSessions": {

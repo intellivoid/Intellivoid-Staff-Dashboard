@@ -188,7 +188,7 @@
             <div class="collapse" id="coffeehouse-dropdown">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_servers', [], true); ?>">Servers</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse_lydia_sessions', [], true); ?>">Lydia Sessions</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_subscriptions', [], true); ?>">User Subscriptions</a>
