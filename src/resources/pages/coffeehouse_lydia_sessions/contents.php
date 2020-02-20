@@ -96,11 +96,13 @@
                                                                 </td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print($session['messages']); ?></td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;"><?PHP HTML::print(date("F j, Y, g:i a", $session['last_updated'])); ?></td>
+
+
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;">
                                                                     <div class="dropdown">
                                                                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_openblu_server', array('id' => $session['id']), true); ?>">View Details</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_coffeehouse_lydia_session', array('id' => $session['id']), true); ?>">View Details</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -225,8 +227,6 @@
                             </div>
                         </div>
                     </div>
-                    <?PHP HTML::importScript('search_dialog'); ?>
-                    <?PHP HTML::importScript('filter_dialog'); ?>
                     <?PHP HTML::importSection('footer'); ?>
                 </div>
             </div>
