@@ -94,14 +94,14 @@ use IntellivoidAccounts\Utilities\Validate;
             {
                 $FeatureObject = Feature::fromArray($feature);
 
-                if($FeatureObject->Name == null)
+                if(is_null($FeatureObject->Name))
                 {
                     Actions::redirect(DynamicalWeb::getRoute('manage_subscription_plan',
                         array('id' => $_GET['id'], 'callback' => '107')
                     ));
                 }
 
-                if($FeatureObject->Value == null)
+                if(is_null($FeatureObject->Value))
                 {
                     Actions::redirect(DynamicalWeb::getRoute('manage_subscription_plan',
                         array('id' => $_GET['id'], 'callback' => '107')
