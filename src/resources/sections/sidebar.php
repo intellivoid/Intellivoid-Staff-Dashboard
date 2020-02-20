@@ -178,5 +178,26 @@
                 </ul>
             </div>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#coffeehouse-dropdown" aria-expanded="false" aria-controls="coffeehouse-dropdown">
+                <i class="menu-icon mdi mdi-coffee"></i>
+                <span class="menu-title">CoffeeHouse</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="coffeehouse-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_servers', [], true); ?>">Servers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_subscriptions', [], true); ?>">User Subscriptions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('redirect_openblu_api_requests', [], true); ?>">API Requests</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
     </ul>
 </nav>

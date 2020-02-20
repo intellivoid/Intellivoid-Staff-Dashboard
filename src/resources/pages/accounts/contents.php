@@ -114,8 +114,16 @@
                                                                             HTML::print("<label class=\"badge badge-primary\">Verification Required</label>", false);
                                                                             break;
 
+                                                                        case AccountStatus::BlockedDueToGovernmentBackedAttack:
+                                                                            HTML::print("<label class=\"badge badge-danger\">GBA Mode</label>", false);
+                                                                            break;
+
+                                                                        case AccountStatus::PasswordRecoveryMode:
+                                                                            HTML::print("<label class=\"badge badge-warning\">PR Mode</label>", false);
+                                                                            break;
+
                                                                         default:
-                                                                            HTML::print("<label class=\"badge badge-\">Limited</label>", false);
+                                                                            HTML::print("<label class=\"badge badge-primary\">Unknown</label>", false);
                                                                             break;
                                                                     }
                                                                     ?>
