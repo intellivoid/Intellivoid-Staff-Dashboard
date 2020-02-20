@@ -52,7 +52,7 @@
                         <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $_GET['id'], 'action' => 'set_status', 'status' => 'limited'), true); ?>">Limited</a>
                         <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $_GET['id'], 'action' => 'set_status', 'status' => 'verification_required'), true); ?>">Verification Required</a>
                         <a class="dropdown-item" data-toggle="modal" data-target="#gbaDialog" href="#">GBA Mode</a>
-                        <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_account', array('id' => $_GET['id'], 'action' => 'set_status', 'status' => 'prm'), true); ?>">Password Recovery Mode</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#prmDialog" href="#">Password Recovery Mode</a>
                     </div>
                 </div>
             </div>

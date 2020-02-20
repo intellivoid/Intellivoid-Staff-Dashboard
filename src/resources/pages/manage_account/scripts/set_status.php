@@ -36,6 +36,21 @@ use IntellivoidAccounts\Abstracts\AuditEventType;
 
         $Status = 0;
 
+        if(isset(DynamicalWeb::$globalObjects["intellivoid_accounts"]) == false)
+        {
+            /** @var IntellivoidAccounts $IntellivoidAccounts */
+            $IntellivoidAccounts = DynamicalWeb::setMemoryObject(
+                "intellivoid_accounts", new IntellivoidAccounts()
+            );
+        }
+        else
+        {
+            /** @var IntellivoidAccounts $IntellivoidAccounts */
+            $IntellivoidAccounts = DynamicalWeb::getMemoryObject("intellivoid_accounts");
+        }
+
+        $Account = $IntellivoidAccounts->getAccountManager()->getAccount(AccountSearchMethod::byId, (int)$_GET['id']);
+
         switch(strtoupper($_GET['status']))
         {
             case "ACTIVE":
@@ -58,26 +73,21 @@ use IntellivoidAccounts\Abstracts\AuditEventType;
                 $Status = AccountStatus::BlockedDueToGovernmentBackedAttack;
                 break;
 
+            case "PRM":
+                $Password = $IntellivoidAccounts->getAccountManager()->enterPasswordRecoveryMode($Account);
+
+                Actions::redirect(DynamicalWeb::getRoute('manage_account', array(
+                    'prm_np' => $Password, 'id' => $_GET['id']
+                )));
+
+                break;
+
             default:
                 Actions::redirect(DynamicalWeb::getRoute('manage_account', array(
                     'callback' => '114', 'id' => $_GET['id']
                 )));
         }
 
-        if(isset(DynamicalWeb::$globalObjects["intellivoid_accounts"]) == false)
-        {
-            /** @var IntellivoidAccounts $IntellivoidAccounts */
-            $IntellivoidAccounts = DynamicalWeb::setMemoryObject(
-                "intellivoid_accounts", new IntellivoidAccounts()
-            );
-        }
-        else
-        {
-            /** @var IntellivoidAccounts $IntellivoidAccounts */
-            $IntellivoidAccounts = DynamicalWeb::getMemoryObject("intellivoid_accounts");
-        }
-
-        $Account = $IntellivoidAccounts->getAccountManager()->getAccount(AccountSearchMethod::byId, (int)$_GET['id']);
         $Account->Status = (int)$Status;
         $IntellivoidAccounts->getAccountManager()->updateAccount($Account);
 

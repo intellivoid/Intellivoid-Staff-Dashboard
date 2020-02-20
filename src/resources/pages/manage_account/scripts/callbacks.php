@@ -2,9 +2,15 @@
 
     use DynamicalWeb\HTML;
 
+    HTML::importScript('render_alert');
+
+    if(isset($_GET['prm_np']))
+    {
+        RenderAlert('Temporary Password: ' . $_GET['prm_np'], "success", "mdi-checkbox-marked-circle-outline");
+    }
+
     if(isset($_GET['callback']))
     {
-        HTML::importScript('render_alert');
 
         switch((int)$_GET['callback'])
         {
