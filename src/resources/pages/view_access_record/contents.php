@@ -167,6 +167,9 @@ use IntellivoidAPI\IntellivoidAPI;
                                                 </tbody>
                                             </table>
                                         </div>
+                                        <div class="mt-3">
+                                            <button class="btn btn-primary" onclick="location.href='<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'access_record_id', 'value' => $AccessRecord->ID), true) ?>'">View Request History</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
