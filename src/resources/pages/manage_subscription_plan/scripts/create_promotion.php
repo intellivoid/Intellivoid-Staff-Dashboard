@@ -92,6 +92,16 @@ use IntellivoidAccounts\Utilities\Validate;
         {
             foreach($features as $feature)
             {
+                if(isset($feature['Name']))
+                {
+                    $feature['name'] = $feature['Name'];
+                }
+
+                if(isset($feature['Value']))
+                {
+                    $feature['value'] = $feature['Value'];
+                }
+
                 $FeatureObject = Feature::fromArray($feature);
 
                 if(is_null($FeatureObject->Name))
