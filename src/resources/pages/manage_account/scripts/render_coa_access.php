@@ -14,7 +14,7 @@ use IntellivoidAccounts\Objects\COA\Application;
 
     function render_coa_access(IntellivoidAccounts $IntellivoidAccounts, Account $account)
     {
-        $ApplicationAccessRecords = $IntellivoidAccounts->getCrossOverAuthenticationManager()->getApplicationAccessManager()->searchRecordsByAccount($_GET['id']);
+        $ApplicationAccessRecords = $IntellivoidAccounts->getCrossOverAuthenticationManager()->getApplicationAccessManager()->searchRecordsByAccount(WEB_ACCOUNT_ID);
         $TotalAccessCount = 0;
         $Applications = array();
 
@@ -31,7 +31,7 @@ use IntellivoidAccounts\Objects\COA\Application;
                         $Application = $IntellivoidAccounts->getApplicationManager()->getApplication(ApplicationSearchMethod::byId, $record['application_id']);
                         $Applications[$record['application_id']] = $Application;
                     }
-                    catch (ApplicationNotFoundException $e)
+                    catch (Exception $e)
                     {
                         unset($e);
                         $TotalAccessCount -= 1;
@@ -40,6 +40,7 @@ use IntellivoidAccounts\Objects\COA\Application;
                 }
             }
         }
+
 
         if($TotalAccessCount > 0)
         {
@@ -52,10 +53,10 @@ use IntellivoidAccounts\Objects\COA\Application;
 
                     if($ApplicationAccess->Status == ApplicationAccessStatus::Authorized)
                     {
-                        if(isset($Applications[$ApplicationAccess->ApplicationID]))
+                        if(isset($applications[$ApplicationAccess->ApplicationID]))
                         {
                             /** @var Application $Application */
-                            $Application = $Applications[$ApplicationAccess->ID];
+                            $Application = $Applications[$ApplicationAccess->ApplicationID];
                         }
                         else
                         {
