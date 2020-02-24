@@ -207,6 +207,9 @@
                                                 <button type="button" class="btn btn-outline-success btn-xs btn-block" data-toggle="modal" data-target="#createSubscriptionPlanDialog">
                                                     <i class="mdi mdi-plus-circle"></i> Create Subscription Plan
                                                 </button>
+                                                <button type="button" class="btn btn-outline-info btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('subscription_plans', array('filter'=>'application_id','value'=>$Application->ID), true); ?>';">
+                                                    <i class="mdi mdi-magnify"></i> View Subscription Plans
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

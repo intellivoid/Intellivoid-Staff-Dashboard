@@ -189,7 +189,7 @@ use msqg\Abstracts\SortBy;
                                                                         <div class="dropdown-menu">
                                                                             <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_access_record', array('id' => $accessRecordObject->ID), true); ?>">View Details</a>
                                                                             <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('manage_application', array('id' => $accessRecordObject->ApplicationID), true); ?>">View Application</a>
-                                                                            <a class="dropdown-item" href="#">View Subscription</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'access_record_id', 'value' => $accessRecordObject->ID), true) ?>">View Request History</a>
                                                                             <div class="dropdown-divider"></div>
                                                                             <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('access_records', array('filter' => 'application_id', 'value' => $accessRecordObject->ApplicationID), true); ?>">Filter by Application ID</a>
                                                                         </div>

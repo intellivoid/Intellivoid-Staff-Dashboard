@@ -21,6 +21,14 @@ use DynamicalWeb\Javascript;
                         <div class="row">
                             <?PHP HTML::importScript('render_device_usage'); ?>
                             <?PHP HTML::importScript('render_browser_usage'); ?>
+                            <div class="col-md-6 col-lg-4 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Notice</h4>
+                                        <p>Hi, sorry for the lack of stuff here. I got tired. i'll add analytical stuff and whatnot later when i feel like it. Make sure not to break anything</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <?PHP HTML::importSection('footer'); ?>
