@@ -124,7 +124,7 @@
         "on_page_load": ["download.feature_builder.php", "auth.check.php"],
         "page_loaded": [],
         "after_request": [],
-        "on_request": [],
+        "on_request": ["maintenance.php"],
         "on_import": []
     }
 }
