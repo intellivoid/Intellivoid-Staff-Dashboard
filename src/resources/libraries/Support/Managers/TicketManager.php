@@ -3,6 +3,7 @@
 
     namespace Support\Managers;
 
+    use msqg\QueryBuilder;
     use Support\Abstracts\SupportTicketSearchMethod;
     use Support\Abstracts\TicketStatus;
     use Support\Exceptions\DatabaseException;
@@ -84,7 +85,18 @@
             $TicketStatus = (int)TicketStatus::Opened;
             $TicketNotes = $this->support->getDatabase()->real_escape_string('None');
 
-            $Query = "INSERT INTO `support_tickets` (ticket_number, source, subject, message, response_email, ticket_status, ticket_notes, submission_timestamp) VALUES ('$TicketNumber', '$Source', '$Subject', '$Message', '$ResponseEmail', $TicketStatus, '$TicketNotes', $CurrentTimestamp)";
+            $Query = QueryBuilder::insert_into(
+                'support_tickets', array(
+                    'ticket_number' => $TicketNumber,
+                    'source' => $Source,
+                    'subject' => $Subject,
+                    'message' => $Message,
+                    'response_email' => $ResponseEmail,
+                    'ticket_status' => $TicketStatus,
+                    'ticket_notes' => $TicketNotes,
+                    'submission_timestamp' => $CurrentTimestamp
+                )
+            );
             $QueryResults = $this->support->getDatabase()->query($Query);
 
             if($QueryResults == true)
@@ -114,14 +126,24 @@
 
                 case SupportTicketSearchMethod::byTicketNumber:
                     $search_method = $this->support->getDatabase()->real_escape_string($search_method);
-                    $value = "'" . $this->support->getDatabase()->real_escape_string($value) . "'";
+                    $value = $this->support->getDatabase()->real_escape_string($value);
                     break;
 
                 default:
                     throw new InvalidSearchMethodException();
             }
 
-            $Query = "SELECT id, ticket_number, source, subject, message, response_email, ticket_status, ticket_notes, submission_timestamp FROM `support_tickets` WHERE $search_method=$value";
+            $Query = QueryBuilder::select('support_tickets', [
+                'id',
+                'ticket_number',
+                'source',
+                'subject',
+                'message',
+                'response_email',
+                'ticket_status',
+                'ticket_notes',
+                'submission_timestamp'
+            ], $search_method, $value);
             $QueryResults = $this->support->getDatabase()->query($Query);
 
             if($QueryResults == false)
@@ -189,7 +211,14 @@
             $TicketStatus = (int)$supportTicket->TicketStatus;
             $TicketNotes = $this->support->getDatabase()->real_escape_string($supportTicket->TicketNotes);
 
-            $Query = "UPDATE `support_tickets` SET source='$Source', subject='$Subject', message='$Message', response_email='$ResponseEmail', ticket_status=$TicketStatus, ticket_notes='$TicketNotes' WHERE id=$ID";
+            $Query = QueryBuilder::update('support_tickets', array(
+                'source' => $Source,
+                'subject' => $Subject,
+                'message' => $Message,
+                'response_email' => $ResponseEmail,
+                'ticket_status' => $TicketStatus,
+                'ticket_notes' => $TicketNotes
+            ), 'id', $ID);
             $QueryResults = $this->support->getDatabase()->query($Query);
 
             if($QueryResults == false)
