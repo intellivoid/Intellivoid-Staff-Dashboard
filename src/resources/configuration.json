@@ -5,7 +5,7 @@
         "enable_ppm": true,
         "buffer_output": true,
         "compression": {
-            "compress_html": true,
+            "compress_html": false,
             "compress_javascript": true,
             "compress_css": true
         },
@@ -130,7 +130,7 @@
         }
     },
     "runtime_scripts": {
-        "initialize": [],
+        "initialize": ["memory_patch.php"],
         "on_page_load": ["download.feature_builder.php", "auth.check.php"],
         "page_loaded": [],
         "after_request": [],
