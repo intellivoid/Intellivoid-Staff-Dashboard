@@ -14,7 +14,7 @@ use IntellivoidAccounts\Objects\COA\Application;
 
     function render_coa_access(IntellivoidAccounts $IntellivoidAccounts, Account $account)
     {
-        $ApplicationAccessRecords = $IntellivoidAccounts->getCrossOverAuthenticationManager()->getApplicationAccessManager()->searchRecordsByAccount(WEB_ACCOUNT_ID);
+        $ApplicationAccessRecords = $IntellivoidAccounts->getCrossOverAuthenticationManager()->getApplicationAccessManager()->searchRecordsByAccount($account->ID);
         $TotalAccessCount = 0;
         $Applications = array();
 
