@@ -24,14 +24,14 @@ use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'application_access', array('callback' => '100')
+                'coa/application_access', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'application_access', array('callback' => '100')
+                'coa/application_access', array('callback' => '100')
             ));
         }
 
@@ -55,25 +55,25 @@ use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
             );
 
             Actions::redirect(DynamicalWeb::getRoute(
-                'view_application_access', array('id' => $ApplicationAccess->ID)
+                'coa/view_application_access', array('id' => $ApplicationAccess->ID)
             ));
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'application_access', array('callback' => '103')
+                'coa/application_access', array('callback' => '103')
             ));
         }
         catch(ApplicationAccessNotFoundException $accountNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'application_access', array('callback' => '101')
+                'coa/application_access', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'application_access', array('callback' => '102')
+                'coa/application_access', array('callback' => '102')
             ));
         }
     }

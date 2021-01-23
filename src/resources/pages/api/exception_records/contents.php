@@ -148,7 +148,7 @@ use msqg\Abstracts\SortBy;
                                                                                 <a href="<?PHP DynamicalWeb::getRoute('cloud/manage_application', array('id' => $exceptionRecordObject->ApplicationID), true) ?>" class="text-white pl-2">
                                                                                     <i class="mdi mdi-database-search"></i>
                                                                                 </a>
-                                                                                <a href="<?PHP DynamicalWeb::getRoute('exception_records', array('filter' => 'application_id', 'value' => $exceptionRecordObject->ApplicationID), true) ?>" class="text-white pl-2">
+                                                                                <a href="<?PHP DynamicalWeb::getRoute('api/exception_records', array('filter' => 'application_id', 'value' => $exceptionRecordObject->ApplicationID), true) ?>" class="text-white pl-2">
                                                                                     <i class="mdi mdi-filter"></i>
                                                                                 </a>
                                                                             </div>
@@ -170,7 +170,7 @@ use msqg\Abstracts\SortBy;
                                                                                 <a href="#" class="text-white pl-2">
                                                                                     <i class="mdi mdi-database-search"></i>
                                                                                 </a>
-                                                                                <a href="<?PHP DynamicalWeb::getRoute('exception_records', array('filter' => 'access_record_id', 'value' => $exceptionRecordObject->AccessRecordID), true) ?>" class="text-white pl-2">
+                                                                                <a href="<?PHP DynamicalWeb::getRoute('api/exception_records', array('filter' => 'access_record_id', 'value' => $exceptionRecordObject->AccessRecordID), true) ?>" class="text-white pl-2">
                                                                                     <i class="mdi mdi-filter"></i>
                                                                                 </a>
                                                                             </div>
@@ -183,10 +183,10 @@ use msqg\Abstracts\SortBy;
                                                                     <div class="dropdown">
                                                                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_exception_record', array('id' => $exceptionRecordObject->ID), true); ?>">View Details</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('api/view_exception_record', array('id' => $exceptionRecordObject->ID), true); ?>">View Details</a>
                                                                             <div class="dropdown-divider"></div>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('exception_records', array('filter' => 'application_id', 'value' => $exceptionRecordObject->ApplicationID), true); ?>">Filter by Application ID</a>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('exception_records', array('filter' => 'access_record_id', 'value' => $exceptionRecordObject->AccessRecordID), true); ?>">Filter by Access Record ID</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('api/exception_records', array('filter' => 'application_id', 'value' => $exceptionRecordObject->ApplicationID), true); ?>">Filter by Application ID</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('api/exception_records', array('filter' => 'access_record_id', 'value' => $exceptionRecordObject->AccessRecordID), true); ?>">Filter by Access Record ID</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -225,7 +225,7 @@ use msqg\Abstracts\SortBy;
                                                                             $RedirectHref['page'] = $Results['current_page'] - 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('exception_records', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('api/exception_records', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-left"></i>
                                                                                 </a>
                                                                             </li>
@@ -248,7 +248,7 @@ use msqg\Abstracts\SortBy;
                                                                                 $RedirectHref['page'] = $current_count;
                                                                                 ?>
                                                                                 <li class="page-item">
-                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('exception_records', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('api/exception_records', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                                 </li>
                                                                                 <?PHP
                                                                             }
@@ -277,7 +277,7 @@ use msqg\Abstracts\SortBy;
                                                                             $RedirectHref['page'] = $Results['current_page'] + 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('exception_records', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('api/exception_records', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-right"></i>
                                                                                 </a>
                                                                             </li>

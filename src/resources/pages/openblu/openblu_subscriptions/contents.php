@@ -172,7 +172,7 @@ use OpenBlu\OpenBlu;
                                                                             $RedirectHref['page'] = $Results['current_page'] - 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('openblu_subscriptions', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('openblu/openblu_subscriptions', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-left"></i>
                                                                                 </a>
                                                                             </li>
@@ -195,7 +195,7 @@ use OpenBlu\OpenBlu;
                                                                                 $RedirectHref['page'] = $current_count;
                                                                                 ?>
                                                                                 <li class="page-item">
-                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('openblu_subscriptions', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('openblu/openblu_subscriptions', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                                 </li>
                                                                                 <?PHP
                                                                             }
@@ -224,7 +224,7 @@ use OpenBlu\OpenBlu;
                                                                             $RedirectHref['page'] = $Results['current_page'] + 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('openblu_subscriptions', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('openblu/openblu_subscriptions', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-right"></i>
                                                                                 </a>
                                                                             </li>

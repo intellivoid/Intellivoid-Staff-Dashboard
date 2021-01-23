@@ -14,7 +14,7 @@
             ApplicationSearchMethod::byName, 'CoffeeHouse'
     );
 
-    Actions::redirect(DynamicalWeb::getRoute('request_records', array(
+    Actions::redirect(DynamicalWeb::getRoute('api/request_records', array(
         'filter' => 'application_id',
         'value' => $Application->ID
     )));

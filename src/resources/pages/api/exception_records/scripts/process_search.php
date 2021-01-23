@@ -24,14 +24,14 @@ use IntellivoidAPI\Exceptions\InvalidSearchMethodException;
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'exception_records', array('callback' => '100')
+                'api/exception_records', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'exception_records', array('callback' => '100')
+                'api/exception_records', array('callback' => '100')
             ));
         }
 
@@ -42,26 +42,26 @@ use IntellivoidAPI\Exceptions\InvalidSearchMethodException;
             $ExceptionRecord = $IntellivoidAPI->getExceptionRecordManager()->getExceptionRecord(
                 $_POST['by'], $_POST['value']
             );
-            Actions::redirect(DynamicalWeb::getRoute('view_exception_record', array(
+            Actions::redirect(DynamicalWeb::getRoute('api/view_exception_record', array(
                 'id' => $ExceptionRecord->ID
             )));
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'exception_records', array('callback' => '103')
+                'api/exception_records', array('callback' => '103')
             ));
         }
         catch(ExceptionRecordNotFoundException $exceptionRecordNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'exception_records', array('callback' => '101')
+                'api/exception_records', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'exception_records', array('callback' => '102')
+                'api/exception_records', array('callback' => '102')
             ));
         }
     }

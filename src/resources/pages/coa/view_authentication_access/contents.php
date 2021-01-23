@@ -15,7 +15,7 @@ use IntellivoidAccounts\Exceptions\AuthenticationRequestNotFoundException;
 
     if(isset($_GET['id']) == false)
     {
-        Actions::redirect(DynamicalWeb::getRoute('authentication_requests'));
+        Actions::redirect(DynamicalWeb::getRoute('coa/authentication_requests'));
     }
 
     $IntellivoidAccounts = new IntellivoidAccounts();
@@ -28,11 +28,11 @@ use IntellivoidAccounts\Exceptions\AuthenticationRequestNotFoundException;
     }
     catch (AuthenticationAccessNotFoundException $e)
     {
-        Actions::redirect(DynamicalWeb::getRoute('authentication_access', array('callback' => '104')));
+        Actions::redirect(DynamicalWeb::getRoute('coa/authentication_access', array('callback' => '104')));
     }
     catch(Exception $exception)
     {
-        Actions::redirect(DynamicalWeb::getRoute('authentication_access', array('callback' => '105')));
+        Actions::redirect(DynamicalWeb::getRoute('coa/authentication_access', array('callback' => '105')));
     }
 ?>
 <!DOCTYPE html>
@@ -118,7 +118,7 @@ use IntellivoidAccounts\Exceptions\AuthenticationRequestNotFoundException;
                                                         <td><?PHP HTML::print("COA Request ID"); ?></td>
                                                         <td><?PHP HTML::print(gettype($AuthenticationAccess->RequestId)); ?></td>
                                                         <td>
-                                                            <a href="<?PHP DynamicalWeb::getRoute('view_authentication_request', array('id' => $AuthenticationAccess->RequestId), true); ?>">
+                                                            <a href="<?PHP DynamicalWeb::getRoute('coa/view_authentication_request', array('id' => $AuthenticationAccess->RequestId), true); ?>">
                                                                 <?PHP HTML::print($AuthenticationAccess->RequestId); ?>
                                                             </a>
                                                         </td>

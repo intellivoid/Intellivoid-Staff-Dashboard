@@ -23,14 +23,14 @@
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'request_records', array('callback' => '100')
+                'api/request_records', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'request_records', array('callback' => '100')
+                'api/request_records', array('callback' => '100')
             ));
         }
 
@@ -42,26 +42,26 @@
                 $_POST['by'], $_POST['value']
             );
 
-            Actions::redirect(DynamicalWeb::getRoute('view_request_record', array(
+            Actions::redirect(DynamicalWeb::getRoute('api/view_request_record', array(
                 'id' => $RequestRecord->ID
             )));
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'request_records', array('callback' => '103')
+                'api/request_records', array('callback' => '103')
             ));
         }
         catch(RequestRecordNotFoundException $authenticationRequestNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'request_records', array('callback' => '101')
+                'api/request_records', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'request_records', array('callback' => '102')
+                'api/request_records', array('callback' => '102')
             ));
         }
     }

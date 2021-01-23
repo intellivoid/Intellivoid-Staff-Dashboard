@@ -23,14 +23,14 @@
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'openblu_servers', array('callback' => '100')
+                'openblu/openblu_servers', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'openblu_servers', array('callback' => '100')
+                'openblu/openblu_servers', array('callback' => '100')
             ));
         }
 
@@ -44,25 +44,25 @@
             );
 
             Actions::redirect(DynamicalWeb::getRoute(
-                'view_openblu_server', array('id' => $KnownHost->ID)
+                'openblu/view_openblu_server', array('id' => $KnownHost->ID)
             ));
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'openblu_servers', array('callback' => '103')
+                'openblu/openblu_servers', array('callback' => '103')
             ));
         }
         catch(VPNNotFoundException $hostNotKnownException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'openblu_servers', array('callback' => '101')
+                'openblu/openblu_servers', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'openblu_servers', array('callback' => '102')
+                'openblu/openblu_servers', array('callback' => '102')
             ));
         }
     }

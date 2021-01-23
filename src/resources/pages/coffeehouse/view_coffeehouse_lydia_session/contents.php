@@ -12,7 +12,7 @@
 
     if(isset($_GET['id']) == false)
     {
-        Actions::redirect(DynamicalWeb::getRoute('coffeehouse_lydia_sessions'));
+        Actions::redirect(DynamicalWeb::getRoute('coffeehouse/coffeehouse_lydia_sessions'));
     }
 
     $CoffeeHouse = new CoffeeHouse();
@@ -25,11 +25,11 @@
     }
     catch (ForeignSessionNotFoundException $e)
     {
-        Actions::redirect(DynamicalWeb::getRoute('coffeehouse_lydia_sessions', array('callback' => '104')));
+        Actions::redirect(DynamicalWeb::getRoute('coffeehouse/coffeehouse_lydia_sessions', array('callback' => '104')));
     }
     catch(Exception $exception)
     {
-        Actions::redirect(DynamicalWeb::getRoute('coffeehouse_lydia_sessions', array('callback' => '105')));
+        Actions::redirect(DynamicalWeb::getRoute('coffeehouse/coffeehouse_lydia_sessions', array('callback' => '105')));
     }
 ?>
 <!DOCTYPE html>

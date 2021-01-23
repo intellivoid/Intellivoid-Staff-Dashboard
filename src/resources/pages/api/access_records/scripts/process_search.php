@@ -43,7 +43,7 @@
             );
 
             Actions::redirect(DynamicalWeb::getRoute(
-                ''api/view_access_record', array('id' => $AccessRecord->ID)
+                'api/view_access_record', array('id' => $AccessRecord->ID)
             ));
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)

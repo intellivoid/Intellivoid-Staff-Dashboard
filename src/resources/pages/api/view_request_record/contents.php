@@ -19,7 +19,7 @@ use IntellivoidAPI\IntellivoidAPI;
 
     if(isset($_GET['id']) == false)
     {
-        Actions::redirect(DynamicalWeb::getRoute('request_records'));
+        Actions::redirect(DynamicalWeb::getRoute('api/request_records'));
     }
 
     $IntellivoidAPI = new IntellivoidAPI();
@@ -32,11 +32,11 @@ use IntellivoidAPI\IntellivoidAPI;
     }
     catch (RequestRecordNotFoundException $e)
     {
-        Actions::redirect(DynamicalWeb::getRoute('request_records', array('callback' => '104')));
+        Actions::redirect(DynamicalWeb::getRoute('api/request_records', array('callback' => '104')));
     }
     catch(Exception $exception)
     {
-        Actions::redirect(DynamicalWeb::getRoute('request_records', array('callback' => '105')));
+        Actions::redirect(DynamicalWeb::getRoute('api/request_records', array('callback' => '105')));
     }
 
     DynamicalWeb::setMemoryObject('intellivoid_api', $IntellivoidAPI);
@@ -64,7 +64,7 @@ use IntellivoidAPI\IntellivoidAPI;
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
                                         <h4 class="card-title">Request Record - <?PHP HTML::print($RequestRecord->ID); ?></h4>
                                         <div class="wrapper d-flex align-items-center">
-                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" onclick="location.href='<?PHP DynamicalWeb::getRoute('view_request_record', array('id' => $_GET['id'], 'action' => 'export'), true); ?>'" type="button">
+                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" onclick="location.href='<?PHP DynamicalWeb::getRoute('api/view_request_record', array('id' => $_GET['id'], 'action' => 'export'), true); ?>'" type="button">
                                                 <i class="mdi mdi-export"></i>
                                             </button>
                                         </div>

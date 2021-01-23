@@ -107,13 +107,13 @@
             <div class="collapse" id="coa-dropdown">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('authentication_requests', [], true); ?>">Authentication Requests</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('coa/authentication_requests', [], true); ?>">Authentication Requests</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('authentication_access', [], true); ?>">Authentication Access</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('coa/authentication_access', [], true); ?>">Authentication Access</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('application_access', [], true); ?>">Application Access</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('coa/application_access', [], true); ?>">Application Access</a>
                     </li>
                 </ul>
             </div>
@@ -130,13 +130,13 @@
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('api/access_records', [], true); ?>">Access Records</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('request_records', [], true); ?>">Request Records</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('api/request_records', [], true); ?>">Request Records</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('exception_records', [], true); ?>">Exceptions</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('api/exception_records', [], true); ?>">Exceptions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('access_key_changes', [], true); ?>">Access Key Changes</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('api/access_key_changes', [], true); ?>">Access Key Changes</a>
                     </li>
                 </ul>
             </div>
@@ -167,13 +167,13 @@
             <div class="collapse" id="openblu-dropdown">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_servers', [], true); ?>">Servers</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu/openblu_servers', [], true); ?>">Servers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu_subscriptions', [], true); ?>">User Subscriptions</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu/openblu_subscriptions', [], true); ?>">User Subscriptions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('redirect_openblu_api_requests', [], true); ?>">API Requests</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('openblu/redirect_openblu_api_requests', [], true); ?>">API Requests</a>
                     </li>
                 </ul>
             </div>
@@ -188,13 +188,13 @@
             <div class="collapse" id="coffeehouse-dropdown">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse_lydia_sessions', [], true); ?>">Lydia Sessions</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse/coffeehouse_lydia_sessions', [], true); ?>">Lydia Sessions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse_subscriptions', [], true); ?>">User Subscriptions</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse/coffeehouse_subscriptions', [], true); ?>">User Subscriptions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('redirect_coffeehouse_api_requests', [], true); ?>">API Requests</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse/redirect_coffeehouse_api_requests', [], true); ?>">API Requests</a>
                     </li>
                 </ul>
             </div>

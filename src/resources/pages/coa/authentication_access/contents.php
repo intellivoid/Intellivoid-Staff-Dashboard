@@ -92,7 +92,7 @@
                 <a href="<?PHP DynamicalWeb::getRoute('cloud/manage_application', array('id' => $id), true) ?>" class="text-white">
                     <i class="mdi mdi-pencil"></i>
                 </a>
-                <a href="<?PHP DynamicalWeb::getRoute('authentication_access', array('filter' => 'application_id', 'value' => $id), true) ?>" class="text-white pl-2">
+                <a href="<?PHP DynamicalWeb::getRoute('coa/authentication_access', array('filter' => 'application_id', 'value' => $id), true) ?>" class="text-white pl-2">
                     <i class="mdi mdi-filter"></i>
                 </a>
             </div>
@@ -109,7 +109,7 @@
             </div>
             <div class="border-top mt-3 mb-3"></div>
             <div class="row ml-auto">
-                <a href="<?PHP DynamicalWeb::getRoute('authentication_access', array('filter' => 'application_id', 'value' => $id), true) ?>" class="text-white">
+                <a href="<?PHP DynamicalWeb::getRoute('coa/authentication_access', array('filter' => 'application_id', 'value' => $id), true) ?>" class="text-white">
                     <i class="mdi mdi-filter"></i>
                 </a>
             </div>
@@ -198,7 +198,7 @@
                                                                                 <a href="<?PHP DynamicalWeb::getRoute('cloud/manage_account', array('id' => $authentication_access['account_id']), true) ?>" class="text-white pl-2">
                                                                                     <i class="mdi mdi-pencil"></i>
                                                                                 </a>
-                                                                                <a href="<?PHP DynamicalWeb::getRoute('authentication_access', array('filter' => 'account_id', 'value' => $authentication_access['account_id']), true) ?>" class="text-white pl-2">
+                                                                                <a href="<?PHP DynamicalWeb::getRoute('coa/authentication_access', array('filter' => 'account_id', 'value' => $authentication_access['account_id']), true) ?>" class="text-white pl-2">
                                                                                     <i class="mdi mdi-filter"></i>
                                                                                 </a>
                                                                             </div>
@@ -266,12 +266,12 @@
                                                                     <div class="dropdown">
                                                                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_authentication_access', array('id' => $authentication_access['id']), true); ?>">View Details</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('coa/view_authentication_access', array('id' => $authentication_access['id']), true); ?>">View Details</a>
                                                                             <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('cloud/manage_application', array('id' => $authentication_access['application_id']), true); ?>">Manage Application</a>
                                                                             <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('cloud/manage_account', array('id' => $authentication_access['application_id']), true); ?>">Manage Account</a>
                                                                             <div class="dropdown-divider"></div>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('authentication_access', array('filter' => 'application_id', 'value' => $authentication_access['application_id']), true) ?>">Filter by Application</a>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('authentication_access', array('filter' => 'account_id', 'value' => $authentication_access['account_id']), true) ?>">Filter by Account</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('coa/authentication_access', array('filter' => 'application_id', 'value' => $authentication_access['application_id']), true) ?>">Filter by Application</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('coa/authentication_access', array('filter' => 'account_id', 'value' => $authentication_access['account_id']), true) ?>">Filter by Account</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -310,7 +310,7 @@
                                                                             $RedirectHref['page'] = $Results['current_page'] - 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('authentication_access', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('coa/authentication_access', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-left"></i>
                                                                                 </a>
                                                                             </li>
@@ -333,7 +333,7 @@
                                                                                 $RedirectHref['page'] = $current_count;
                                                                                 ?>
                                                                                 <li class="page-item">
-                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('authentication_access', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('coa/authentication_access', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                                 </li>
                                                                                 <?PHP
                                                                             }
@@ -362,7 +362,7 @@
                                                                             $RedirectHref['page'] = $Results['current_page'] + 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('authentication_access', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('coa/authentication_access', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-right"></i>
                                                                                 </a>
                                                                             </li>

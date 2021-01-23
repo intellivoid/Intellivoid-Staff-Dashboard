@@ -12,7 +12,7 @@
 
     if(isset($_GET['id']) == false)
     {
-        Actions::redirect(DynamicalWeb::getRoute('openblu_servers'));
+        Actions::redirect(DynamicalWeb::getRoute('openblu/openblu_servers'));
     }
 
     $OpenBlu = new OpenBlu();
@@ -25,11 +25,11 @@
     }
     catch (VPNNotFoundException $e)
     {
-        Actions::redirect(DynamicalWeb::getRoute('openblu_servers', array('callback' => '104')));
+        Actions::redirect(DynamicalWeb::getRoute('openblu/openblu_servers', array('callback' => '104')));
     }
     catch(Exception $exception)
     {
-        Actions::redirect(DynamicalWeb::getRoute('openblu_servers', array('callback' => '105')));
+        Actions::redirect(DynamicalWeb::getRoute('openblu/openblu_servers', array('callback' => '105')));
     }
 ?>
 <!DOCTYPE html>

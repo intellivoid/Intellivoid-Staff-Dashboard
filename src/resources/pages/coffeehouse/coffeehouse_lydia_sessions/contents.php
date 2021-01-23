@@ -102,7 +102,7 @@
                                                                     <div class="dropdown">
                                                                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_coffeehouse_lydia_session', array('id' => $session['id']), true); ?>">View Details</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('coffeehouse/view_coffeehouse_lydia_session', array('id' => $session['id']), true); ?>">View Details</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -140,7 +140,7 @@
                                                                             $RedirectHref['page'] = $Results['current_page'] - 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse_lydia_sessions', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse/coffeehouse_lydia_sessions', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-left"></i>
                                                                                 </a>
                                                                             </li>
@@ -163,7 +163,7 @@
                                                                                 $RedirectHref['page'] = $current_count;
                                                                                 ?>
                                                                                 <li class="page-item">
-                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse_lydia_sessions', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse/coffeehouse_lydia_sessions', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                                 </li>
                                                                                 <?PHP
                                                                             }
@@ -192,7 +192,7 @@
                                                                             $RedirectHref['page'] = $Results['current_page'] + 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse_lydia_sessions', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('coffeehouse/coffeehouse_lydia_sessions', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-right"></i>
                                                                                 </a>
                                                                             </li>

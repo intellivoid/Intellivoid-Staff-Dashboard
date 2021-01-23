@@ -210,7 +210,7 @@ use msqg\Abstracts\SortBy;
                                                                                 <a href="<?PHP DynamicalWeb::getRoute('api/view_access_record', array('id' => $requestRecordObject->AccessRecordID), true); ?>" class="text-white pl-2">
                                                                                     <i class="mdi mdi-database-search"></i>
                                                                                 </a>
-                                                                                <a href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'access_record_id', 'value' => $requestRecordObject->AccessRecordID), true) ?>" class="text-white pl-2">
+                                                                                <a href="<?PHP DynamicalWeb::getRoute('api/request_records', array('filter' => 'access_record_id', 'value' => $requestRecordObject->AccessRecordID), true) ?>" class="text-white pl-2">
                                                                                     <i class="mdi mdi-filter"></i>
                                                                                 </a>
                                                                             </div>
@@ -232,7 +232,7 @@ use msqg\Abstracts\SortBy;
                                                                                 <a href="<?PHP DynamicalWeb::getRoute('cloud/manage_application', array('id' => $requestRecordObject->ApplicationID), true) ?>" class="text-white pl-2">
                                                                                     <i class="mdi mdi-database-search"></i>
                                                                                 </a>
-                                                                                <a href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'application_id', 'value' => $requestRecordObject->ApplicationID), true) ?>" class="text-white pl-2">
+                                                                                <a href="<?PHP DynamicalWeb::getRoute('api/request_records', array('filter' => 'application_id', 'value' => $requestRecordObject->ApplicationID), true) ?>" class="text-white pl-2">
                                                                                     <i class="mdi mdi-filter"></i>
                                                                                 </a>
                                                                             </div>
@@ -244,19 +244,19 @@ use msqg\Abstracts\SortBy;
                                                                     <div class="dropdown">
                                                                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" href="#">Actions</a>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('view_request_record', array('id' => $requestRecordObject->ID), true); ?>">View Details</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('api/view_request_record', array('id' => $requestRecordObject->ID), true); ?>">View Details</a>
                                                                             <div class="dropdown-divider"></div>
                                                                             <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('api/view_access_record', array('id' => $requestRecordObject->AccessRecordID), true); ?>">View Access Record</a>
                                                                             <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('cloud/manage_application', array('id' => $requestRecordObject->ApplicationID), true); ?>">View Application</a>
                                                                             <a class="dropdown-item" href="#">View Exception</a>
                                                                             <div class="dropdown-divider"></div>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'request_method', 'value' => $requestRecordObject->RequestMethod), true); ?>">Filter by Request Method</a>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'version', 'value' => $requestRecordObject->Version), true); ?>">Filter by Version</a>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'path', 'value' => $requestRecordObject->Path), true); ?>">Filter by Path</a>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'ip_address', 'value' => $requestRecordObject->IPAddress), true); ?>">Filter by IP Address</a>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'response_code', 'value' => $requestRecordObject->ResponseCode), true); ?>">Filter by Response Code</a>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'access_record_id', 'value' => $requestRecordObject->AccessRecordID), true); ?>">Filter Access Record ID</a>
-                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('request_records', array('filter' => 'application_id', 'value' => $requestRecordObject->ApplicationID), true); ?>">Filter Application ID</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('api/request_records', array('filter' => 'request_method', 'value' => $requestRecordObject->RequestMethod), true); ?>">Filter by Request Method</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('api/request_records', array('filter' => 'version', 'value' => $requestRecordObject->Version), true); ?>">Filter by Version</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('api/request_records', array('filter' => 'path', 'value' => $requestRecordObject->Path), true); ?>">Filter by Path</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('api/request_records', array('filter' => 'ip_address', 'value' => $requestRecordObject->IPAddress), true); ?>">Filter by IP Address</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('api/request_records', array('filter' => 'response_code', 'value' => $requestRecordObject->ResponseCode), true); ?>">Filter by Response Code</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('api/request_records', array('filter' => 'access_record_id', 'value' => $requestRecordObject->AccessRecordID), true); ?>">Filter Access Record ID</a>
+                                                                            <a class="dropdown-item" href="<?PHP DynamicalWeb::getRoute('api/request_records', array('filter' => 'application_id', 'value' => $requestRecordObject->ApplicationID), true); ?>">Filter Application ID</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -295,7 +295,7 @@ use msqg\Abstracts\SortBy;
                                                                             $RedirectHref['page'] = $Results['current_page'] - 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('request_records', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('api/request_records', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-left"></i>
                                                                                 </a>
                                                                             </li>
@@ -318,7 +318,7 @@ use msqg\Abstracts\SortBy;
                                                                                 $RedirectHref['page'] = $current_count;
                                                                                 ?>
                                                                                 <li class="page-item">
-                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('request_records', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
+                                                                                    <a class="page-link" href="<?PHP DynamicalWeb::getRoute('api/request_records', $RedirectHref, true); ?>"><?PHP HTML::print($current_count); ?></a>
                                                                                 </li>
                                                                                 <?PHP
                                                                             }
@@ -347,7 +347,7 @@ use msqg\Abstracts\SortBy;
                                                                             $RedirectHref['page'] = $Results['current_page'] + 1;
                                                                             ?>
                                                                             <li class="page-item">
-                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('request_records', $RedirectHref, true); ?>">
+                                                                                <a class="page-link" href="<?PHP DynamicalWeb::getRoute('api/request_records', $RedirectHref, true); ?>">
                                                                                     <i class="mdi mdi-chevron-right"></i>
                                                                                 </a>
                                                                             </li>

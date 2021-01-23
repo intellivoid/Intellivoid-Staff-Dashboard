@@ -16,7 +16,7 @@ use IntellivoidAccounts\Exceptions\AuthenticationRequestNotFoundException;
 
     if(isset($_GET['id']) == false)
     {
-        Actions::redirect(DynamicalWeb::getRoute('application_access'));
+        Actions::redirect(DynamicalWeb::getRoute('coa/application_access'));
     }
 
     $IntellivoidAccounts = new IntellivoidAccounts();
@@ -29,11 +29,11 @@ use IntellivoidAccounts\Exceptions\AuthenticationRequestNotFoundException;
     }
     catch (ApplicationAccessNotFoundException $e)
     {
-        Actions::redirect(DynamicalWeb::getRoute('application_access', array('callback' => '104')));
+        Actions::redirect(DynamicalWeb::getRoute('coa/application_access', array('callback' => '104')));
     }
     catch(Exception $exception)
     {
-        Actions::redirect(DynamicalWeb::getRoute('application_access', array('callback' => '105')));
+        Actions::redirect(DynamicalWeb::getRoute('coa/application_access', array('callback' => '105')));
     }
 ?>
 <!DOCTYPE html>

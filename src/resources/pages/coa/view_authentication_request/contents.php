@@ -13,7 +13,7 @@ use IntellivoidAccounts\Abstracts\SearchMethods\AuthenticationRequestSearchMetho
 
     if(isset($_GET['id']) == false)
     {
-        Actions::redirect(DynamicalWeb::getRoute('authentication_requests'));
+        Actions::redirect(DynamicalWeb::getRoute('coa/authentication_requests'));
     }
 
     $IntellivoidAccounts = new IntellivoidAccounts();
@@ -26,11 +26,11 @@ use IntellivoidAccounts\Abstracts\SearchMethods\AuthenticationRequestSearchMetho
     }
     catch (AuthenticationRequestNotFoundException $e)
     {
-        Actions::redirect(DynamicalWeb::getRoute('authentication_requests', array('callback' => '104')));
+        Actions::redirect(DynamicalWeb::getRoute('coa/authentication_requests', array('callback' => '104')));
     }
     catch(Exception $exception)
     {
-        Actions::redirect(DynamicalWeb::getRoute('authentication_requests', array('callback' => '105')));
+        Actions::redirect(DynamicalWeb::getRoute('coa/authentication_requests', array('callback' => '105')));
     }
 ?>
 <!DOCTYPE html>

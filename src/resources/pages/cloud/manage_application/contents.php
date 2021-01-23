@@ -191,9 +191,9 @@
                                                     }
                                                 ?>
                                                 <button type="button" class="btn btn-danger btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('cloud/manage_application', array('id' => $_GET['id'], 'action' => 'delete_application'), true); ?>';">Delete</button>
-                                                <button type="button" class="btn btn-outline-primary btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('authentication_requests', array('filter'=>'application_id', 'value'=>$Application->ID), true); ?>';">View Request Tokens</button>
-                                                <button type="button" class="btn btn-outline-primary btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('authentication_access', array('filter'=>'application_id', 'value'=>$Application->ID), true); ?>';">View Access Tokens</button>
-                                                <button type="button" class="btn btn-outline-primary btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('application_access', array('filter'=>'application_id', 'value'=>$Application->ID), true); ?>';">View Application Access</button>
+                                                <button type="button" class="btn btn-outline-primary btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('coa/authentication_requests', array('filter'=>'application_id', 'value'=>$Application->ID), true); ?>';">View Request Tokens</button>
+                                                <button type="button" class="btn btn-outline-primary btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('coa/authentication_access', array('filter'=>'application_id', 'value'=>$Application->ID), true); ?>';">View Access Tokens</button>
+                                                <button type="button" class="btn btn-outline-primary btn-xs btn-block" onclick="location.href='<?PHP DynamicalWeb::getRoute('coa/application_access', array('filter'=>'application_id', 'value'=>$Application->ID), true); ?>';">View Application Access</button>
                                             </div>
                                         </div>
                                     </div>

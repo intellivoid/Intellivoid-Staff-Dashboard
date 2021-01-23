@@ -21,7 +21,7 @@ use IntellivoidAPI\IntellivoidAPI;
 
     if(isset($_GET['id']) == false)
     {
-        Actions::redirect(DynamicalWeb::getRoute('exception_records'));
+        Actions::redirect(DynamicalWeb::getRoute('api/exception_records'));
     }
 
     $IntellivoidAPI = new IntellivoidAPI();
@@ -34,11 +34,11 @@ use IntellivoidAPI\IntellivoidAPI;
     }
     catch (ExceptionRecordNotFoundException $e)
     {
-        Actions::redirect(DynamicalWeb::getRoute('exception_records', array('callback' => '104')));
+        Actions::redirect(DynamicalWeb::getRoute('api/exception_records', array('callback' => '104')));
     }
     catch(Exception $exception)
     {
-        Actions::redirect(DynamicalWeb::getRoute('exception_records', array('callback' => '105')));
+        Actions::redirect(DynamicalWeb::getRoute('api/exception_records', array('callback' => '105')));
     }
 
     DynamicalWeb::setMemoryObject('intellivoid_api', $IntellivoidAPI);
@@ -66,7 +66,7 @@ use IntellivoidAPI\IntellivoidAPI;
                                     <div class="card-header header-sm d-flex justify-content-between align-items-center">
                                         <h4 class="card-title">Exception Record - <?PHP HTML::print($ExceptionRecord->ID); ?></h4>
                                         <div class="wrapper d-flex align-items-center">
-                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" onclick="location.href='<?PHP DynamicalWeb::getRoute('view_exception_record', array('id' => $_GET['id'], 'action' => 'export'), true); ?>'" type="button">
+                                            <button class="btn btn-transparent icon-btn arrow-disabled pl-2 pr-2 text-white text-small" onclick="location.href='<?PHP DynamicalWeb::getRoute('api/view_exception_record', array('id' => $_GET['id'], 'action' => 'export'), true); ?>'" type="button">
                                                 <i class="mdi mdi-export"></i>
                                             </button>
                                         </div>
@@ -91,7 +91,7 @@ use IntellivoidAPI\IntellivoidAPI;
                                                         <td><?PHP HTML::print("Request Record ID"); ?></td>
                                                         <td><?PHP HTML::print(gettype($ExceptionRecord->RequestRecordID)); ?></td>
                                                         <td>
-                                                            <a href="<?PHP DynamicalWeb::getRoute('view_request_record', array('id' => $ExceptionRecord->RequestRecordID), true); ?>">
+                                                            <a href="<?PHP DynamicalWeb::getRoute('api/view_request_record', array('id' => $ExceptionRecord->RequestRecordID), true); ?>">
                                                                 <?PHP HTML::print($ExceptionRecord->RequestRecordID); ?>
                                                             </a>
                                                         </td>

@@ -23,14 +23,14 @@
         if(isset($_POST['by']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '100')
+                'coa/authentication_requests', array('callback' => '100')
             ));
         }
 
         if(isset($_POST['value']) == false)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '100')
+                'coa/authentication_requests', array('callback' => '100')
             ));
         }
 
@@ -53,25 +53,25 @@
                 $_POST['by'], $_POST['value']
             );
             Actions::redirect(DynamicalWeb::getRoute(
-                'view_authentication_request', array('id' => $AuthenticationRequest->Id)
+                'coa/view_authentication_request', array('id' => $AuthenticationRequest->Id)
             ));
         }
         catch(InvalidSearchMethodException $invalidSearchMethodException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '103')
+                'coa/authentication_requests', array('callback' => '103')
             ));
         }
         catch(AuthenticationRequestNotFoundException $authenticationRequestNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '101')
+                'coa/authentication_requests', array('callback' => '101')
             ));
         }
         catch(Exception $exception)
         {
             Actions::redirect(DynamicalWeb::getRoute(
-                'authentication_requests', array('callback' => '102')
+                'coa/authentication_requests', array('callback' => '102')
             ));
         }
     }

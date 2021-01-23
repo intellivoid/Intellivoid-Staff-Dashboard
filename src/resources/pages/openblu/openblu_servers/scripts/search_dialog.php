@@ -4,7 +4,7 @@
 <div class="modal fade" id="searchDialog" tabindex="-1" role="dialog" aria-labelledby="searchDialogLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="POST" action="<?PHP DynamicalWeb::getRoute('openblu_servers', array('action' => 'search'), true); ?>">
+            <form method="POST" action="<?PHP DynamicalWeb::getRoute('openblu/openblu_servers', array('action' => 'search'), true); ?>">
                 <div class="modal-header">
                     <h5 class="modal-title" id="searchDialog">OpenBlu Server Search</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

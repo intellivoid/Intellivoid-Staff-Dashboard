@@ -4,7 +4,7 @@
 <div class="modal fade" id="filterDialog" tabindex="-1" role="dialog" aria-labelledby="filterDialogLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="GET" action="<?PHP DynamicalWeb::getRoute('request_records', array(), true); ?>">
+            <form method="GET" action="<?PHP DynamicalWeb::getRoute('api/request_records', array(), true); ?>">
                 <div class="modal-header">
                     <h5 class="modal-title" id="filterDialog">Filter Request Records</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
