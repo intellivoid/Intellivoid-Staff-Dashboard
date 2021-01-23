@@ -33,7 +33,7 @@
                     <img class="img-xs" src="<?PHP HTML::print(getAvatarUrl(WEB_ACCOUNT_PUBID, 'normal')); ?>" alt="Profile image">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown py-2" aria-labelledby="UserDropdown">
-                    <a href="<?PHP DynamicalWeb::getRoute('logout', array(), true); ?>" class="dropdown-item">Close Session</a>
+                    <a href="<?PHP DynamicalWeb::getRoute('auth/logout', array(), true); ?>" class="dropdown-item">Close Session</a>
                 </div>
             </li>
         </ul>

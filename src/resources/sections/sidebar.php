@@ -35,7 +35,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('support_tickets', [], true); ?>">
+            <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('support/support_tickets', [], true); ?>">
                 <i class="menu-icon mdi mdi-ticket"></i>
                 <span class="menu-title">Support Tickets</span>
             </a>
@@ -49,22 +49,22 @@
             <div class="collapse" id="cloud-dropdown">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('accounts', [], true); ?>">Accounts</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('cloud/accounts', [], true); ?>">Accounts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('applications', [], true); ?>">Applications</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('cloud/applications', [], true); ?>">Applications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('devices', [], true); ?>">Devices</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('cloud/devices', [], true); ?>">Devices</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('known_hosts', [], true); ?>">Known Hosts</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('cloud/known_hosts', [], true); ?>">Known Hosts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('login_records', [], true); ?>">Login Records</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('cloud/login_records', [], true); ?>">Login Records</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('audit_logs', [], true); ?>">Audit Logs</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('cloud/audit_logs', [], true); ?>">Audit Logs</a>
                     </li>
                 </ul>
             </div>
@@ -78,22 +78,22 @@
             <div class="collapse" id="finance-dropdown">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('subscription_plans', [], true); ?>">Subscription Plans</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('finance_subscriptions/subscription_plans', [], true); ?>">Subscription Plans</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('subscription_promotions', [], true); ?>">Subscription Promotions</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('finance_subscriptions/subscription_promotions', [], true); ?>">Subscription Promotions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('active_subscriptions', [], true); ?>">Active Subscriptions</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('finance_subscriptions/manage_subscription_promotion', [], true); ?>">Active Subscriptions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('transaction_records', [], true); ?>">Transaction Records</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('finance/transaction_records', [], true); ?>">Transaction Records</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('create_transaction', [], true); ?>">Create Transaction</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('finance/create_transaction', [], true); ?>">Create Transaction</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('transfer_funds', [], true); ?>">Transfer Funds</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('finance/transfer_funds', [], true); ?>">Transfer Funds</a>
                     </li>
                 </ul>
             </div>
@@ -127,7 +127,7 @@
             <div class="collapse" id="api-dropdown">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('access_records', [], true); ?>">Access Records</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('api/access_records', [], true); ?>">Access Records</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('request_records', [], true); ?>">Request Records</a>
@@ -150,10 +150,10 @@
             <div class="collapse" id="tpa-dropdown">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('telegram_clients', [], true); ?>">Telegram Clients</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('tpa/telegram_clients', [], true); ?>">Telegram Clients</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('otl_codes', [], true); ?>">OTL Codes</a>
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('tpa/otl_codes', [], true); ?>">OTL Codes</a>
                     </li>
                 </ul>
             </div>

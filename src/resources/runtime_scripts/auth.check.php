@@ -10,7 +10,7 @@
     Runtime::import('SecuredWebSessions');
 
     $unauthorized_pages = [
-        'login'
+        'auth/login'
     ];
 
     execute_authentication_check($unauthorized_pages);
@@ -91,7 +91,7 @@
 
             if($redirect == true)
             {
-                Actions::redirect(DynamicalWeb::getRoute('login'));
+                Actions::redirect(DynamicalWeb::getRoute('auth/login'));
             }
         }
         else

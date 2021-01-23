@@ -62,7 +62,7 @@
             return array(
                 'balance' => (float)$this->Balance,
                 'verification_methods' => $this->VerificationMethods->toArray(),
-                'known_hosts' => $this->KnownHosts->toArray(),
+                'cloud/known_hosts' => $this->KnownHosts->toArray(),
                 'roles' => $this->Roles->toArray()
             );
         }
@@ -91,9 +91,9 @@
                 $ConfigurationObject->VerificationMethods = VerificationMethods::fromArray(array());
             }
 
-            if(isset($data['known_hosts']))
+            if(isset($data['cloud/known_hosts']))
             {
-                $ConfigurationObject->KnownHosts = KnownHosts::fromArray($data['known_hosts']);
+                $ConfigurationObject->KnownHosts = KnownHosts::fromArray($data['cloud/known_hosts']);
             }
             else
             {

@@ -126,18 +126,14 @@
         /**
          * Imports a script from local resources or shared resources
          *
-         * @param string $sectionName
+         * @param string $scriptName
          * @throws Exception
          */
-        public static function importScript(string $sectionName)
+        public static function importScript(string $scriptName)
         {
-            $FormattedName = strtolower(stripslashes($sectionName));
+            $FormattedName = strtolower(stripslashes($scriptName));
 
-            $LocalResource = null;
-            if(defined("APP_CURRENT_PAGE_DIRECTORY"))
-            {
-                $LocalResource = APP_CURRENT_PAGE_DIRECTORY . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR . $FormattedName . '.php';
-            }
+            $LocalResource = APP_CURRENT_PAGE_DIRECTORY . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR . $FormattedName . '.php';
             $SharedResource = APP_RESOURCES_DIRECTORY . DIRECTORY_SEPARATOR . 'shared' . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR . $FormattedName . '.php';
 
             if(file_exists($LocalResource) == false)
@@ -158,5 +154,18 @@
                 /** @noinspection PhpIncludeInspection */
                 include_once($LocalResource);
             }
+        }
+
+        /**
+         * Minifies HTML content
+         *
+         * @param string $html
+         * @param array $options
+         * @return string
+         */
+        public static function minifyHtml(string $html, array $options = []) : string
+        {
+            $minifier = new HtmlMin($options);
+            return $minifier->minify($html);
         }
     }
