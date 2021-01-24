@@ -49,7 +49,7 @@
         }
     }
 
-    $Results = get_results($IntellivoidAccounts->database, 5000, 'telegram_clients', 'id',
+    $Results = get_results($IntellivoidAccounts->database, 2000, 'telegram_clients', 'id',
         QueryBuilder::select(
                 'telegram_clients', ['id', 'public_id', 'available', 'account_id', 'chat', 'user', 'user_id', 'username', 'chat_id', 'last_activity'],
                 $where, $where_value, 'last_activity', SortBy::descending

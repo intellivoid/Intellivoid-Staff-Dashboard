@@ -134,6 +134,15 @@ use IntellivoidAccounts\IntellivoidAccounts;
                                                                     (<?PHP HTML::print(date("F j, Y, g:i a", $TelegramClient->CreatedTimestamp)); ?>)
                                                                 </td>
                                                             </tr>
+                                                            <tr>
+                                                                <td>Search By</td>
+                                                                <td>Actions</td>
+                                                                <td>
+                                                                    <a href="<?PHP DynamicalWeb::getRoute('tpa/telegram_clients', array("filter"=>"user_id", "value"=>$TelegramClient->User->ID), true); ?>">Search by Groups</a>
+                                                                    |
+                                                                    <a href="<?PHP DynamicalWeb::getRoute('tpa/telegram_clients', array("filter"=>"chat_id", "value"=>$TelegramClient->Chat->ID), true); ?>">Search by Users</a>
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
