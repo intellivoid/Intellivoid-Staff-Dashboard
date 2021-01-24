@@ -51,7 +51,7 @@
 
     $Results = get_results($IntellivoidAccounts->database, 5000, 'telegram_clients', 'id',
         QueryBuilder::select(
-                'telegram_clients', ['id', 'public_id', 'available', 'account_id', 'chat', 'user', 'user_id', 'chat_id', 'last_activity'],
+                'telegram_clients', ['id', 'public_id', 'available', 'account_id', 'chat', 'user', 'user_id', 'username', 'chat_id', 'last_activity'],
                 $where, $where_value, 'last_activity', SortBy::descending
         ),
     $where, $where_value);
@@ -98,6 +98,7 @@
                                                             <th>Account ID</th>
                                                             <th>User ID</th>
                                                             <th>Chat ID</th>
+                                                            <th>Username</th>
                                                             <th>Available</th>
                                                             <th>Last Activity</th>
                                                             <th>Actions</th>
@@ -223,6 +224,17 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
+
+                                                                <?PHP
+                                                                $Username = "Unknown";
+
+                                                                if(isset($telegram_client['username']))
+                                                                {
+                                                                    $Username = '@' . $telegram_client['username'];
+                                                                    $Username = "<a href=\"https://t.me/" . htmlspecialchars($telegram_client['username'], ENT_QUOTES, 'UTF-8') . "\">" . $DisplayName . "</a>";
+                                                                }
+                                                                ?>
+                                                                <td style="padding-top: 10px; padding-bottom: 10px;" data-toggle="tooltip" data-placement="bottom" title="<?PHP HTML::print($public_id, false); ?>"><?PHP HTML::print($Username, false); ?></td>
                                                                 <td style="padding-top: 10px; padding-bottom: 10px;">
                                                                     <?PHP
                                                                     switch($telegram_client['available'])
