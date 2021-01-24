@@ -80,11 +80,16 @@
             "main_class": "sws"
         },
         "IntellivoidAccounts": {
-            "directory_name": "IntellivoidAccounts",
-            "autoloader": "IntellivoidAccounts.php",
-            "check_class_exists": true,
-            "namespace": "IntellivoidAccounts",
-            "main_class": "IntellivoidAccounts"
+            "package_name": "net.intellivoid.accounts",
+            "version": "latest",
+            "import_dependencies": true,
+            "throw_error": true
+        },
+        "TelegramClientManager": {
+            "package_name": "net.intellivoid.telegram_client_manager",
+            "version": "latest",
+            "import_dependencies": true,
+            "throw_error": true
         },
         "IntellivoidAPI": {
             "directory_name": "IntellivoidAPI",

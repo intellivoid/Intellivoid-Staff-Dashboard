@@ -18,7 +18,11 @@
                         <label for="by">By</label>
                         <select name="by" id="by" class="form-control">
                             <option value="id">ID</option>
-                            <option value="public_id">Public ID</option>
+                            <option value="public_id">Public ID (PTID)</option>
+                            <option value="account_id">Account ID</option>
+                            <option value="chat_id">Chat ID</option>
+                            <option value="user_id">User ID</option>
+                            <option value="username">Username (without @)</option>
                         </select>
                     </div>
                     <div class="from-group">

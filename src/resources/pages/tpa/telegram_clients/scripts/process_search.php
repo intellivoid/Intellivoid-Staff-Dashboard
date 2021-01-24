@@ -3,11 +3,11 @@
 
     use DynamicalWeb\Actions;
     use DynamicalWeb\DynamicalWeb;
-    use IntellivoidAccounts\Exceptions\InvalidSearchMethodException;
-    use IntellivoidAccounts\Exceptions\TelegramClientNotFoundException;
     use IntellivoidAccounts\IntellivoidAccounts;
+    use TelegramClientManager\Exceptions\InvalidSearchMethod;
+    use TelegramClientManager\Exceptions\TelegramClientNotFoundException;
 
-    if(isset($_GET['action']))
+if(isset($_GET['action']))
     {
         if($_GET['action'] == 'search')
         {
@@ -34,7 +34,7 @@
             ));
         }
 
-        if(isset(DynamicalWeb::$globalObjects["intellivoid_accounts"]) == false)
+        if(isset(DynamicalWeb::$globalObjects["telegram_client_manager"]) == false)
         {
             /** @var IntellivoidAccounts $IntellivoidAccounts */
             $IntellivoidAccounts = DynamicalWeb::setMemoryObject(
@@ -57,13 +57,13 @@
                 'tpa/view_telegram_client', array('id' => $TelegramClient->ID)
             ));
         }
-        catch(InvalidSearchMethodException $invalidSearchMethodException)
+        catch(InvalidSearchMethod)
         {
             Actions::redirect(DynamicalWeb::getRoute(
                 'tpa/telegram_clients', array('callback' => '103')
             ));
         }
-        catch(TelegramClientNotFoundException $telegramClientNotFoundException)
+        catch(TelegramClientNotFoundException)
         {
             Actions::redirect(DynamicalWeb::getRoute(
                 'tpa/telegram_clients', array('callback' => '101')
