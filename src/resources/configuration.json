@@ -111,11 +111,10 @@
             "main_class": "Support"
         },
         "OpenBlu": {
-            "directory_name": "OpenBlu",
-            "autoloader": "OpenBlu.php",
-            "check_class_exists": true,
-            "namespace": "OpenBlu",
-            "main_class": "OpenBlu"
+            "package_name": "net.intellivoid.openblu",
+            "version": "latest",
+            "import_dependencies": true,
+            "throw_error": true
         },
         "CoffeeHouse": {
             "package_name": "net.intellivoid.coffeehouse",
