@@ -104,11 +104,10 @@
             "throw_error": true
         },
         "TicketSupport": {
-            "directory_name": "Support",
-            "autoloader": "Support.php",
-            "check_class_exists": true,
-            "namespace": "Support",
-            "main_class": "Support"
+            "package_name": "net.intellivoid.support",
+            "version": "latest",
+            "import_dependencies": true,
+            "throw_error": true
         },
         "OpenBlu": {
             "package_name": "net.intellivoid.openblu",
