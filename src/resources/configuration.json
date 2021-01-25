@@ -92,18 +92,16 @@
             "throw_error": true
         },
         "IntellivoidAPI": {
-            "directory_name": "IntellivoidAPI",
-            "autoloader": "IntellivoidAPI.php",
-            "check_class_exists": true,
-            "namespace": "IntellivoidAPI",
-            "main_class": "IntellivoidAPI"
+            "package_name": "net.intellivoid.api",
+            "version": "latest",
+            "import_dependencies": true,
+            "throw_error": true
         },
         "msqg": {
-            "directory_name": "msqg",
-            "autoloader": "msqg.php",
-            "check_class_exists": true,
-            "namespace": "msqg",
-            "main_class": "msqg"
+            "package_name": "net.intellivoid.msqg",
+            "version": "latest",
+            "import_dependencies": true,
+            "throw_error": true
         },
         "TicketSupport": {
             "directory_name": "Support",
