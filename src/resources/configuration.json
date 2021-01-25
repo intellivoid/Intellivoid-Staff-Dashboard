@@ -120,11 +120,10 @@
             "main_class": "OpenBlu"
         },
         "CoffeeHouse": {
-            "directory_name": "CoffeeHouse",
-            "autoloader": "CoffeeHouse.php",
-            "check_class_exists": true,
-            "namespace": "CoffeeHouse",
-            "main_class": "CoffeeHouse"
+            "package_name": "net.intellivoid.coffeehouse",
+            "version": "latest",
+            "import_dependencies": true,
+            "throw_error": true
         },
         "COASniffle": {
             "directory_name": "COASniffle",
