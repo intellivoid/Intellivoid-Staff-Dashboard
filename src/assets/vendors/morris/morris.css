@@ -1,0 +1,33 @@
+.morris-hover {
+    position: absolute;
+    z-index: 1000
+}
+
+.morris-hover.morris-default-style {
+    border-radius: 5px;
+    padding: 10px 12px;
+    color: #666;
+    background: #2f3d46;
+    border: none;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 12px;
+    text-align: center;
+    box-shadow: 0 5px 25px 5px rgba(0, 0, 0, 0.14);
+}
+
+.morris-hover.morris-default-style .morris-hover-row-label {
+    background-color: #2f3d46;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 4px;
+    border-radius: 5px 5px 0 0;
+    margin: -10px -12px 10px;
+}
+
+.morris-hover.morris-default-style .morris-hover-point {
+    white-space: nowrap;
+    margin: 0.1em 0;
+    font-weight: 600;
+    line-height: 24px;
+    font-size: 14px;
+}

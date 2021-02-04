@@ -158,6 +158,23 @@
                 </ul>
             </div>
         </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#analytics-dropdown" aria-expanded="false" aria-controls="analytics-dropdown">
+                <i class="menu-icon mdi mdi-chart-pie"></i>
+                <span class="menu-title">DeepAnalytics</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="analytics-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('deepanalytics/lydiachatbot', [], true); ?>">LydiaChatBot</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#openblu-dropdown" aria-expanded="false" aria-controls="openblu-dropdown">
                 <i class="menu-icon mdi mdi-vpn"></i>

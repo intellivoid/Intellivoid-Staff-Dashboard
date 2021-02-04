@@ -69,7 +69,9 @@
         {"method": ["GET", "POST"], "path": "/coffeehouse/lydia/sessions", "page": "coffeehouse/coffeehouse_lydia_sessions", "params": []},
         {"method": ["GET", "POST"], "path": "/coffeehouse/lydia/sessions/view", "page": "coffeehouse/view_coffeehouse_lydia_session", "params": []},
         {"method": ["GET", "POST"], "path": "/coffeehouse/subscriptions", "page": "coffeehouse/coffeehouse_subscriptions", "params": []},
-        {"method": ["GET", "POST"], "path": "/coffeehouse/api_requests", "page": "coffeehouse/redirect_coffeehouse_api_requests", "params": []}
+        {"method": ["GET", "POST"], "path": "/coffeehouse/api_requests", "page": "coffeehouse/redirect_coffeehouse_api_requests", "params": []},
+
+        {"method": ["GET", "POST"], "path": "/deepanalytics/lydiachatbot", "page": "deepanalytics/lydiachatbot", "params": []}
     ],
     "libraries": {
         "SecuredWebSessions": {
@@ -123,6 +125,12 @@
         },
         "COASniffle": {
             "package_name": "net.intellivoid.coa_sniffle",
+            "version": "latest",
+            "import_dependencies": true,
+            "throw_error": true
+        },
+        "DeepAnalytics": {
+            "package_name": "net.intellivoid.deepanalytics",
             "version": "latest",
             "import_dependencies": true,
             "throw_error": true
