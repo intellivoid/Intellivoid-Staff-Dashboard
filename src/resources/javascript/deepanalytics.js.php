@@ -981,7 +981,7 @@ const deepanalytics = {
 
 $(document).ready(function () {
     deepanalytics.init(
-        "deepanalytics_viewer", "<?php \DynamicalWeb\DynamicalWeb::getRoute('deepanalytics/lydiachatbot', [], true); ?>",
+        "deepanalytics_viewer", "<?php \DynamicalWeb\DynamicalWeb::getRoute($_GET["api"], [], true); ?>",
         ['#5468da', '#ffbb44', '#67a8e4', '#4ac18e', '#ea553d', '#3bc3e9', '#ea553d', '#e83e8c', '#007bff', '#20c997', '#ffc107', '#dc3545', '#6f42c1'],
         '#1a2036');
 });

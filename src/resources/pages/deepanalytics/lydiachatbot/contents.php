@@ -49,6 +49,6 @@
         <script src="/assets/vendors/morris/morris.min.js"></script>
         <script src="/assets/vendors/raphael/raphael-min.js"></script>
         <?PHP Javascript::importScript('rpage'); ?>
-        <?PHP Javascript::importScript('deepanalytics'); ?>
+        <?PHP Javascript::importScript('deepanalytics', ["api" => "deepanalytics/lydiachatbot"]); ?>
     </body>
 </html>
