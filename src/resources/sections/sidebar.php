@@ -171,6 +171,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('deepanalytics/lydiachatbot', [], true); ?>">LydiaChatBot</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?PHP DynamicalWeb::getRoute('deepanalytics/spamprotectionbot', [], true); ?>">SpamProtectionBot</a>
+                    </li>
                 </ul>
             </div>
         </li>

@@ -17,7 +17,7 @@
     <head>
         <?PHP HTML::importSection('header'); ?>
         <link rel="stylesheet" href="/assets/vendors/morris/morris.css">
-        <title>Intellivoid Staff - @LydiaChatBot Analytics</title>
+        <title>Intellivoid Staff - @SpamProtectionBot Analytics</title>
     </head>
     <body class="dark-theme sidebar-dark">
         <div class="container-scroller">
@@ -31,7 +31,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">@LydiaChatBot Analytics</h4>
+                                        <h4 class="card-title">@SpamProtectionBot Analytics</h4>
                                         <div id="deepanalytics_viewer">
                                             <span>Loading</span>
                                         </div>
@@ -49,6 +49,6 @@
         <script src="/assets/vendors/morris/morris.min.js"></script>
         <script src="/assets/vendors/raphael/raphael-min.js"></script>
         <?PHP Javascript::importScript('rpage'); ?>
-        <?PHP Javascript::importScript('deepanalytics', ["api" => "deepanalytics/lydiachatbot"]); ?>
+        <?PHP Javascript::importScript('deepanalytics', ["api" => "deepanalytics/spamprotectionbot"]); ?>
     </body>
 </html>

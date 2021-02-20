@@ -1,7 +1,7 @@
 {
     "configuration": {
         "primary_language": "en",
-        "debugging_mode": true,
+        "debugging_mode": false,
         "enable_ppm": true,
         "buffer_output": true,
         "compression": {
@@ -71,7 +71,8 @@
         {"method": ["GET", "POST"], "path": "/coffeehouse/subscriptions", "page": "coffeehouse/coffeehouse_subscriptions", "params": []},
         {"method": ["GET", "POST"], "path": "/coffeehouse/api_requests", "page": "coffeehouse/redirect_coffeehouse_api_requests", "params": []},
 
-        {"method": ["GET", "POST"], "path": "/deepanalytics/lydiachatbot", "page": "deepanalytics/lydiachatbot", "params": []}
+        {"method": ["GET", "POST"], "path": "/deepanalytics/lydiachatbot", "page": "deepanalytics/lydiachatbot", "params": []},
+        {"method": ["GET", "POST"], "path": "/deepanalytics/spamprotectionbot", "page": "deepanalytics/spamprotectionbot", "params": []}
     ],
     "libraries": {
         "SecuredWebSessions": {
